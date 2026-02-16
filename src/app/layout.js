@@ -1,4 +1,5 @@
-import { Geist, Geist_Mono, Montserrat, Cinzel } from "next/font/google";
+import { Geist, Geist_Mono, Montserrat, Cinzel, Playfair_Display } from "next/font/google";
+
 import "./globals.css";
 import { ProductProvider } from '@/context/ProductContext';
 import ConditionalLayout from '@/components/ConditionalLayout';
@@ -8,6 +9,12 @@ import { CartProvider } from "@/context/CartContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+export const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-playfair",
 });
 
 export const cinzel = Cinzel({
@@ -34,17 +41,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${cinzel.variable} antialiased`}
-      >
-        <ProductProvider>
-          <CartProvider>
-            <EnquiryProvider>
-              <ConditionalLayout>{children}</ConditionalLayout>
-            </EnquiryProvider>
-          </CartProvider>
-        </ProductProvider>
+  className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${cinzel.variable} ${playfair.variable} antialiased`}
+>
+
+        <CartProvider>
+          <EnquiryProvider>
+            <ConditionalLayout>{children}</ConditionalLayout>
+          </EnquiryProvider>
+        </CartProvider>
       </body>
     </html>
   );

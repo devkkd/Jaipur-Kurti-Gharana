@@ -12,6 +12,10 @@
   font-family: var(--font-cinzel), serif;
 }
 
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
 /* default body font */
 body {
   font-family: var(--font-montserrat), sans-serif;
