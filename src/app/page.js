@@ -18,14 +18,18 @@ import PremiumCollections from "@/components/PremiumCollections";
 import RefinedSelection from "@/components/RefinedSelection";
 import TrustedCities from "@/components/TrustedCities";
 import WholesaleForm from "@/components/WholesaleForm";
+import Slider from "@/components/Slider";
+import ExclusiveCollections from "@/components/ExclusiveCollections";
 
 export default function Home() {
   return (
    <>
    <HeroCarousel/>
+      <Slider/>
    <TrustedCities/>
    <Manufacturing/>
-   <PremiumCollections/>
+      <ExclusiveCollections/>
+   {/* <PremiumCollections/> */}
    <CuratedArrivals/>
    <AvantaLanding/>
    <ArtisanExcellence/>

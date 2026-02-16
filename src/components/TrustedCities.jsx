@@ -51,29 +51,29 @@ const TrustedNetwork = () => {
   );
 
   return (
-    <section className="pt-16 md:pb-16 px-4 max-w-[1440px] mx-auto font-mont">
+    <section className="py-16 px-4 max-w-[1440px] mx-auto font-mont">
       {/* Header Section */}
       <div className="text-center max-w-6xl mx-auto mb-12">
         <div className="flex items-center justify-center gap-2 mb-4">
-          <span className="w-2 h-2 rounded-full bg-[#ee2a7b]"></span>
-          <span className="text-[10px] md:text-sm font-bold font-mont text-[#1a1a3d] uppercase">
-            Avanta by Jaipur Kurti Gharana
-          </span>
-          <span className="w-2 h-2 rounded-full bg-[#ee2a7b]"></span>
+         
+          <h3 className="text-[10px] md:text-3xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          Jaipur Kurti Gharana
+          </h3>
+         
         </div>
 
-        <h2 className="text-2xl md:text-4xl font-bold font-cinzel text-[#1a1a3d] mb-6 uppercase ">
-          Trusted Across India and the World
+        <h2 className="text-2xl md:text-5xl font-bold font-playfair text-[#1F1951] mb-6 ">
+       Trusted Across India and the World
         </h2>
 
-        <p className="text-[11px] font-mont md:text-sm font-medium text-[#0E0E0E] leading-relaxed px-4">
+        <p className="text-[11px] font-mont md:text-sm font-semibold text-[#0E0E0E] leading-relaxed px-4">
           Our kurtis and ethnic collections are worn in leading cities across India and in major global fashion hubs.<br></br>
           From domestic markets to international demand, our reach reflects the growing appreciation for modern Indian style everywhere.
         </p>
       </div>
 
       {/* India Top Cities */}
-      <div className="sm:mb-16">
+      <div className="mb-16">
         <h3 className="text-center text-xl md:text-2xl font-cinzel font-bold text-[#0E0E0E] mb-10 uppercase ">
           India Top Cities
         </h3>

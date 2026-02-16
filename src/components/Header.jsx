@@ -1,5 +1,6 @@
 "use client";
 
+
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Search, Menu, X, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
@@ -57,7 +58,7 @@ const Header = () => {
 
   const footerLinks = [
     { name: "CONTACT US", href: "/contact" },
-    { name: "DOWNLOAD CATALOG ↓", href: "#" }
+    { name: "DOWNLOAD CATALOG ↓", href: "/catalog" }
   ];
 
   const navigation = [
@@ -74,7 +75,7 @@ const Header = () => {
     <header className="sticky top-0 w-full z-50 font-sans">
       {/* Top Announcement Bar - Dynamic transition */}
       <div
-        className={`bg-[#1F1951] text-white flex items-center justify-center relative transition-all duration-500 ease-in-out overflow-hidden ${isScrolled ? "max-h-0 py-0 opacity-0" : "max-h-20 py-1 opacity-100"
+        className={`bg-[#1F1951] text-white flex items-center justify-center relative transition-all duration-500 ease-in-out overflow-hidden ${isScrolled ? "max-h-0 py-0 opacity-0" : "max-h-20 py-2 opacity-100"
           }`}
       >
         <button className="absolute left-4 lg:left-10 text-white/70 hover:text-white">
@@ -90,116 +91,79 @@ const Header = () => {
 
       {/* Glassmorphism Header Content - Stays Exactly the Same */}
       <div className="bg-white/70 backdrop-blur-md border-b border-white/20 shadow-sm transition-all duration-300">
-        <div className="max-w-[1440px] mx-auto px-4 py-2 lg:py-3">
-          <div className="flex items-center justify-between gap-4 relative">
+        <div className="max-w-[1440px] mx-auto px-4 py-4 lg:py-6">
+          <div className="flex items-center justify-between gap-4">
 
-            {/* Left: Shipping & Search */}
-            <div className="hidden lg:flex items-center gap-4 flex-1">
-              <div className="flex items-center gap-2 border border-indigo-100/50 rounded-full px-4 py-2.5 bg-white/50 hover:bg-white transition-colors">
-                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Ship To</span>
-                <div className="flex items-center gap-1.5">
-                  <img src="https://flagcdn.com/w20/in.png" alt="India" className="w-4 h-3 object-cover" />
-                  <span className="text-xs font-bold text-gray-800 uppercase">India</span>
-                  <ChevronDown className="w-3 h-3 text-gray-400" />
-                </div>
-              </div>
+            {/* Left: Logo */}
+            <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+              <img src='/images/logo.svg' className='w-sm'/>
+            </Link>
 
-              <div className="relative flex-1 max-w-sm">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            {/* Right: All Buttons */}
+            <div className="flex items-center gap-2 md:gap-3">
+              
+              {/* Search Bar */}
+              <div className="relative w-40 sm:w-48 md:w-56 lg:w-64">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search product or categories & more..."
-                  className="w-full bg-white/40 border border-indigo-50/50 rounded-full py-2.5 pl-11 pr-4 text-sm focus:outline-none focus:bg-white focus:ring-4 focus:ring-indigo-50/30 transition-all"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-full py-2 md:py-2.5 pl-10 pr-4 text-xs md:text-sm focus:outline-none focus:bg-white focus:border-gray-300 transition-all"
                 />
               </div>
-            </div>
 
-            {/* Center: Logo */}
-            <div className="absolute left-1/2 -translate-x-1/2 z-10">
-              <Link href="/">
-                <img src='/images/Avanta-Logo.svg' alt="Avanta India" className="w-20 md:w-24 h-auto" />
-              </Link>
-            </div>
+              {/* Call Now Button */}
+              <button className="bg-[#E12B5E] text-white flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs font-semibold hover:bg-[#C91F4E] transition-all whitespace-nowrap">
+                <img src="/images/icon/call-calling.svg" alt="Call" className="w-4 h-4" />
+                <span className="hidden md:inline">Call Now →</span>
+              </button>
 
-            {/* Right: Actions */}
-            <div className="flex items-center gap-3 flex-1 justify-end">
+              {/* Ship To Button */}
+              <div className="hidden lg:flex items-center gap-2 border border-gray-200 rounded-full px-4 py-2 bg-white flex-shrink-0">
+                <span className="text-[10px] font-semibold text-gray-600 uppercase">Ship To</span>
+                <img src="https://flagcdn.com/w20/in.png" alt="India" className="w-5 h-4 object-cover rounded-sm" />
+                <span className="text-xs font-bold text-gray-800 uppercase">India</span>
+                <ChevronDown className="w-3 h-3 text-gray-400" />
+              </div>
 
-              {/* Desktop Cart Section */}
-              <Link href="/cart" className="relative group hidden lg:flex items-center mr-2">
+              {/* Instagram Button */}
+              <button className="hidden md:flex bg-black text-white items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs font-semibold hover:bg-gray-800 transition-all whitespace-nowrap">
+                <img src="/images/icon/instagram.svg" alt="Instagram" className="w-4 h-4" />
+                <span>Instagram</span>
+              </button>
+
+              {/* Cart Icon */}
+              <Link href="/cart" className="relative group flex-shrink-0 hidden md:block">
                 <ShoppingCart className="w-6 h-6 text-[#1F1951] group-hover:scale-110 transition-transform" />
                 {Enquiries.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-[#E12B5E] text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white animate-in zoom-in">
+                  <span className="absolute -top-2 -right-2 bg-[#E12B5E] text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
                     {Enquiries.length}
                   </span>
                 )}
               </Link>
 
-              <div className="hidden lg:flex items-center gap-3">
-
-                <button className="bg-[#1F1951] text-white flex items-center gap-2 px-5 py-3 rounded-full text-[11px] font-bold tracking-tight hover:scale-105 transition-all shadow-md">
-                  <img src="/images/icon/call-calling.svg" alt="Call" className="w-3.5 h-3.5" />
-                  Call Now →
-                </button>
-
-                {/* WhatsApp */}
-                <a
-                  href="https://wa.me/918619242626"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[#00C349] text-white flex items-center gap-2 px-5 py-3 rounded-full text-[11px] font-bold tracking-tight hover:scale-105 transition-all shadow-md"
-                >
-                  <img src="/images/icon/whatsapp.svg" alt="WA" className="w-3.5 h-3.5" />
-                  Enquiry Now →
-                </a>
-
-                {/* Instagram */}
-                <a
-                  href="https://www.instagram.com/__avanta__"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-black text-white flex items-center gap-2 px-5 py-3 rounded-full text-[11px] font-bold tracking-tight hover:bg-zinc-800 transition-all shadow-md"
-                >
-                  <img src="/images/icon/instagram.svg" alt="Instagram" className="w-3.5 h-3.5" />
-                  Instagram
-                </a>
-
-              </div>
-
-
-              {/* Mobile Right Section (Cart + Menu) */}
-              <div className="flex items-center gap-3 lg:hidden">
-                <Link href="/cart" className="relative">
-                  <ShoppingCart className="w-6 h-6 text-[#1F1951]" />
+              {/* Mobile: Cart + Menu */}
+              <div className="flex md:hidden items-center gap-2">
+                <Link href="/cart" className="relative group">
+                  <ShoppingCart className="w-5 h-5 text-[#1F1951]" />
                   {Enquiries.length > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-[#E12B5E] text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
+                    <span className="absolute -top-1.5 -right-1.5 bg-[#E12B5E] text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full border-2 border-white">
                       {Enquiries.length}
                     </span>
                   )}
                 </Link>
-                <button className="p-2 text-[#1F1951]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                  {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                <button className="p-1 text-[#1F1951]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
               </div>
             </div>
           </div>
 
           {/* Desktop Navigation Bar */}
-          <nav className="hidden lg:flex items-center justify-center mt-3 gap-10 pb-1">
-            {loading ? (
-              // Skeleton Loader for 10 menu items
-              <>
-                {[...Array(10)].map((_, index) => (
-                  <div key={index} className="flex flex-col gap-2">
-                    <div className="h-3 w-20 bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-0.5 w-0 bg-gray-200 rounded"></div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <>
-                {staticLinks.map(item => (
-                  <NavLink key={item.name} item={item} pathname={pathname} />
-                ))}
+          <nav className="hidden lg:flex items-center justify-center mt-8 gap-10 pb-2">
+            {staticLinks.map(item => (
+              <NavLink key={item.name} item={item} pathname={pathname} />
+            ))}
 
             {visibleCategories.map(item => {
               const category = categories.find(cat =>
@@ -208,7 +172,7 @@ const Header = () => {
 
               const relatedSubCategories = category?.subcategories || [];
               const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
-
+              
               return (
                 <div key={item.name} className="relative group">
                   <Link
@@ -286,7 +250,7 @@ const Header = () => {
                   {overflowCategories.map((item) => {
                     const category = categories.find((cat) => cat.slug === item.href.split("/").pop());
                     const relatedSubCategories = category?.subcategories || [];
-                    console.log("sub", relatedSubCategories);
+                    console.log("sub",relatedSubCategories);
                     const hasSubs = relatedSubCategories.length > 0;
 
                     return (
@@ -367,8 +331,6 @@ const Header = () => {
             {footerLinks.map(item => (
               <NavLink key={item.name} item={item} pathname={pathname} />
             ))}
-              </>
-            )}
           </nav>
         </div>
       </div>
@@ -400,7 +362,7 @@ const Header = () => {
 
 const NavLink = ({ item, pathname }) => {
   const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
-
+  
   return (
     <Link
       href={item.href}

@@ -28,11 +28,6 @@ const VideoSlider = () => {
       src: "/images/videos/video3.mp4",
       thumbnail: "/images/videos/thumb3.png",
     },
-    {
-      id: 4,
-      src: "/images/videos/video4.mp4",
-      thumbnail: "/images/videos/thumb4.png",
-    },
   ];
 
   const stopAllVideos = () => {
@@ -59,30 +54,28 @@ const VideoSlider = () => {
     <section className="py-16 bg-white overflow-hidden">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-4 text-center mb-10">
-        <div className="flex items-center justify-center gap-2 text-[#1F1951] font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase mb-4">
-          <span className="w-1.5 h-1.5 bg-[#C8205F] rounded-full" />
-          AVANTA BY JAIPUR KURTI GHARANA
-          <span className="w-1.5 h-1.5 bg-[#C8205F] rounded-full" />
-        </div>
+        <h3 className="text-[10px] md:text-3xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          Jaipur Kurti Gharana
+          </h3>
 
-        <h2 className="text-3xl md:text-4xl font-cinzel font-bold uppercase mb-6">
+        <h2 className="text-3xl md:text-4xl text-[#1F1951] font-playfair font-bold mb-6">
           We’re Manufacturing What Matters
         </h2>
 
-        <p className="max-w-4xl mx-auto text-black text-sm md:text-base">
-          Discover the products we build and the expertise behind them.
+        <p className="max-w-4xl mx-auto font-semibold text-black text-sm md:text-base">
+         Discover the products we build and the expertise behind them. This gallery of videos and photos highlights Avanta’s diverse manufacturing output, showcasing quality, scale, and performance across industries.
         </p>
       </div>
 
       {/* Slider */}
       <Swiper
         modules={[Navigation]}
-        centeredSlides={true}
-        loop={true}
-        initialSlide={3}
+        centeredSlides
+        loop
+        watchOverflow
         speed={600}
         spaceBetween={24}
-        slidesPerView={1.4}
+        slidesPerView={1.2}
         navigation={{
           nextEl: ".next-btn",
           prevEl: ".prev-btn",
@@ -96,7 +89,6 @@ const VideoSlider = () => {
         onSlideChange={stopAllVideos}
         className="!overflow-visible"
       >
-
         {videoSlides.map((video, index) => (
           <SwiperSlide key={video.id}>
             <div className="relative aspect-[16/7] rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-lg">
@@ -112,8 +104,9 @@ const VideoSlider = () => {
               <video
                 ref={(el) => (videoRefs.current[index] = el)}
                 src={video.src}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${playingIndex === index ? "opacity-100" : "opacity-0"
-                  }`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                  playingIndex === index ? "opacity-100" : "opacity-0"
+                }`}
                 muted
                 playsInline
                 controls={playingIndex === index}
