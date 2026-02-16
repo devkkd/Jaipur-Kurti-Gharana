@@ -1,0 +1,66 @@
+[
+  {
+    "_id": "65b8f1a9e9c1a2a001111111",
+    "name": "Suits Set",
+    "slug": "suits-set",
+    "description": "Traditional and modern suits sets for all occasions",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "_id": "65b8f1a9e9c1a2a002222222",
+    "name": "Kurti Set",
+    "slug": "kurti-set",
+    "description": "Comfortable and stylish kurti sets",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "_id": "65b8f1a9e9c1a2a003333333",
+    "name": "Anarkali Set",
+    "slug": "anarkali-set",
+    "description": "Elegant anarkali sets with rich designs",
+    "isActive": true,
+    "sortOrder": 3
+  },
+  {
+    "_id": "65b8f1a9e9c1a2a004444444",
+    "name": "Top & Tunics",
+    "slug": "top-tunics",
+    "description": "Trendy tops and tunics for daily and party wear",
+    "isActive": true,
+    "sortOrder": 4
+  },
+  {
+    "_id": "65b8f1a9e9c1a2a005555555",
+    "name": "Gown",
+    "slug": "gown",
+    "description": "Graceful gowns for weddings and evening events",
+    "isActive": true,
+    "sortOrder": 5
+  },
+  {
+    "_id": "65b8f1a9e9c1a2a006666666",
+    "name": "Co-ord Set",
+    "slug": "co-ord-set",
+    "description": "Matching co-ord sets for modern fashion",
+    "isActive": true,
+    "sortOrder": 6
+  },
+  {
+    "_id": "65b8f1a9e9c1a2a007777777",
+    "name": "AA",
+    "slug": "aa",
+    "description": "Dummy category AA",
+    "isActive": true,
+    "sortOrder": 7
+  },
+  {
+    "_id": "65b8f1a9e9c1a2a008888888",
+    "name": "BB",
+    "slug": "bb",
+    "description": "Dummy category BB",
+    "isActive": true,
+    "sortOrder": 8
+  }
+]

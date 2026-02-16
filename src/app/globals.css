@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+  --font-mont: 'Montserrat', sans-serif;
+}
+
+.font-mont {
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel), serif;
+}
+
+/* default body font */
+body {
+  font-family: var(--font-montserrat), sans-serif;
+}

@@ -1,0 +1,193 @@
+{
+  "products": [
+    {
+      "_id": "p1",
+      "title": "Traditional Straight Dupatta Set",
+      "slug": "traditional-straight-dupatta-set",
+      "categoryId": "65b8f1a9e9c1a2a001111111",
+      "subcategoryId": "75c1a1a9e9c1a2a001000003",
+      "priceRange": { "min": 2000, "max": 3000 },
+      "styleCode": "TSD-101",
+      "color": { "name": "Ivory" },
+      "images": {
+        "main": "/products/p1/main.jpg",
+        "gallery": [
+          "/products/p1/1.jpg",
+          "/products/p1/2.jpg",
+          "/products/p1/3.jpg"
+        ]
+      },
+      "sizes": [
+        { "size": "S", "available": true },
+        { "size": "M", "available": true },
+        { "size": "L", "available": true },
+        { "size": "XL", "available": false }
+      ],
+      "productDetails": {
+        "material": "Cotton Silk Blend",
+        "productCare": "Dry Clean Only"
+      },
+      "description": "Authentic traditional straight suit with handwoven dupatta",
+      "featured": true,
+      "active": true
+    },
+
+    {
+      "_id": "p2",
+      "title": "Designer Flared Gown Style Set",
+      "slug": "designer-flared-gown-style-set",
+      "categoryId": "65b8f1a9e9c1a2a001111111",
+      "subcategoryId": "75c1a1a9e9c1a2a001000002",
+      "priceRange": { "min": 3000, "max": 4000 },
+      "styleCode": "DFG-204",
+      "color": { "name": "Wine" },
+      "images": {
+        "main": "/products/p2/main.jpg",
+        "gallery": [
+          "/products/p2/1.jpg",
+          "/products/p2/2.jpg"
+        ]
+      },
+      "sizes": [
+        { "size": "S", "available": false },
+        { "size": "M", "available": true },
+        { "size": "L", "available": true },
+        { "size": "XL", "available": true }
+      ],
+      "productDetails": {
+        "material": "Georgette",
+        "productCare": "Dry Clean Only"
+      },
+      "description": "Modern flared gown style suit with contemporary design elements",
+      "featured": true,
+      "active": true
+    },
+
+    {
+      "_id": "p3",
+      "title": "Premium Straight Suit Collection",
+      "slug": "premium-straight-suit-collection",
+      "categoryId": "65b8f1a9e9c1a2a001111111",
+      "subcategoryId": "75c1a1a9e9c1a2a001000004",
+      "priceRange": { "min": 2200, "max": 3200 },
+      "styleCode": "PSS-330",
+      "color": { "name": "Navy Blue" },
+      "images": {
+        "main": "/products/p3/main.jpg",
+        "gallery": [
+          "/products/p3/1.jpg",
+          "/products/p3/2.jpg"
+        ]
+      },
+      "sizes": [
+        { "size": "S", "available": true },
+        { "size": "M", "available": true },
+        { "size": "L", "available": false },
+        { "size": "XL", "available": false }
+      ],
+      "productDetails": {
+        "material": "Rayon",
+        "productCare": "Hand Wash Cold"
+      },
+      "description": "Complete straight suit set with coordinated pieces",
+      "featured": false,
+      "active": true
+    },
+
+    {
+      "_id": "p4",
+      "title": "Classic Straight Dupatta Ensemble",
+      "slug": "classic-straight-dupatta-ensemble",
+      "categoryId": "65b8f1a9e9c1a2a001111111",
+      "subcategoryId": "75c1a1a9e9c1a2a001000003",
+      "priceRange": { "min": 1800, "max": 2800 },
+      "styleCode": "CSD-118",
+      "color": { "name": "Lime Green" },
+      "images": {
+        "main": "/products/p4/main.jpg",
+        "gallery": [
+          "/products/p4/1.jpg",
+          "/products/p4/2.jpg",
+          "/products/p4/3.jpg"
+        ]
+      },
+      "sizes": [
+        { "size": "S", "available": true },
+        { "size": "M", "available": true },
+        { "size": "L", "available": true },
+        { "size": "XL", "available": true }
+      ],
+      "productDetails": {
+        "material": "Viscose Chinnon (100% Viscose)",
+        "productCare": "Professional Dry Clean Only"
+      },
+      "description": "Traditional straight suit with beautiful dupatta",
+      "featured": true,
+      "active": true
+    },
+
+    {
+      "_id": "p5",
+      "title": "wow",
+      "slug": "wow",
+      "categoryId": "65b8f1a9e9c1a2a001111111",
+      "subcategoryId": "75c1a1a9e9c1a2a001000003",
+      "priceRange": { "min": 1800, "max": 2800 },
+      "styleCode": "CSD-118",
+      "color": { "name": "Lime Green" },
+      "images": {
+        "main": "/products/p4/main.jpg",
+        "gallery": [
+          "/products/p4/1.jpg",
+          "/products/p4/2.jpg",
+          "/products/p4/3.jpg"
+        ]
+      },
+      "sizes": [
+        { "size": "S", "available": true },
+        { "size": "M", "available": true },
+        { "size": "L", "available": true },
+        { "size": "XL", "available": true }
+      ],
+      "productDetails": {
+        "material": "Viscose Chinnon (100% Viscose)",
+        "productCare": "Professional Dry Clean Only"
+      },
+      "description": "Traditional straight suit with beautiful dupatta",
+      "featured": true,
+      "active": true
+    },
+
+    {
+      "_id": "p6",
+      "title": "good",
+      "slug": "good",
+      "categoryId": "65b8f1a9e9c1a2a001111111",
+      "subcategoryId": "75c1a1a9e9c1a2a001000003",
+      "priceRange": { "min": 1800, "max": 2800 },
+      "styleCode": "CSD-118",
+      "color": { "name": "Lime Green" },
+      "images": {
+        "main": "/products/p4/main.jpg",
+        "gallery": [
+          "/products/p4/1.jpg",
+          "/products/p4/2.jpg",
+          "/products/p4/3.jpg"
+        ]
+      },
+      "sizes": [
+        { "size": "S", "available": true },
+        { "size": "M", "available": true },
+        { "size": "L", "available": true },
+        { "size": "XL", "available": true }
+      ],
+      "productDetails": {
+        "material": "Viscose Chinnon (100% Viscose)",
+        "productCare": "Professional Dry Clean Only"
+      },
+      "description": "Traditional straight suit with beautiful dupatta",
+      "featured": true,
+      "active": true
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Product API</title>
+</head>
+<body>
+    <h1>Testing Product API</h1>
+    <button onclick="testAPI()">Test Store API</button>
+    <pre id="output"></pre>
+
+    <script>
+        async function testAPI() {
+            const output = document.getElementById('output');
+            output.textContent = 'Loading...\n';
+            
+            try {
+                // Test store API
+                const response = await fetch('/api/store/suits-set');
+                const result = await response.json();
+                
+                output.textContent = 'Store API Response:\n';
+                output.textContent += JSON.stringify(result, null, 2);
+                
+                if (result.success && result.data.products.length > 0) {
+                    output.textContent += '\n\n=== First Product ===\n';
+                    const product = result.data.products[0];
+                    output.textContent += `Name: ${product.name}\n`;
+                    output.textContent += `Slug: ${product.slug}\n`;
+                    output.textContent += `ID: ${product._id}\n`;
+                    output.textContent += `Has images: ${!!product.images}\n`;
+                    output.textContent += `Has priceRange: ${!!product.priceRange}\n`;
+                    
+                    // Test product detail API
+                    if (product.slug) {
+                        output.textContent += `\n\n=== Testing Product Detail API ===\n`;
+                        output.textContent += `Fetching: /api/products/slug/${product.slug}\n\n`;
+                        
+                        const detailResponse = await fetch(`/api/products/slug/${product.slug}`);
+                        const detailResult = await detailResponse.json();
+                        
+                        output.textContent += JSON.stringify(detailResult, null, 2);
+                    }
+                }
+            } catch (error) {
+                output.textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

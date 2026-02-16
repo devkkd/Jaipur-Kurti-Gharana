@@ -1,0 +1,182 @@
+[
+  {
+    "_id": "75c1a1a9e9c1a2a001000002",
+    "name": "Flared Suit Sets",
+    "slug": "flared-suit-sets",
+    "description": "Flared silhouettes with elegant detailing",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a001111111",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a001000003",
+    "name": "Straight Dupatta Sets",
+    "slug": "straight-dupatta-sets",
+    "description": "Straight cut suits paired with dupattas",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a001111111",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a001000004",
+    "name": "Straight Suit Sets",
+    "slug": "straight-suit-sets",
+    "description": "Classic straight suit sets",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a001111111",
+    "isActive": true,
+    "sortOrder": 3
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a001000005",
+    "name": "Roshan",
+    "slug": "suits-set-roshan",
+    "description": "Experimental limited designs",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a001111111",
+    "isActive": false,
+    "sortOrder": 4
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a001000006",
+    "name": "Sir Ji",
+    "slug": "suits-set-sir-ji",
+    "description": "Internal test category",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a001111111",
+    "isActive": false,
+    "sortOrder": 5
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a002000002",
+    "name": "Cotton Kurti Sets",
+    "slug": "cotton-kurti-sets",
+    "description": "Breathable cotton kurti sets",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a002222222",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a002000003",
+    "name": "Party Wear",
+    "slug": "kurti-set-party-wear",
+    "description": "Kurti sets for festive and party occasions",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a002222222",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a003000002",
+    "name": "Printed Anarkali",
+    "slug": "printed-anarkali",
+    "description": "Printed anarkali styles",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a003333333",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a003000003",
+    "name": "Heavy Embroidery",
+    "slug": "heavy-embroidery-anarkali",
+    "description": "Anarkali sets with heavy embroidery",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a003333333",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a004000002",
+    "name": "Short Tunics",
+    "slug": "short-tunics",
+    "description": "Short length tunics",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a004444444",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a004000003",
+    "name": "Long Tops",
+    "slug": "long-tops",
+    "description": "Long tops and tunics",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a004444444",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a004000004",
+    "name": "Western Fusion",
+    "slug": "western-fusion-tops",
+    "description": "Fusion western wear",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a004444444",
+    "isActive": false,
+    "sortOrder": 3
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a005000002",
+    "name": "Wedding Gowns",
+    "slug": "wedding-gowns",
+    "description": "Luxury wedding gowns",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a005555555",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a005000003",
+    "name": "Evening Wear",
+    "slug": "evening-gowns",
+    "description": "Evening and occasion gowns",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a005555555",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a006000002",
+    "name": "Lounge Wear",
+    "slug": "lounge-co-ord-sets",
+    "description": "Comfort-focused co-ord sets",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a006666666",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a006000003",
+    "name": "Formal Co-ords",
+    "slug": "formal-co-ord-sets",
+    "description": "Structured formal co-ord sets",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a006666666",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a006000055",
+    "name": "Formal Co-ords",
+    "slug": "formal-co-ord-sets",
+    "description": "Structured formal co-ord sets",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a007777777",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "_id": "75c1a1a9e9c1a2a006000092",
+    "name": "Formal Cobgfedsxvf",
+    "slug": "formal-co-ord-sets",
+    "description": "Structured formal co-ord sets",
+    "image": "",
+    "categoryId": "65b8f1a9e9c1a2a007777777",
+    "isActive": true,
+    "sortOrder": 2
+  }
+]
