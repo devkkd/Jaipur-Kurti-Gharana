@@ -5,17 +5,17 @@ const commitments = [
   {
     title: "Exceptional Cotton",
     description: "We source only the finest cottons, chosen for their superior softness, breathability, and longevity ensuring every garment offers an elevated wearing experience.",
-    image: "/images/commitment/commitment1.png", // Replace with your image paths
-  },
-  {
-    title: "Heritage, Reimagined",
-    description: "At Avanta India, centuries-old Indian craftsmanship is thoughtfully reinterpreted through a contemporary lens, resulting in designs that are timeless, refined, and distinctly modern.",
-    image: "/images/commitment/commitment2.png",
+    image: "/images/about/Cotton.svg", // Replace with your image paths
   },
   {
     title: "Bespoke by Design",
     description: "For those seeking exclusivity, our bespoke customization service offers a personalized approach to luxury crafted with precision, discretion, and uncompromising attention to detail.",
-    image: "/images/commitment/commitment3.png",
+    image: "/images/about/Design.svg",
+  },
+  {
+    title: "Heritage, Reimagined",
+    description: "At Jaipur Kurti Gharana, centuries-old Indian craftsmanship is thoughtfully reinterpreted through a contemporary lens, resulting in designs that are timeless, refined, and distinctly modern.",
+    image: "/images/about/Heritage.svg",
   }
 ];
 
@@ -24,15 +24,13 @@ const CommitmentSection = () => {
     <section className="py-16 px-4 max-w-7xl mx-auto bg-white">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
-          <span className="h-1.5 w-1.5 md:h-2 md:w-2 bg-[#DE3163] rounded-full"></span>
-          <h3 className="text-[10px] md:text-sm font-bold text-[#1a1a3d] uppercase tracking-widest">
-            Avanta by Jaipur Kurti Gharana
-          </h3>
-          <span className="h-1.5 w-1.5 md:h-2 md:w-2 bg-[#DE3163] rounded-full"></span>
-        </div>
-        <h2 className="text-3xl md:text-4xl font-cinzel font-bold text-gray-900 uppercase tracking-tight">
-          Our Commitment To You
+         <h2 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          Jaipur Kurti Gharana
+          </h2>
+
+        {/* Main Heading */}
+        <h2 className="text-3xl md:text-[40px] font-bold font-playfair text-[#0E0E0E] mb-10 ">
+ An Enduring Promise of Quality
         </h2>
       </div>
 
@@ -51,10 +49,10 @@ const CommitmentSection = () => {
 
             {/* Text Content */}
             <div className="text-center px-2">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-bold .font-mona text-gray-900 mb-4">
                 {item.title}
               </h3>
-              <p className="text-sm leading-relaxed text-gray-600 font-light">
+              <p className="text-sm leading-relaxed font-medium .font-mona text-gray-600 font-light">
                 {item.description}
               </p>
             </div>

@@ -183,15 +183,15 @@ export default function BulkUploadPage() {
                   <ul className="space-y-2 text-sm text-white/90">
                     <li className="flex items-start gap-2">
                       <span className="text-yellow-300">✓</span>
-                      <span>CSV mein local image paths do (e.g., ./images/product.jpg)</span>
+                      <span>Provide local image paths in CSV (e.g., ./images/product.jpg)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-yellow-300">✓</span>
-                      <span>System automatically images ko R2 mein upload karega</span>
+                      <span>System automatically uploads images to R2 storage</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-yellow-300">✓</span>
-                      <span>Products create honge with R2 URLs - sab automatic!</span>
+                      <span>Products are created with R2 URLs - fully automated!</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-yellow-300">✓</span>
@@ -385,7 +385,7 @@ export default function BulkUploadPage() {
             {/* Hero Section */}
             <div className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-2xl shadow-xl p-8 text-white">
               <h2 className="text-3xl font-bold mb-4">🎯 How Auto-Upload Works</h2>
-              <p className="text-lg text-white/90">Complete automation - CSV se directly products create karo with automatic image upload!</p>
+              <p className="text-lg text-white/90">Complete automation - Create products directly from CSV with automatic image upload!</p>
             </div>
 
             {/* Flow Diagram */}
@@ -397,35 +397,35 @@ export default function BulkUploadPage() {
                   {
                     step: 1,
                     title: 'CSV Upload',
-                    desc: 'User CSV file upload karta hai with local image paths',
+                    desc: 'User uploads CSV file with local image paths',
                     color: 'blue',
                     icon: Upload
                   },
                   {
                     step: 2,
                     title: 'Path Detection',
-                    desc: 'System automatically detect karta hai ki kaunse fields mein local paths hain',
+                    desc: 'System automatically detects which fields contain local paths',
                     color: 'purple',
                     icon: AlertCircle
                   },
                   {
                     step: 3,
                     title: 'Image Upload',
-                    desc: 'Sab local images automatically Cloudflare R2 mein upload hoti hain',
+                    desc: 'All local images are automatically uploaded to Cloudflare R2',
                     color: 'green',
                     icon: Image
                   },
                   {
                     step: 4,
                     title: 'URL Generation',
-                    desc: 'R2 public URLs automatically generate hote hain',
+                    desc: 'R2 public URLs are automatically generated',
                     color: 'yellow',
                     icon: Zap
                   },
                   {
                     step: 5,
                     title: 'Product Creation',
-                    desc: 'Products database mein create hote hain with R2 URLs',
+                    desc: 'Products are created in database with R2 URLs',
                     color: 'pink',
                     icon: CheckCircle
                   }
@@ -510,7 +510,7 @@ export default function BulkUploadPage() {
             </div>
 
             {/* Code Flow Explanation */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+            {/* <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">💻 Technical Flow</h3>
               <div className="space-y-4">
                 <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
@@ -534,7 +534,7 @@ export default function BulkUploadPage() {
                   </code>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         )}
       </div>

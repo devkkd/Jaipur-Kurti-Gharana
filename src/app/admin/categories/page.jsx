@@ -1,15 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Eye, EyeOff } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, EyeOff, Upload, X } from 'lucide-react';
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
-    name: ''
+    name: '',
+    image: ''
   });
 
   // Fetch categories
@@ -33,42 +37,105 @@ export default function CategoriesPage() {
     fetchCategories();
   }, []);
 
+  // Handle image file selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Remove image
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImagePreview(null);
+    setFormData({ ...formData, image: '' });
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setUploading(true);
 
     try {
+      let imageUrl = formData.image || '';
+
+      // Upload image to R2 if new image selected
+      if (imageFile) {
+        console.log('📤 Uploading image to R2...');
+        const imageFormData = new FormData();
+        imageFormData.append('images', imageFile);
+
+        const uploadResponse = await fetch('/api/admin/products/upload-image', {
+          method: 'POST',
+          body: imageFormData,
+        });
+
+        const uploadData = await uploadResponse.json();
+        console.log('📥 Upload response:', uploadData);
+
+        if (uploadData.success && uploadData.urls && uploadData.urls.length > 0) {
+          imageUrl = uploadData.urls[0];
+          console.log('✅ Image uploaded successfully:', imageUrl);
+        } else {
+          console.error('❌ Upload failed:', uploadData);
+          throw new Error(uploadData.error || 'Image upload failed');
+        }
+      }
+
       const url = editingCategory 
         ? `/api/admin/categories/${editingCategory._id}`
         : '/api/admin/categories';
       
       const method = editingCategory ? 'PUT' : 'POST';
 
+      const payload = {
+        name: formData.name,
+        image: imageUrl,
+        description: formData.description || '',
+        sortOrder: formData.sortOrder || 0
+      };
+
+      console.log('📤 Sending category data:', payload);
+      console.log('📍 URL:', url);
+      console.log('📍 Method:', method);
+
       const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
+      console.log('📥 Category save response:', data);
 
       if (data.success) {
+        console.log('✅ Category saved successfully!');
         await fetchCategories();
         setShowForm(false);
         setEditingCategory(null);
-        setFormData({ name: '' });
+        setFormData({ name: '', image: '' });
+        setImageFile(null);
+        setImagePreview(null);
         alert(data.message);
       } else {
+        console.error('❌ Save failed:', data);
         alert(data.error || 'Something went wrong');
       }
     } catch (error) {
-      console.error('Error saving category:', error);
-      alert('Error saving category');
+      console.error('❌ Error saving category:', error);
+      alert('Error saving category: ' + error.message);
     } finally {
       setLoading(false);
+      setUploading(false);
     }
   };
 
@@ -76,8 +143,11 @@ export default function CategoriesPage() {
   const handleEdit = (category) => {
     setEditingCategory(category);
     setFormData({
-      name: category.name
+      name: category.name,
+      image: category.image || ''
     });
+    setImagePreview(category.image || null);
+    setImageFile(null);
     setShowForm(true);
   };
 
@@ -155,7 +225,9 @@ export default function CategoriesPage() {
           onClick={() => {
             setShowForm(true);
             setEditingCategory(null);
-            setFormData({ name: '' });
+            setFormData({ name: '', image: '' });
+            setImageFile(null);
+            setImagePreview(null);
           }}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
         >
@@ -187,19 +259,60 @@ export default function CategoriesPage() {
                 />
               </div>
 
+              {/* Image Upload */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Category Image
+                </label>
+                
+                {imagePreview ? (
+                  <div className="relative">
+                    <img 
+                      src={imagePreview} 
+                      alt="Preview" 
+                      className="w-full h-48 object-cover rounded-lg border-2 border-gray-200"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleRemoveImage}
+                      className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 shadow-lg"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden"
+                      id="category-image"
+                    />
+                    <label htmlFor="category-image" className="cursor-pointer">
+                      <Upload className="mx-auto text-gray-400 mb-2" size={32} />
+                      <p className="text-sm text-gray-600">Click to upload category image</p>
+                      <p className="text-xs text-gray-400 mt-1">PNG, JPG up to 5MB</p>
+                    </label>
+                  </div>
+                )}
+              </div>
+
               <div className="flex gap-3 pt-4">
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || uploading}
                   className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
                 >
-                  {loading ? 'Saving...' : (editingCategory ? 'Update' : 'Create')}
+                  {uploading ? 'Uploading...' : loading ? 'Saving...' : (editingCategory ? 'Update' : 'Create')}
                 </button>
                 <button
                   type="button"
                   onClick={() => {
                     setShowForm(false);
                     setEditingCategory(null);
+                    setImageFile(null);
+                    setImagePreview(null);
                   }}
                   className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400"
                 >
@@ -217,6 +330,9 @@ export default function CategoriesPage() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Image
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Category Name
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -233,6 +349,19 @@ export default function CategoriesPage() {
           <tbody className="bg-white divide-y divide-gray-200">
             {categories.map((category) => (
               <tr key={category._id} className="hover:bg-gray-50">
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {category.image ? (
+                    <img 
+                      src={category.image} 
+                      alt={category.name}
+                      className="w-16 h-16 object-cover rounded-lg border border-gray-200"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <span className="text-gray-400 text-xs">No image</span>
+                    </div>
+                  )}
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">
                     {category.name}
@@ -289,7 +418,9 @@ export default function CategoriesPage() {
               onClick={() => {
                 setShowForm(true);
                 setEditingCategory(null);
-                setFormData({ name: '' });
+                setFormData({ name: '', image: '' });
+                setImageFile(null);
+                setImagePreview(null);
               }}
               className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
             >

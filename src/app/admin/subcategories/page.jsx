@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Eye, EyeOff } from 'lucide-react';
-import CloudinaryUpload from '@/components/admin/CloudinaryUpload';
+import { Plus, Edit, Trash2, Eye, EyeOff, Upload, X } from 'lucide-react';
 
 export default function SubcategoriesPage() {
   const [subcategories, setSubcategories] = useState([]);
@@ -11,6 +10,9 @@ export default function SubcategoriesPage() {
   const [showForm, setShowForm] = useState(false);
   const [editingSubcategory, setEditingSubcategory] = useState(null);
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -81,12 +83,58 @@ export default function SubcategoriesPage() {
     return 'Unknown';
   };
 
+  // Handle image file selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Remove image
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImagePreview(null);
+    setFormData({ ...formData, image: '' });
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setUploading(true);
 
     try {
+      let imageUrl = formData.image || '';
+
+      // Upload image to R2 if new image selected
+      if (imageFile) {
+        console.log('📤 Uploading subcategory image to R2...');
+        const imageFormData = new FormData();
+        imageFormData.append('images', imageFile);
+
+        const uploadResponse = await fetch('/api/admin/products/upload-image', {
+          method: 'POST',
+          body: imageFormData,
+        });
+
+        const uploadData = await uploadResponse.json();
+        console.log('📥 Upload response:', uploadData);
+
+        if (uploadData.success && uploadData.urls && uploadData.urls.length > 0) {
+          imageUrl = uploadData.urls[0];
+          console.log('✅ Image uploaded successfully:', imageUrl);
+        } else {
+          console.error('❌ Upload failed:', uploadData);
+          throw new Error(uploadData.error || 'Image upload failed');
+        }
+      }
+
       const url = editingSubcategory 
         ? `/api/admin/subcategories/${editingSubcategory._id}`
         : '/api/admin/subcategories';
@@ -95,9 +143,13 @@ export default function SubcategoriesPage() {
 
       // Normalize categoryId to string id if needed
       const payload = {
-        ...formData,
-        categoryId: formData.categoryId && formData.categoryId._id ? formData.categoryId._id : formData.categoryId
+        name: formData.name,
+        description: formData.description || '',
+        categoryId: formData.categoryId && formData.categoryId._id ? formData.categoryId._id : formData.categoryId,
+        image: imageUrl
       };
+
+      console.log('📤 Sending subcategory data:', payload);
 
       const response = await fetch(url, {
         method,
@@ -106,24 +158,29 @@ export default function SubcategoriesPage() {
         },
         body: JSON.stringify(payload),
       });
-        setFormData({ name: '', description: '', categoryId: '', image: '' });
 
       const data = await response.json();
+      console.log('📥 Subcategory save response:', data);
 
       if (data.success) {
+        console.log('✅ Subcategory saved successfully!');
         await fetchSubcategories(selectedCategoryFilter);
         setShowForm(false);
         setEditingSubcategory(null);
-        setFormData({ name: '', description: '', categoryId: '' });
+        setFormData({ name: '', description: '', categoryId: '', image: '' });
+        setImageFile(null);
+        setImagePreview(null);
         alert(data.message);
       } else {
+        console.error('❌ Save failed:', data);
         alert(data.error || 'Something went wrong');
       }
     } catch (error) {
-      console.error('Error saving subcategory:', error);
-      alert('Error saving subcategory');
+      console.error('❌ Error saving subcategory:', error);
+      alert('Error saving subcategory: ' + error.message);
     } finally {
       setLoading(false);
+      setUploading(false);
     }
   };
 
@@ -136,6 +193,8 @@ export default function SubcategoriesPage() {
       categoryId: subcategory.categoryId && subcategory.categoryId._id ? subcategory.categoryId._id : subcategory.categoryId,
       image: subcategory.image || ''
     });
+    setImagePreview(subcategory.image || null);
+    setImageFile(null);
     setShowForm(true);
   };
 
@@ -281,15 +340,41 @@ export default function SubcategoriesPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Image
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Subcategory Image
                 </label>
-                <CloudinaryUpload
-                  value={formData.image}
-                  onChange={(url) => setFormData({ ...formData, image: url })}
-                  folder="avanta/subcategories"
-                  placeholder="Upload subcategory image"
-                />
+                
+                {imagePreview ? (
+                  <div className="relative">
+                    <img 
+                      src={imagePreview} 
+                      alt="Preview" 
+                      className="w-full h-48 object-cover rounded-lg border-2 border-gray-200"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleRemoveImage}
+                      className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 shadow-lg"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden"
+                      id="subcategory-image"
+                    />
+                    <label htmlFor="subcategory-image" className="cursor-pointer">
+                      <Upload className="mx-auto text-gray-400 mb-2" size={32} />
+                      <p className="text-sm text-gray-600">Click to upload subcategory image</p>
+                      <p className="text-xs text-gray-400 mt-1">PNG, JPG up to 5MB</p>
+                    </label>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -311,7 +396,7 @@ export default function SubcategoriesPage() {
                   disabled={loading}
                   className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
                 >
-                  {loading ? 'Saving...' : (editingSubcategory ? 'Update' : 'Create')}
+                  {uploading ? 'Uploading...' : loading ? 'Saving...' : (editingSubcategory ? 'Update' : 'Create')}
                 </button>
                 <button
                   type="button"

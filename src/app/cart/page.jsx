@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const CartPage = () => {
   const { Enquiries, removeEnquiry, clearEnquiries } = useEnquiry();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -52,7 +53,7 @@ const CartPage = () => {
       const result = await response.json();
 
       if (result.success) {
-        toast.success("Inquiry submitted successfully! We'll contact you soon.");
+        setShowSuccessModal(true);
         
         // Clear form and enquiries after successful submission
         setFormData({  
@@ -63,7 +64,11 @@ const CartPage = () => {
           location: "",
           notes: ""
         });
-        clearEnquiries();
+        
+        // Clear enquiries after 2 seconds
+        setTimeout(() => {
+          clearEnquiries();
+        }, 2000);
       } else {
         toast.error(result.error || "Failed to submit inquiry");
       }
@@ -134,11 +139,11 @@ Thank you!`;
   // --- EMPTY STATE ---
   if (Enquiries.length === 0) {
     return (
-      <section className="w-full bg-white py-24 px-4 min-h-[70vh] flex flex-col items-center justify-center">
-        <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-8 text-[#1F1951]">
+      <section className="w-full bg-gradient-to-b from-[#FFF5F8] to-white py-24 px-4 min-h-[70vh] flex flex-col items-center justify-center">
+        <div className="w-24 h-24 bg-[#FFE5ED] rounded-full flex items-center justify-center mb-8 text-[#E13C6C]">
           <ShoppingBag size={40} strokeWidth={1.5} />
         </div>
-        <h2 className="text-3xl md:text-4xl font-serif text-[#1F1951] mb-4 text-center">
+        <h2 className="text-3xl md:text-4xl font-playfair text-[#E13C6C] mb-4 text-center">
           Your Inquiry List is Empty
         </h2>
         <p className="text-gray-500 max-w-sm text-center text-sm md:text-base mb-10">
@@ -146,7 +151,7 @@ Thank you!`;
         </p>
         <Link
           href="/store/suits-set"
-          className="bg-[#1F1951] text-white px-10 py-4 rounded-full font-bold text-sm tracking-widest uppercase hover:bg-[#2a2f6b] transition-all"
+          className="bg-[#E13C6C] text-white px-10 py-4 rounded-full font-bold text-sm tracking-widest uppercase hover:bg-[#C92F5C] transition-all shadow-lg shadow-pink-200"
         >
           Go to Store
         </Link>
@@ -157,11 +162,44 @@ Thank you!`;
   return (
     <>
       <Toaster position="top-center" />
-      <section className="w-full bg-white py-12 md:py-20 px-4">
+      
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn">
+          <div className="bg-white rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl transform animate-scaleIn">
+            <div className="text-center">
+              {/* Success Icon */}
+              <div className="w-20 h-20 bg-gradient-to-br from-[#E13C6C] to-[#FF6B9D] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-pink-200">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              
+              {/* Success Message */}
+              <h3 className="text-2xl md:text-3xl font-playfair font-bold text-[#E13C6C] mb-3">
+                Inquiry Submitted!
+              </h3>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Thank you for your interest! Our team will review your inquiry and contact you within 2-4 business hours.
+              </p>
+              
+              {/* Close Button */}
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="w-full bg-gradient-to-r from-[#E13C6C] to-[#FF6B9D] text-white py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:shadow-xl hover:shadow-pink-200 transition-all"
+              >
+                Continue Shopping
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      <section className="w-full bg-gradient-to-b from-[#FFF5F8] to-white py-12 md:py-20 px-4">
         <div className="max-w-[1300px] mx-auto">
           {/* Page Header */}
-          <div className="mb-12 border-b border-gray-100 pb-8 text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-serif text-[#1F1951] mb-3">
+          <div className="mb-12 border-b border-pink-100 pb-8 text-center md:text-left">
+            <h1 className="text-4xl md:text-5xl font-playfair text-[#E13C6C] mb-3">
               Request a Quote
             </h1>
             <p className="text-gray-500 text-sm md:text-base max-w-2xl">
@@ -176,10 +214,10 @@ Thank you!`;
                 {Enquiries.map((item) => (
                   <div
                     key={item._id}
-                    className="group relative flex flex-col sm:flex-row gap-6 p-5 bg-white border border-gray-100 rounded-[2rem] hover:shadow-xl hover:shadow-gray-100 transition-all duration-500"
+                    className="group relative flex flex-col sm:flex-row gap-6 p-2 bg-white border border-pink-100 rounded-4xl hover:shadow-xl hover:shadow-pink-100 transition-all duration-500"
                   >
                     {/* Product Image */}
-                    <div className="relative w-full sm:w-36 h-44 shrink-0 bg-gray-50 rounded-2xl overflow-hidden shadow-sm">
+                    <div className="relative w-full sm:w-36 h-36 shrink-0 bg-pink-50 rounded-2xl overflow-hidden shadow-sm">
                       <img
                         src={item.images?.main || "/placeholder.png"}
                         alt={item.name || item.title}
@@ -189,16 +227,26 @@ Thank you!`;
 
                     {/* Product Details */}
                     <div className="flex-1 flex flex-col py-2">
-                      <div className="flex justify-between items-start gap-3">
-                        <div>
-                          <h3 className="text-[#1F1951] font-serif text-xl leading-tight mb-2">
+                      <div className="flex justify-between items-start gap-3 mb-3">
+                        <div className="flex-1">
+                          <h3 className="text-[#E13C6C]  font-playfair text-xl  mb-2">
                             {item.name || item.title}
                           </h3>
-                          <div className="flex flex-wrap gap-2 mb-3">
-                            <span className="text-[10px] font-bold text-[#E12B5E] uppercase tracking-widest bg-pink-50 px-2 py-1 rounded">
-                              ID: {item.styleCode || item._id.slice(-6)}
-                            </span>
-                          </div>
+                          
+                          {/* SKU Code */}
+                          <p className="text-xs text-gray-500 mb-2">
+                            SKU: <span className="font-semibold text-gray-700">{item.sku || item.styleCode || "N/A"}</span>
+                          </p>
+                          
+                          {/* Price */}
+                          <p className="text-gray-900 font-semibold text-lg mb-2">
+                            ₹{item.priceRange?.min} – ₹{item.priceRange?.max}
+                          </p>
+                          
+                          {/* Description - 2 lines max */}
+                          <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
+                            {item.description || "Premium quality ethnic wear for wholesale."}
+                          </p>
                         </div>
 
                         {/* Remove Button */}
@@ -207,26 +255,10 @@ Thank you!`;
                             removeEnquiry(item._id);
                             toast.error("Item removed");
                           }}
-                          className="text-gray-300 hover:text-red-500 hover:bg-red-50 p-2 rounded-full transition-all"
+                          className="text-gray-300 hover:text-[#E13C6C] hover:bg-pink-50 p-2 rounded-full transition-all"
                         >
                           <Trash2 size={20} />
                         </button>
-                      </div>
-
-                      {/* Specifications */}
-                      <div className="mt-auto grid grid-cols-2 gap-y-2 text-sm">
-                        <p className="text-gray-500">
-                          <span className="font-bold text-gray-800">Material:</span>{" "}
-                          {item.productDetails?.material || "Premium Fabric"}
-                        </p>
-                        <p className="text-gray-500">
-                          <span className="font-bold text-gray-800">Color:</span>{" "}
-                          {item.color?.name || "As Shown"}
-                        </p>
-                        <p className="text-gray-500">
-                          <span className="font-bold text-gray-800">Care:</span>{" "}
-                          {item.productDetails?.productCare || "Dry Clean"}
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -236,9 +268,9 @@ Thank you!`;
 
             {/* ================= RIGHT: CONSULTATION FORM ================= */}
             <div className="lg:col-span-5">
-              <div className="bg-[#1F1951]/[0.02] p-8 md:p-10 rounded-[3rem] border border-gray-100 sticky top-32 shadow-sm">
+              <div className="bg-pink-50/50 p-8 md:p-10 rounded-[3rem] border border-pink-100 sticky top-32 shadow-sm">
                 <div className="mb-8">
-                  <h2 className="text-3xl font-serif text-[#1F1951] mb-2">Consultation</h2>
+                  <h2 className="text-3xl font-playfair text-[#E13C6C] mb-2">Consultation</h2>
                   <p className="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold">
                     Reseller Details
                   </p>
@@ -257,7 +289,7 @@ Thank you!`;
                       onChange={handleInputChange}
                       placeholder="Enter your name"
                       required
-                      className="w-full px-5 py-4 bg-white border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#1F1951]/10 text-gray-800 placeholder-gray-300 transition-all text-sm"
+                      className="w-full px-5 py-4 bg-white border border-pink-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#E13C6C]/20 text-gray-800 placeholder-gray-300 transition-all text-sm"
                     />
                   </div>
 
@@ -273,7 +305,7 @@ Thank you!`;
                       onChange={handleInputChange}
                       placeholder="business@email.com"
                       required
-                      className="w-full px-5 py-4 bg-white border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#1F1951]/10 text-gray-800 placeholder-gray-300 transition-all text-sm"
+                      className="w-full px-5 py-4 bg-white border border-pink-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#E13C6C]/20 text-gray-800 placeholder-gray-300 transition-all text-sm"
                     />
                   </div>
 
@@ -289,7 +321,7 @@ Thank you!`;
                       onChange={handleInputChange}
                       placeholder="+91 00000 00000"
                       required
-                      className="w-full px-5 py-4 bg-white border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#1F1951]/10 text-gray-800 placeholder-gray-300 transition-all text-sm"
+                      className="w-full px-5 py-4 bg-white border border-pink-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#E13C6C]/20 text-gray-800 placeholder-gray-300 transition-all text-sm"
                     />
                   </div>
 
@@ -304,7 +336,7 @@ Thank you!`;
                       value={formData.company}
                       onChange={handleInputChange}
                       placeholder="Optional"
-                      className="w-full px-5 py-4 bg-white border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#1F1951]/10 text-gray-800 placeholder-gray-300 transition-all text-sm"
+                      className="w-full px-5 py-4 bg-white border border-pink-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#E13C6C]/20 text-gray-800 placeholder-gray-300 transition-all text-sm"
                     />
                   </div>
 
@@ -319,7 +351,7 @@ Thank you!`;
                       value={formData.location}
                       onChange={handleInputChange}
                       placeholder="Jaipur, India"
-                      className="w-full px-5 py-4 bg-white border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#1F1951]/10 text-gray-800 placeholder-gray-300 transition-all text-sm"
+                      className="w-full px-5 py-4 bg-white border border-pink-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#E13C6C]/20 text-gray-800 placeholder-gray-300 transition-all text-sm"
                     />
                   </div>
 
@@ -334,20 +366,20 @@ Thank you!`;
                       onChange={handleInputChange}
                       rows="3"
                       placeholder="Sizes needed, quantity per style, etc..."
-                      className="w-full px-5 py-4 bg-white border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#1F1951]/10 text-gray-800 placeholder-gray-300 text-sm resize-none"
+                      className="w-full px-5 py-4 bg-white border border-pink-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#E13C6C]/20 text-gray-800 placeholder-gray-300 text-sm resize-none"
                     />
                   </div>
 
                   {/* Summary & Action */}
-                  <div className="pt-6 mt-4 border-t border-gray-200/50">
+                  <div className="pt-6 mt-4 border-t border-pink-200/50">
                     <div className="flex justify-between items-center mb-6 px-1">
                       <span className="text-gray-500 text-sm font-medium">Selected Styles:</span>
-                      <span className="text-2xl font-bold text-[#1F1951]">{Enquiries.length}</span>
+                      <span className="text-2xl font-bold text-[#E13C6C]">{Enquiries.length}</span>
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full bg-[#1F1951] text-white py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-[#2a2f6b] transition-all shadow-xl shadow-indigo-100 flex items-center justify-center gap-3 active:scale-95"
+                      className="w-full bg-gradient-to-r from-[#E13C6C] to-[#FF6B9D] text-white py-5 rounded-full font-bold text-sm uppercase tracking-widest hover:shadow-xl hover:shadow-pink-200 transition-all flex items-center justify-center gap-3 active:scale-95"
                     >
                       Submit Inquiry
                       <ArrowRight size={18} />
@@ -356,7 +388,7 @@ Thank you!`;
                     <button
                       type="button"
                       onClick={handleWhatsAppInquiry}
-                      className="w-full mt-3 bg-[#00D95F] text-white py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:shadow-lg transition-all flex items-center justify-center gap-3 active:scale-95"
+                      className="w-full mt-3 bg-[#25D366] text-white py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:shadow-lg hover:shadow-green-200 transition-all flex items-center justify-center gap-3 active:scale-95"
                     >
                       WhatsApp Inquiry
                       <MessageCircle size={18} fill="white" />

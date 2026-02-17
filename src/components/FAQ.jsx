@@ -43,23 +43,21 @@ const FAQ = () => {
 
         {/* Left Side: Title Section */}
         <div className="md:w-1/3">
-          <div className="flex items-center justify-start gap-2 mb-3 md:mb-4">
-            <span className="h-1.5 w-1.5 md:h-2 md:w-2 bg-[#DE3163] rounded-full"></span>
-            <h3 className="text-[10px] md:text-sm font-bold text-[#1a1a3d] uppercase tracking-widest">
-              Avanta by Jaipur Kurti Gharana
-            </h3>
-            <span className="h-1.5 w-1.5 md:h-2 md:w-2 bg-[#DE3163] rounded-full"></span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-cinzel font-bold text-gray-900 leading-[1.1]">
-            FREQUENTLY ASKED <br className="hidden md:block" /> QUESTIONS
+         <h2 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          Jaipur Kurti Gharana
           </h2>
+
+        {/* Main Heading */}
+        <h2 className="text-3xl md:text-[40px] font-bold font-playfair text-[#0E0E0E] mb-6 ">
+     Frequently Asked Questions
+        </h2>
         </div>
 
         {/* Right Side: FAQ Accordion */}
         <div className="md:w-2/3">
           <div className="border-t border-gray-200">
             {faqData.map((item, index) => (
-              <div key={index} className="border-b border-gray-200">
+              <div key={index} className="border-b font-mona border-gray-200">
                 <button
                   onClick={() => toggleAccordion(index)}
                   className="w-full py-6 flex justify-between items-center text-left group"
@@ -79,7 +77,7 @@ const FAQ = () => {
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-60 opacity-100 mb-6' : 'max-h-0 opacity-0'
                     }`}
                 >
-                  <p className="text-gray-500 text-sm md:text-base leading-relaxed pr-10">
+                  <p className="text-gray-700 text-sm  font-medium leading-relaxed pr-10">
                     {item.answer}
                   </p>
                 </div>

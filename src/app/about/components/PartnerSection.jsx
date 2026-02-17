@@ -32,10 +32,10 @@ export default function PartnerSection() {
   return (
     <section className="max-w-7xl mx-auto bg-white py-12 px-6 md:px-12 ">
       <div className="max-w-7xl mx-auto text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-cinzel font-bold tracking-widest uppercase mb-4 text-black">
-          WHY PARTNER WITH AVANTA
+        <h2 className="text-3xl md:text-[40px] font-playfair font-bold  mb-4 text-black">
+         Why Partner With Jaipur Kurti Gharana
         </h2>
-        <p className="text-black text-sm md:text-base tracking-wide">
+        <p className="text-black text-sm md:text-lg font-semibold font-sans">
           Building successful partnerships through quality, reliability, and innovation
         </p>
       </div>

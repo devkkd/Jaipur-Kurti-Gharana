@@ -29,7 +29,7 @@ export async function POST(request) {
     await dbConnect();
     
     const body = await request.json();
-    const { name, description = '', sortOrder = 0 } = body;
+    const { name, description = '', image = '', sortOrder = 0 } = body;
 
     if (!name || name.trim().length < 2) {
       return NextResponse.json(
@@ -54,6 +54,7 @@ export async function POST(request) {
       name: name.trim(),
       slug,
       description: description.trim(),
+      image: image || null,
       sortOrder: parseInt(sortOrder) || 0,
       isActive: true
     };

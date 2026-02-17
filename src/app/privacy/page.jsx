@@ -92,8 +92,8 @@ const PrivacyPolicy = () => {
         
         {/* Header Section */}
         <header className="text-center mb-12">
-          <p className="text-sm font-bold tracking-widest uppercase mb-2">Privacy Policy</p>
-          <h1 className="text-4xl md:text-5xl font-cinzel font-bold tracking-tight text-gray-900 uppercase">
+          <p className="text-lg font-bold .font-mona uppercase mb-2">Privacy Policy</p>
+          <h1 className="text-4xl md:text-5xl font-playfair font-bold tracking-tight text-gray-900 uppercase">
             Privacy Policy
           </h1>
         </header>

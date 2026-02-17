@@ -1,7 +1,9 @@
 @import "tailwindcss";
+@import url('https://api.fontshare.com/v2/css?f[]=mona-sans@400,500,600,700&display=swap');
 
 :root {
   --font-mont: 'Montserrat', sans-serif;
+  --font-mona: 'Mona Sans', sans-serif;
 }
 
 .font-mont {
@@ -14,6 +16,10 @@
 
 .font-playfair {
   font-family: var(--font-playfair);
+}
+
+.font-mona {
+  font-family: var(--font-mona), sans-serif;
 }
 
 /* default body font */

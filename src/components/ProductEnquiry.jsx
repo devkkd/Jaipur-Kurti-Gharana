@@ -77,10 +77,10 @@ const ProductEnquiry = ({ productId = null, productName = null }) => {
   };
 
   return (
-    <section className="bg-[#F9F8FF] py-16 px-4 md:px-8">
+    <section className="justify-center bg-gradient-to-b from-[#FFECF2] to-[#FFD3E1]">
       <div className="max-w-5xl mx-auto rounded-3xl p-8 md:p-12">
         {/* Title */}
-        <h2 className="text-2xl md:text-3xl font-cinzel font-bold text-center text-gray-900 mb-10 tracking-widest uppercase">
+        <h2 className="text-2xl md:text-3xl font-playfair font-bold text-center text-gray-900 mb-10 ">
           Product Enquiry
         </h2>
 
@@ -281,7 +281,7 @@ const ProductEnquiry = ({ productId = null, productName = null }) => {
               <button 
                 type="submit"
                 disabled={loading}
-                className="bg-[#1e1b4b] text-white px-10 py-3 rounded-full font-semibold flex items-center gap-2 hover:bg-[#2e2a6e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#E13C6C] text-white px-10 py-3 rounded-full font-semibold flex items-center gap-2 hover:bg-[#2e2a6e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Submitting...' : 'Submit Enquiry'} <span>→</span>
               </button>

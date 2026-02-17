@@ -24,16 +24,22 @@ const AboutAchievements = () => {
     <section className="py-20 px-6 bg-white">
       <div className="max-w-7xl mx-auto text-center">
         {/* Header Section */}
-        <h2 className="text-3xl md:text-4xl font-cinzel font-bold tracking-wide mb-4 text-black uppercase">
-          Our Achievements
+         <h2 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          Jaipur Kurti Gharana
+          </h2>
+
+        {/* Main Heading */}
+        <h2 className="text-3xl md:text-[40px] font-bold font-playfair text-[#0E0E0E] mb-6 ">
+   Our Achievements
         </h2>
         
         <p className="max-w-2xl mx-auto  text-black leading-relaxed mb-16 tracking-tight">
-          Each Milestone Reflects Our Commitment To Quality, Craftsmanship, And The Trust Placed In Us By A Growing Community Of Discerning Customers.
+        Each Milestone Reflects Our Commitment To Quality, 
+Craftsmanship, And The Trust Placed In Us By A Growing Community Of Discerning Customers.
         </p>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 lg:gap-y-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 lg:gap-y-0">
           {stats.map((stat, index) => (
             <div 
               key={index} 
@@ -42,10 +48,10 @@ const AboutAchievements = () => {
                 index !== stats.length - 1 ? 'lg:border-r' : ''
               }`}
             >
-              <h3 className="text-3xl md:text-4xl font-cinzel font-bold text-black mb-3">
+              <h3 className="text-3xl md:text-4xl font-playfair font-bold text-black mb-3">
                 {stat.value}
               </h3>
-              <p className="text-[13px] md:text-[14px] text-black leading-snug max-w-[200px] font-normal">
+              <p className="text-[13px] md:text-[14px] text-black leading-snug max-w-[200px] font-semibold">
                 {stat.label}
               </p>
             </div>

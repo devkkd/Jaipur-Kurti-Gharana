@@ -22,19 +22,16 @@ const CraftsmanshipSection = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-white">
+    <section className="py-12 px-4 bg-white">
       <div className="max-w-6xl mx-auto text-center">
         {/* Header Section */}
-        <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
-          <span className="h-1.5 w-1.5 md:h-2 md:w-2 bg-[#DE3163] rounded-full"></span>
-          <h3 className="text-[10px] md:text-sm font-bold text-[#1a1a3d] uppercase tracking-widest">
-            Avanta by Jaipur Kurti Gharana
-          </h3>
-          <span className="h-1.5 w-1.5 md:h-2 md:w-2 bg-[#DE3163] rounded-full"></span>
-        </div>
+         <h2 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          Jaipur Kurti Gharana
+          </h2>
 
-        <h2 className="text-2xl md:text-4xl font-cinzel font-bold text-[#1A1A1A] mb-16 tracking-tight uppercase">
-          The Art of Thoughtful Craftsmanship
+        {/* Main Heading */}
+        <h2 className="text-3xl md:text-[40px] font-bold font-playfair text-[#0E0E0E] mb-12 ">
+   The Art of Thoughtful Craftsmanship
         </h2>
 
         {/* Features Grid */}
@@ -60,7 +57,7 @@ const CraftsmanshipSection = () => {
               <h3 className="text-lg font-bold text-[#1A1A1A] mb-3">
                 {item.title}
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed max-w-[250px]">
+              <p className="text-sm text-gray-700 font-semibold leading-relaxed max-w-[450px]">
                 {item.description}
               </p>
             </div>

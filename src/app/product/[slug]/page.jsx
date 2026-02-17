@@ -8,6 +8,8 @@ import ProductCard from "@/components/ProductCard";
 import FAQ from "@/components/FAQ";
 import ContactUs from "@/components/ContactUs";
 import CraftsmanshipSection from "@/components/CraftsmanshipSection";
+import ProductContact from "@/components/ProductContact";
+import ProductEnquiry from "@/components/ProductEnquiry";
 
 const ProductDetailsPage = () => {
   const { slug } = useParams();
@@ -29,18 +31,18 @@ const ProductDetailsPage = () => {
         if (result.success) {
           setProduct(result.data);
           
-          // Fetch related products
-          if (result.data.subcategoryId) {
-            const subcategoryId = result.data.subcategoryId._id || result.data.subcategoryId;
+          // Fetch related products by category
+          if (result.data.categoryId) {
+            const categoryId = result.data.categoryId._id || result.data.categoryId;
             const relatedResponse = await fetch(
-              `/api/products?subcategoryId=${subcategoryId}&limit=4`
+              `/api/products?categoryId=${categoryId}&limit=9`
             );
             const relatedResult = await relatedResponse.json();
             
             if (relatedResult.success) {
-              // Filter out current product
+              // Filter out current product and take 8 products
               const filtered = relatedResult.data.filter(p => p._id !== result.data._id);
-              setRelatedProducts(filtered);
+              setRelatedProducts(filtered.slice(0, 8));
             }
           }
         } else {
@@ -260,32 +262,36 @@ const ProductDetailsPage = () => {
         </div>
       </div>
 
-      {/* RELATED PRODUCTS */}
+
+<div className="my-16">
+<ProductEnquiry/>
+</div>
+
+      {/* RELATED PRODUCTS - Discover Similar Designs */}
       {relatedProducts.length > 0 && (
-        <div className="mt-20">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">
-            Related Products
+        <div className="mt-20 mb-16 mx-auto max-w-7xl">
+          <h2 className="text-3xl md:text-4xl font-bold font-playfair text-gray-900 mb-12">
+            Discover Similar Designs
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
             {relatedProducts.map((relatedProduct) => (
               <ProductCard key={relatedProduct._id} product={relatedProduct} />
             ))}
           </div>
         </div>
       )}
-
       {/* CRAFTSMANSHIP SECTION */}
-      <div className="mt-20">
+      <div>
         <CraftsmanshipSection />
       </div>
 
       {/* FAQ SECTION */}
-      <div className="mt-20">
+      <div>
         <FAQ />
       </div>
 
       {/* CONTACT US SECTION */}
-      <div className="mt-20">
+      <div >
         <ContactUs />
       </div>
     </div>

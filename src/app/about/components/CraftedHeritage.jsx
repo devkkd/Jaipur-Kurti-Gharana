@@ -3,37 +3,29 @@ import Image from 'next/image';
 
 const CraftedHeritage = () => {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-12 md:py-20 font-sans">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
-        <img src="images/about/about2.png" alt="" />
+    <section className="max-w-7xl mx-auto px-4 py-8 md:py-12 font-sans">
+      <div className="grid grid-cols-1 lg:grid-cols-2  gap-12 items-center">
+
+        <img src="images/about/about2.png" alt="aboutus" className='rounded-2xl' />
 
         {/* Right Side: Content */}
         <div className="flex flex-col justify-center text-center lg:text-right space-y-8">
           <header className="space-y-2">
-            <h2 className="text-3xl md:text-4xl font-cinzel font-bold tracking-widest text-gray-900 uppercase leading-tight">
-              Crafted Heritage
+            <h2 className="text-3xl md:text-4xl  font-bold font-playfair text-gray-900  leading-tight tracking-wide">
+              A Legacy of Artisanal
             </h2>
-            <h2 className="text-3xl md:text-4xl font-cinzel font-bold tracking-widest text-gray-900 uppercase leading-tight">
-              Contemporary Elegance
+            <h2 className="text-3xl md:text-4xl  font-bold font-playfair text-gray-900  leading-tight tracking-wide">
+              Mastery
             </h2>
           </header>
 
           <div className="space-y-6 text-black leading-relaxed max-w-xl ml-auto">
             <p className="text-sm md:text-base">
-              At <span className="font-bold">Avanta India</span>, we specialize in 
-              <span className="font-bold"> Kurti-Pant-Dupatta Sets, Anarkalis, Co-ord Sets</span>, 
-              and curated ethnic ensembles, all meticulously produced using 
-              <span className="font-bold"> 60*60 pure cotton and flex cotton fabrics</span>. 
-              Renowned for their softness, breathability, and durability, these fabrics ensure 
-              effortless comfort across seasons while retaining a refined, polished finish.
-            </p>
+              At <span className="font-bold">At Jaipur Kurti Gharana,</span>,  we honor and elevate the enduring legacy of Indian craftsmanship. Every garment is a tribute to heritage meticulously handcrafted by master artisans whose expertise has been cultivated and passed down through generations.<br></br>
 
-            <p className="text-sm md:text-base">
-              Each garment reflects the soul of Jaipur expressed through graceful silhouettes, 
-              precise tailoring, and trend-aware design. From subtle daily wear to statement 
-              festive pieces, our collections are designed to resonate with modern Indian 
-              women while honoring timeless traditions.
+
+
+              Our creations celebrate the finesse of handwork, from intricate embroidery to exquisite zardozi detailing, thoughtfully reimagined through contemporary silhouettes. The result is a timeless aesthetic that seamlessly bridges tradition and modernity, designed for the discerning connoisseur of Indian fashion.
             </p>
           </div>
         </div>

@@ -12,23 +12,19 @@ const InstagramSection = () => {
     <section className="bg-white py-12 px-4">
       {/* Header Section */}
       <div className="max-w-4xl mx-auto text-center mb-12">
-        <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
-          <span className="h-1.5 w-1.5 md:h-2 md:w-2 bg-[#DE3163] rounded-full"></span>
-          <h3 className="text-[10px] md:text-sm font-bold text-[#1a1a3d] uppercase tracking-widest">
-            Avanta by Jaipur Kurti Gharana
-          </h3>
-          <span className="h-1.5 w-1.5 md:h-2 md:w-2 bg-[#DE3163] rounded-full"></span>
-        </div>
-        
-        <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-6 text-gray-900 tracking-tight">
-          Stay Inspired
+         <h2 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          Jaipur Kurti Gharana
+          </h2>
+
+        {/* Main Heading */}
+        <h2 className="text-3xl md:text-[40px] font-bold font-playfair text-[#0E0E0E] mb-6 ">
+   Follow the Craft
         </h2>
         
-        <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-2xl mx-auto mb-4">
-          Stay connected with Avanta India and be the first to discover our latest collections and trend-forward designs. 
-          Follow us on Instagram for exclusive previews, new launches, and refined style inspiration.
-        </p>
-
+        <p className="text-sm font-medium text-black leading-relaxed max-w-7xl mx-auto mb-4">
+          Stay connected with Jaipur Kurti Gharana and be among the first to experience our latest collections and thoughtfully curated designs. 
+Follow us on Instagram for exclusive previews, new launches, and elevated style inspiration rooted in timeless Indian craftsmanship.
+</p>
         <div className="flex items-center justify-center gap-2 text-sm font-semibold text-gray-800">
           <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" className="h-5 w-5" alt="IG" />
           <span>@jaipur_kurti_gharana | JAIPUR KURTI GHARANA</span>

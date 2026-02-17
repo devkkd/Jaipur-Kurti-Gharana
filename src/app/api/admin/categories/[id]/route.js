@@ -41,7 +41,7 @@ export async function PUT(request, { params }) {
     
     const { id } = await params;
     const body = await request.json();
-    const { name, description, sortOrder, isActive } = body;
+    const { name, description, image, sortOrder, isActive } = body;
 
     const updateData = {};
     
@@ -57,6 +57,7 @@ export async function PUT(request, { params }) {
     }
     
     if (description !== undefined) updateData.description = description.trim();
+    if (image !== undefined) updateData.image = image || null;
     if (sortOrder !== undefined) updateData.sortOrder = parseInt(sortOrder) || 0;
     if (isActive !== undefined) updateData.isActive = Boolean(isActive);
 

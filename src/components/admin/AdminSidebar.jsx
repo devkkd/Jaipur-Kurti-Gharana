@@ -78,7 +78,7 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
   return (
     <aside 
       className={`
-        fixed top-16 my-4 left-0 z-40 h-[calc(100vh-4rem)] w-64 bg-white border-r border-gray-200 overflow-y-auto
+        fixed top-16 my-4 left-0 z-40 h-[calc(100vh-4rem)] w-64 bg-gradient-to-b from-white to-pink-50/30 border-r border-pink-100 overflow-y-auto
         transition-transform duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0
@@ -92,10 +92,10 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             href={item.href}
             onClick={() => setSidebarOpen(false)}
             className={`
-              flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-colors
+              flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all
               ${isActive(item.href)
-                ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700'
-                : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                ? 'bg-gradient-to-r from-[#E13C6C] to-[#FF6B9D] text-white shadow-md shadow-pink-200'
+                : 'text-gray-700 hover:bg-pink-50 hover:text-[#E13C6C]'
               }
             `}
           >
@@ -105,10 +105,10 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
         ))}
 
         {/* Logout Button */}
-        <div className="mt-8 pt-4 border-t border-gray-200">
+        <div className="mt-8 pt-4 border-t border-pink-200">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 w-full"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-[#E13C6C] hover:bg-pink-50 w-full transition-all"
           >
             <LogOut size={18} />
             Logout

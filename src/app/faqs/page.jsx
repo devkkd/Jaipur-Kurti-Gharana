@@ -43,8 +43,8 @@ const FAQSection = () => {
       <section className="max-w-6xl mx-auto px-4 py-16 font-sans">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-sm font-bold tracking-widest uppercase text-gray-900">FAQ's</span>
-          <h2 className="text-3xl md:text-4xl font-cinzel font-bold text-gray-900 mt-2 tracking-wide uppercase">
+          <span className="text-sm font-bold .font-mona uppercase text-gray-900">FAQ's</span>
+          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-gray-900 mt-2 tracking-wide ">
             Frequently Asked Questions
           </h2>
         </div>
@@ -60,10 +60,10 @@ const FAQSection = () => {
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex items-center justify-between py-6 text-left focus:outline-none group"
               >
-                <span className="text-base md:text-lg font-semibold text-gray-900 pr-8">
+                <span className="text-base md:text-lg font-bold text-gray-900 .font-mona pr-8">
                   {faq.question}
                 </span>
-                <div className={`p-2 rounded-full bg-[#D9D9E3] transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
+                <div className={`p-2 rounded-full bg-[#DACED2] transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
                   <ChevronDown size={20} className="text-white" strokeWidth={3} />
                 </div>
               </button>
@@ -73,7 +73,7 @@ const FAQSection = () => {
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-96 pb-6' : 'max-h-0'
                   }`}
               >
-                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                <p className="text-sm md:text-base font-medium .font-mona text-gray-900 leading-relaxed">
                   {faq.answer}
                 </p>
               </div>

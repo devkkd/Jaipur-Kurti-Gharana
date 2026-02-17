@@ -15,11 +15,10 @@ export default function CloudinaryUpload({
 
   const uploadToCloudinary = async (file) => {
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('folder', folder);
+    formData.append('images', file); // Changed to 'images' for R2 API
 
     try {
-      const response = await fetch('/api/upload', {
+      const response = await fetch('/api/admin/products/upload-image', { // Changed to R2 endpoint
         method: 'POST',
         body: formData,
       });
@@ -38,7 +37,13 @@ export default function CloudinaryUpload({
       }
 
       const data = await response.json();
-      return data.url;
+      
+      // R2 API returns { success: true, urls: [...] }
+      if (data.success && data.urls && data.urls.length > 0) {
+        return data.urls[0];
+      } else {
+        throw new Error('Upload failed: No URL returned');
+      }
     } catch (error) {
       console.error('Upload error:', error);
       throw error;

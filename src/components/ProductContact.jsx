@@ -3,18 +3,18 @@ import { Upload } from 'lucide-react';
 
 const WholesaleForm = () => {
   return (
-    <div className="flex flex-col max-w-[90rem]  mx-auto lg:flex-row bg-gradient-to-b from-[#FFECF2] to-[#FFD3E1]">
+    <div className="flex flex-col max-w-[90rem] justify-center mx-auto lg:flex-row bg-gradient-to-b from-[#FFECF2] to-[#FFD3E1]">
       {/* Left Side: Image Section */}
-      <div className="w-full lg:w-3/7 relative  m-6">
+      {/* <div className="w-full lg:w-3/7 relative  m-6">
         <img
           src="/images/about/Wholesale-form.svg"
           alt="Fashion Model"
           className="absolute inset-0 w-full rounded-3xl object-cover"
         />
-      </div>
+      </div> */}
 
       {/* Right Side: Form Section */}
-      <div className="w-full lg:w-3/5 p-6 md:p-12 flex flex-col justify-center">
+      <div className="w-3/4  p-6  flex flex-col justify-center">
         <h2 className="text-2xl md:text-3xl font-bold font-playfair text-center mb-6">
         Wholesale Collaborations
         </h2>

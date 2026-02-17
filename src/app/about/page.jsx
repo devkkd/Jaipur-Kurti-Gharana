@@ -10,6 +10,10 @@ import FAQ from '@/components/FAQ';
 import InstagramSection from '@/components/InstagramSection';
 import ContactUs from '@/components/ContactUs';
 import CraftsmanshipSection from '@/components/CraftsmanshipSection';
+import SignatureCraft from './components/SignatureCraft';
+import Wholesale from './components/Wholesale';
+import CommitmentSection from '@/components/CommitmentSection';
+import WholesaleForm from '@/components/WholesaleForm';
 
 const AvantaHero = () => {
   return (
@@ -17,35 +21,35 @@ const AvantaHero = () => {
       <section className="max-w-[1440px] mx-auto flex flex-col md:flex-row bg-white font-sans">
         {/* Left Content Side */}
         <div className="flex-1 flex flex-col justify-center px-8 py-12 md:px-16 lg:px-24">
-          <div className="flex items-center gap-2 mb-6">
-            <span className="w-2 h-2 bg-pink-600 rounded-full"></span>
-            <p className="text-xs font-bold tracking-widest text-indigo-900 uppercase">
-              Avanta by Jaipur Kurti Gharana
+          <p className='uppercase  text-2xl leading-tight font-bold'>
+              About us
             </p>
-            <span className="w-2 h-2 bg-pink-600 rounded-full"></span>
-          </div>
+          <div className="flex items-center gap-2 ">
+            
+            <h2 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          Jaipur Kurti Gharana
+          </h2>
+         
+        </div>
 
-          <h1 className="text-3xl md:text-4xl font-cinzel font-bold leading-tight text-gray-900 mb-8">
-            AVANTA INDIA <br />
-            BY JAIPUR KURTI GHARANA
-          </h1>
+        <h2 className="text-2xl md:text-5xl font-bold font-playfair text-[#1F1951] mb-6 my-3 ">
+      A Heritage of Excellence
+        </h2>
 
-          <div className="space-y-6 text-gray-700 max-w-xl leading-relaxed">
+          <div className="space-y-6 text-gray-700 max-w-xl leading-relaxed ">
             <p>
-              <span className="font-bold text-black">Welcome to Avanta India</span>, a distinguished wholesale label by
-              <span className="font-bold text-black"> Jaipur Kurti Gharana</span>, where heritage craftsmanship meets refined contemporary design.
-              Rooted in the rich textile legacy of Jaipur, Avanta India is dedicated to creating premium ethnic wear exclusively for
-              resellers, boutiques, and fashion businesses across India.
-            </p>
-
-            <p>
-              We are a trusted manufacturing partner for retailers who value consistency, quality, and timeless appeal.
+              <span className="font-bold text-black">Welcome to Jaipur Kurti Gharana</span>,  a distinguished wholesale fashion house where heritage craftsmanship meets refined contemporary design.</p>
+              <p>
+             Rooted in Jaipur’s rich textile legacy, we create premium ethnic wear exclusively for resellers, boutiques, and fashion businesses across India.
             </p>
 
             <p>
-              Every collection is thoughtfully developed to balance cultural authenticity with modern sensibilities crafted to perform
-              beautifully in both everyday wardrobes and elevated festive assortments.
+            We are a trusted manufacturing and sourcing partner for retailers who value consistency, uncompromising quality, and enduring style.
             </p>
+
+            <h6 className=''>
+             Each collection is thoughtfully developed to harmonize cultural authenticity with modern sensibilities—designed to perform seamlessly across everyday wardrobes and elevated festive assortments.
+            </h6>
           </div>
         </div>
 
@@ -65,20 +69,29 @@ const AvantaHero = () => {
 
 
       </section>
-      <AboutAchievements />
-      <div id="crafted-heritage">
+      <SignatureCraft/>
+       <div id="crafted-heritage">
         <CraftedHeritage />
       </div>
+      <AboutAchievements />
+     
       <PartnerSection />
-      <div id="resellers">
-        <AboutAvantaLanding />
+
+      <div className='w-full justify-center my-5'>
+        <img src='/images/about/about-banner.svg' className='w-full'/>
+      </div>
+      <div id="wholesale">
+       <Wholesale/>
       </div>
       <div id="founder-messages">
         <FounderSection />
       </div>
       <QualityCommitment />
+       <InstagramSection />
+       <CommitmentSection/>
+       <WholesaleForm/>
       <FAQ />
-      <InstagramSection />
+     
       <ContactUs />
       <CraftsmanshipSection />
     </div>
