@@ -55,36 +55,56 @@ export default function CustomerInquiriesPage() {
   const updateStatus = async (id, newStatus) => {
     try {
       console.log('Updating status:', id, newStatus);
+      
       const response = await fetch(`/api/admin/customer-inquiries/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ status: newStatus })
       });
 
       const result = await response.json();
       console.log('Update result:', result);
 
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to update status');
+      }
+
       if (result.success) {
         toast.success('Status updated successfully');
-        fetchInquiries();
+        
+        // Update local state immediately for better UX
+        setInquiries(prev => prev.map(inq => 
+          inq._id === id ? { ...inq, status: newStatus } : inq
+        ));
+        
+        // Update selected inquiry if it's open
         if (selectedInquiry?._id === id) {
-          setSelectedInquiry(result.data);
+          setSelectedInquiry(prev => ({ ...prev, status: newStatus }));
         }
+        
+        // Refresh data from server
+        fetchInquiries();
+        
+        // Trigger notification refresh by dispatching custom event
+        window.dispatchEvent(new CustomEvent('refreshNotifications'));
       } else {
         toast.error(result.error || 'Failed to update status');
       }
     } catch (error) {
       console.error('Error updating status:', error);
-      toast.error('Failed to update status');
+      toast.error(error.message || 'Failed to update status');
     }
   };
 
   // Delete inquiry
   const deleteInquiry = async (id) => {
-    if (!confirm('Are you sure you want to delete this inquiry?')) return;
+    if (!confirm('Are you sure you want to delete this inquiry? This action cannot be undone.')) return;
 
     try {
       console.log('Deleting inquiry:', id);
+      
       const response = await fetch(`/api/admin/customer-inquiries/${id}`, {
         method: 'DELETE'
       });
@@ -92,16 +112,21 @@ export default function CustomerInquiriesPage() {
       const result = await response.json();
       console.log('Delete result:', result);
 
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to delete inquiry');
+      }
+
       if (result.success) {
         toast.success('Inquiry deleted successfully');
-        fetchInquiries();
         setShowModal(false);
+        setSelectedInquiry(null);
+        fetchInquiries();
       } else {
         toast.error(result.error || 'Failed to delete inquiry');
       }
     } catch (error) {
       console.error('Error deleting inquiry:', error);
-      toast.error('Failed to delete inquiry');
+      toast.error(error.message || 'Failed to delete inquiry');
     }
   };
 
@@ -109,9 +134,14 @@ export default function CustomerInquiriesPage() {
   const viewDetails = async (id) => {
     try {
       console.log('Viewing details for:', id);
+      
       const response = await fetch(`/api/admin/customer-inquiries/${id}`);
       const result = await response.json();
       console.log('View details result:', result);
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to fetch inquiry details');
+      }
 
       if (result.success) {
         setSelectedInquiry(result.data);
@@ -121,7 +151,7 @@ export default function CustomerInquiriesPage() {
       }
     } catch (error) {
       console.error('Error fetching inquiry details:', error);
-      toast.error('Failed to fetch inquiry details');
+      toast.error(error.message || 'Failed to fetch inquiry details');
     }
   };
 

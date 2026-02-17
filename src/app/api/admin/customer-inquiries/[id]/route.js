@@ -65,6 +65,16 @@ export async function PUT(request, { params }) {
     const updateData = {};
     if (status) updateData.status = status;
     if (adminNotes !== undefined) updateData.adminNotes = adminNotes;
+    
+    // Mark as viewed when status is changed
+    if (status) {
+      updateData.isViewed = true;
+      // Set firstViewedAt only if it's not already set
+      const existingInquiry = await CustomerInquiry.findById(id);
+      if (existingInquiry && !existingInquiry.firstViewedAt) {
+        updateData.firstViewedAt = new Date();
+      }
+    }
 
     console.log('Update data:', updateData);
 

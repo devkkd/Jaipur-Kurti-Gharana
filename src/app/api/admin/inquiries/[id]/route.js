@@ -55,13 +55,20 @@ export async function PUT(request, { params }) {
     // Update status with timestamp
     if (status && status !== inquiry.status) {
       await inquiry.updateStatus(status);
+      
+      // Mark as viewed when status is changed
+      inquiry.isViewed = true;
+      if (!inquiry.firstViewedAt) {
+        inquiry.firstViewedAt = new Date();
+      }
     }
 
     // Update admin notes
     if (adminNotes !== undefined) {
       inquiry.adminNotes = adminNotes;
-      await inquiry.save();
     }
+    
+    await inquiry.save();
 
     return NextResponse.json({
       success: true,

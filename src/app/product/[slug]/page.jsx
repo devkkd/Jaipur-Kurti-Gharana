@@ -263,11 +263,17 @@ const ProductDetailsPage = () => {
       </div>
 
 
-<div className="my-16">
+{/* <div className="my-16">
 <ProductEnquiry/>
-</div>
+</div> */}
 
-      {/* RELATED PRODUCTS - Discover Similar Designs */}
+     
+      {/* CRAFTSMANSHIP SECTION */}
+      <div>
+        <CraftsmanshipSection />
+      </div>
+
+ {/* RELATED PRODUCTS - Discover Similar Designs */}
       {relatedProducts.length > 0 && (
         <div className="mt-20 mb-16 mx-auto max-w-7xl">
           <h2 className="text-3xl md:text-4xl font-bold font-playfair text-gray-900 mb-12">
@@ -280,11 +286,6 @@ const ProductDetailsPage = () => {
           </div>
         </div>
       )}
-      {/* CRAFTSMANSHIP SECTION */}
-      <div>
-        <CraftsmanshipSection />
-      </div>
-
       {/* FAQ SECTION */}
       <div>
         <FAQ />

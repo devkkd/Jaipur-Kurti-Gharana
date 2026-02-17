@@ -123,6 +123,9 @@ export default function AdminInquiriesPage() {
         if (selectedInquiry && selectedInquiry._id === id) {
           setSelectedInquiry(result.data);
         }
+        
+        // Trigger notification refresh
+        window.dispatchEvent(new CustomEvent('refreshNotifications'));
       } else {
         toast.error(result.error || 'Failed to update status');
       }

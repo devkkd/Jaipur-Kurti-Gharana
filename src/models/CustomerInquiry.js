@@ -139,6 +139,17 @@ const CustomerInquirySchema = new mongoose.Schema({
     default: 'pending'
   },
   
+  // Track if inquiry has been viewed/touched by admin
+  isViewed: {
+    type: Boolean,
+    default: false
+  },
+  
+  firstViewedAt: {
+    type: Date,
+    default: null
+  },
+  
   // Admin Notes
   adminNotes: {
     type: String,

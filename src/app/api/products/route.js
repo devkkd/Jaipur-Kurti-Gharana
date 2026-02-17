@@ -33,13 +33,18 @@ export async function GET(request) {
     if (categoryId) query.categoryId = categoryId;
     if (subcategoryId) query.subcategoryId = subcategoryId;
     if (featured === 'true') query.isFeatured = true;
-    if (search) {
+    
+    // Enhanced search functionality
+    if (search && search.trim().length >= 2) {
+      const searchRegex = new RegExp(search.trim(), 'i');
       query.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } },
-        { styleCode: { $regex: search, $options: 'i' } },
-        { sku: { $regex: search, $options: 'i' } },
-        { tags: { $in: [new RegExp(search, 'i')] } }
+        { name: searchRegex },
+        { description: searchRegex },
+        { styleCode: searchRegex },
+        { sku: searchRegex },
+        { 'productDetails.material': searchRegex },
+        { 'color.name': searchRegex },
+        { tags: { $in: [searchRegex] } }
       ];
     }
     
