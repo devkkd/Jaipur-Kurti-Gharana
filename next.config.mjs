@@ -7,8 +7,7 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', 'react-hot-toast'],
   },
   
-  // Reduce memory usage
-  swcMinify: true,
+  // Reduce memory usage (swcMinify removed - default in Next.js 16)
   compress: true,
   
   // Image optimization
@@ -48,8 +47,17 @@ const nextConfig = {
           lib: {
             test: /[\\/]node_modules[\\/]/,
             name(module) {
-              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-              return `npm.${packageName.replace('@', '')}`;
+              // Safe package name extraction
+              try {
+                const match = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/);
+                if (match && match[1]) {
+                  const packageName = match[1].replace('@', '');
+                  return `npm.${packageName}`;
+                }
+                return 'npm.vendor';
+              } catch (e) {
+                return 'npm.vendor';
+              }
             },
             priority: 20,
           },
