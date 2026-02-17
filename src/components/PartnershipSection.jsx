@@ -1,5 +1,4 @@
 import React from 'react';
-import { Star } from 'lucide-react';
 
 const PartnershipSection = () => {
   const features = [
@@ -19,7 +18,7 @@ const PartnershipSection = () => {
       description: "Stay competitive with a constant pipeline of fresh and trend-driven product designs. Our design studio continuously launches updated SKUs to meet market demand and seasonal shifts."
     },
     {
-      title: "Why Partner with Avanta?",
+      title: "Why Partner with Jaipur Kurti Gharana?",
       subtitle: "",
       description: "From product innovation to reliable delivery, Avanta combines speed, capacity, and experience to strengthen your business. Connect with a manufacturing partner built for scale and long-term growth."
     },
@@ -36,55 +35,59 @@ const PartnershipSection = () => {
   ];
 
   return (
-    <section className="bg-[#1a1a4b] text-white py-16 px-6 md:px-12 lg:px-24 font-sans min-h-screen flex flex-col justify-center relative overflow-hidden">
-      {/* Background Pattern - Using your PNG file */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: 'url("/images/pattern.png")',
-          backgroundRepeat: 'repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'auto'
-        }}
-
-      ></div>
+    <section 
+      className="relative text-white py-20 px-6 md:px-12 lg:px-24 overflow-hidden"
+      style={{
+        // Using the specific pink from the image and layering the pattern
+        backgroundColor: '#E13C6C',
+        backgroundImage: 'url("/images/pattern.png")',
+        backgroundRepeat: 'repeat',
+        backgroundSize: 'auto',
+        backgroundBlendMode: 'soft-light'
+      }}
+    >
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header Section */}
-        <div className="text-center mb-16">
-          <p className="text-xs tracking-[0.3em] uppercase mb-4 opacity-80 flex items-center justify-center gap-2">
-            <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-            Avanta by Jaipur Kurti Charana
-            <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-          </p>
-          <h2 className="text-3xl md:text-5xl font-cinzel font-bold tracking-wide mb-6">
-            WHY PARTNER WITH AVANTA
+        
+        {/* Header Section - Updated to match image_05aaa8.png */}
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-6xl font-playfair font-bold mb-6 tracking-tight">
+            Why Partner With Jaipur Kurti Gharana
           </h2>
-          <p className="text-sm md:text-base opacity-90 font-light">
+          <p className="text-base md:text-lg font-mont font-medium opacity-90 tracking-wide">
             Building successful partnerships through quality, reliability, and innovation
           </p>
         </div>
 
-        {/* Grid Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 relative">
-          {/* Horizontal Divider for Desktop */}
-          <div className="hidden md:block absolute top-1/2 left-0 w-full h-[1px] bg-white/20 -translate-y-1/2"></div>
+        {/* Grid Section with dividers */}
+        <div className="grid grid-cols-1 md:grid-cols-3 relative">
+          
+          {/* Horizontal Divider Line */}
+          <div className="hidden md:block absolute top-1/2 left-0 w-full h-[1px] bg-white/30 -translate-y-1/2"></div>
 
           {features.map((item, index) => (
             <div
               key={index}
-              className={`px-8 py-6 flex flex-col items-start relative
-                ${index % 3 !== 2 ? 'md:border-r border-white/20' : ''}
-                ${index < 3 ? 'md:pb-12' : 'md:pt-12'}
+              className={`px-10 py-12 flex flex-col items-start relative
+                ${index % 3 !== 2 ? 'md:border-r border-white/30' : ''}
               `}
             >
-              <div className="mb-6">
-                <Star className="w-6 h-6 fill-white text-white rotate-12" />
+              {/* Star Icon - Rotated as seen in design */}
+              <div className="mb-8">
+                <div className="w-8 h-8 flex items-center justify-center">
+                   {/* Custom Star SVG to match the sharp 4-point design */}
+                   <svg viewBox="0 0 24 24" className="w-full h-full fill-white">
+                     <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+                   </svg>
+                </div>
               </div>
 
-              <h3 className="text-xl font-bold mb-1">{item.title}</h3>
-              {item.subtitle && <h4 className="text-lg font-semibold mb-4">{item.subtitle}</h4>}
+              {/* Text Content - font-mont for all supporting text */}
+              <h3 className="text-2xl font-bold font-mont mb-1 leading-tight">{item.title}</h3>
+              {item.subtitle && (
+                <h4 className="text-xl font-bold font-mont mb-6 text-white/90">{item.subtitle}</h4>
+              )}
 
-              <p className="text-sm leading-relaxed opacity-70 font-light text-justify">
+              <p className="text-sm md:text-base leading-relaxed font-mont font-medium opacity-80 text-left">
                 {item.description}
               </p>
             </div>

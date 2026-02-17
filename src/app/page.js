@@ -1,14 +1,14 @@
 import Achievements from "@/components/Achievements";
 import ArtisanExcellence from "@/components/ArtisanExcellence";
 import AvantaBanner from "@/components/AvantaBanner";
-import AvantaLanding from "@/components/AvantaLanding";
-import BestSelling from "@/components/BestSelling";
+import CraftedHeritage from "@/components/CraftedHeritage";
+import TheSeasons from "@/components/TheSeasons";
 import CommitmentSection from "@/components/CommitmentSection";
 import ContactUs from "@/components/ContactUs";
 import CraftsmanshipSection from "@/components/CraftsmanshipSection";
 import CuratedArrivals from "@/components/CuratedArrivals";
-import DiscoverMore from "@/components/DiscoverMore";
-import Embrace from "@/components/Embrace";
+import ExploreMore from "@/components/ExploreMore";
+import Signature from "@/components/Signature";
 import FAQ from "@/components/FAQ";
 import HeroCarousel from "@/components/HeroCarousel";
 import InstagramSection from "@/components/InstagramSection";
@@ -20,32 +20,36 @@ import TrustedCities from "@/components/TrustedCities";
 import WholesaleForm from "@/components/WholesaleForm";
 import Slider from "@/components/Slider";
 import ExclusiveCollections from "@/components/ExclusiveCollections";
+import SignatureCraft from "@/components/SignatureCraft";
+import Legacy from "@/components/Legacy";
 
 export default function Home() {
-  return (
-   <>
-   <HeroCarousel/>
-      <Slider/>
-   <TrustedCities/>
-   <Manufacturing/>
-      <ExclusiveCollections/>
-   {/* <PremiumCollections/> */}
-   <CuratedArrivals/>
-   <AvantaLanding/>
-   <ArtisanExcellence/>
-   <BestSelling/>
-   <AvantaBanner/>
-   <RefinedSelection/>
-   <PartnershipSection/>
-   <DiscoverMore/>
-   <Embrace/>
-   <CommitmentSection/>
-   <Achievements/>
-   <InstagramSection/>
-   <WholesaleForm/>
-   <FAQ/>
-   <ContactUs/>
-   <CraftsmanshipSection/>
-   </>
-  );
+   return (
+      <>
+         <HeroCarousel />
+         <Slider />
+         <TrustedCities />
+         <Manufacturing />
+         <ExclusiveCollections />
+         {/* <PremiumCollections/> */}
+         <CraftedHeritage />
+         <CuratedArrivals />
+         <SignatureCraft />
+         <Legacy />
+         {/* <ArtisanExcellence /> */}
+         <TheSeasons />
+         {/* <AvantaBanner /> */}
+         {/* <RefinedSelection /> */}
+         <PartnershipSection />
+         <ExploreMore />
+         <Signature />
+         <Achievements />
+         <InstagramSection />
+         <CommitmentSection />
+         <WholesaleForm />
+         <FAQ />
+         <ContactUs />
+         <CraftsmanshipSection />
+      </>
+   );
 }

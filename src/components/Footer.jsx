@@ -53,49 +53,45 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#f8f9fc] pt-12 pb-8 px-6 md:px-16 text-[#1a1a1a]">
+    <footer className="bg-[#FFFAFB] pt-12 pb-8 px-6 md:px-16 text-[#1a1a1a]">
       <div className="max-w-7xl mx-auto">
 
-        {/* --- Logo Section --- */}
-        <div className="flex flex-col items-center mb-5">
-          <Link href="/">
-            <Image
-              src="/images/mainlogo.png"
-              alt="Avanta Logo"
-              width={150}
-              height={50}
-              className="object-contain"
-            />
+        {/* --- Logo Section: 3-Part Structure --- */}
+        <div className="flex flex-col items-center mb-10">
+          <Link href="/" className="flex items-center justify-center gap-4 mb-2">
+            <Image src="/images/mainlogo.png" alt="Avanta" width={120} height={40} className="object-contain" />
+            <Image src="/images/line.png" alt="separator" width={2} height={40} className="object-contain h-8" />
+            <Image src="/images/jkg.png" alt="Jaipur Kurti Gharana" width={180} height={40} className="object-contain" />
           </Link>
           <div className="w-40 h-[1px] bg-gray-300 mt-4 mb-1"></div>
-          <p className="text-[10px] uppercase tracking-[0.3em] text-gray-500">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-mont font-bold">
             Jaipur Kurti Gharana
           </p>
         </div>
 
         {/* --- Main Links Grid --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
 
           {/* Brand Info */}
           <div className="space-y-4">
-            <h3 className="font-bold text-[13px] uppercase tracking-wider">
-              Avanta India By Jaipur Kurti Gharana
+            <h3 className="font-bold text-[13px] uppercase tracking-wider font-mont">
+              JAIPUR KURTI GHARANA
             </h3>
-            <p className="text-xs leading-relaxed text-black text-justify">
-              Avanta India is a celebration of refined Indian fashion where heritage craftsmanship meets contemporary design.
-              Rooted in Jaipur's rich textile legacy, each creation reflects timeless elegance, thoughtful detailing, and uncompromising quality.
+            <p className="text-xs leading-relaxed text-black text-justify font-mont">
+              <span className="font-bold">JAIPUR KURTI GHARANA</span> is a celebration of refined Indian fashion where heritage craftsmanship meets contemporary design.
+              Rooted in Jaipur&apos;s rich textile legacy, each creation reflects timeless elegance, thoughtful detailing, and uncompromising quality.
             </p>
-            <p className="text-xs font-bold italic text-gray-800">
+            <p className="text-xs font-bold italic text-gray-800 font-mont">
               Exquisite Indian fashion, crafted with purpose.
             </p>
           </div>
 
           {/* Shop */}
           <div className="lg:pl-8">
-            <h3 className="font-bold text-[13px] uppercase tracking-wider mb-5">
+            <h3 className="font-bold text-[13px] uppercase tracking-wider mb-5 font-mont">
               Shop
             </h3>
-            <ul className="text-xs space-y-3 text-black">
+            <ul className="text-xs space-y-3 text-black font-mont">
               {shopLinks.map((link) => (
                 <li
                   key={link.name}
@@ -109,10 +105,10 @@ export default function Footer() {
 
           {/* About */}
           <div>
-            <h3 className="font-bold text-[13px] uppercase tracking-wider mb-5">
+            <h3 className="font-bold text-[13px] uppercase tracking-wider mb-5 font-mont">
               About
             </h3>
-            <ul className="text-xs space-y-3 text-black">
+            <ul className="text-xs space-y-3 text-black font-mont">
               {aboutLinks.map((link) => (
                 <li
                   key={link.name}
@@ -126,10 +122,10 @@ export default function Footer() {
 
           {/* Customer Care */}
           <div>
-            <h3 className="font-bold text-[13px] uppercase tracking-wider mb-5">
+            <h3 className="font-bold text-[13px] uppercase tracking-wider mb-5 font-mont">
               Customer Care
             </h3>
-            <ul className="text-xs space-y-3 text-black">
+            <ul className="text-xs space-y-3 text-black font-mont">
               {customerCareLinks.map((link) => (
                 <li
                   key={link.name}
@@ -143,7 +139,7 @@ export default function Footer() {
 
           {/* Follow Us */}
           <div>
-            <h3 className="font-bold text-[13px] uppercase tracking-wider mb-5">
+            <h3 className="font-bold text-[13px] uppercase tracking-wider mb-5 font-mont">
               Follow Us
             </h3>
             <div className="space-y-4">
@@ -153,7 +149,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-xs text-black hover:opacity-70 transition-opacity"
+                  className="flex items-center gap-3 text-xs text-black hover:opacity-70 transition-opacity font-mont"
                 >
                   <Image src={social.icon} alt={social.name} width={18} height={18} />
                   <span>@jaipur_kurti_gharana</span>
@@ -163,56 +159,54 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Everything below untouched */}
-
-        <hr className="border-gray-200 mb-5" />
+        <hr className="border-gray-200 mb-8" />
 
         {/* --- Mid Section --- */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-5">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-10">
           <div className="max-w-md">
-            <h3 className="font-bold text-sm mb-2">Stay Connected</h3>
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <h3 className="font-bold text-sm mb-2 font-mont">Stay Connected</h3>
+            <p className="text-xs text-gray-500 leading-relaxed font-mont">
               Be the first to discover new collections, exclusive launches, and curated style inspiration.
-              Follow us on Instagram and stay connected to the world of Avanta.
+              Follow us on Instagram and stay connected to the world of Jaipur Kurti Gharana.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full md:w-auto">
             <div className="max-w-[200px]">
-              <h3 className="font-bold text-sm mb-1">Download</h3>
-              <p className="text-xs text-gray-500">
+              <h3 className="font-bold text-sm mb-1 font-mont">Download</h3>
+              <p className="text-xs text-gray-500 font-mont">
                 Explore our complete range and latest collections.
               </p>
             </div>
-            <button className="bg-[#1e1b3a] text-white rounded-full px-8 py-4 text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-black transition-all shadow-lg whitespace-nowrap">
+            <button className="bg-[#E12B5E] text-white rounded-full px-8 py-4 text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-black transition-all shadow-lg whitespace-nowrap font-mont">
               Download Catalog +
             </button>
           </div>
         </div>
 
-        {/* Bottom Bar untouched */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-4 border-t border-gray-100 gap-6">
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-gray-100 gap-6">
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <p className="text-[11px] text-gray-400">
-              © Avanta India. All rights reserved.
+            <p className="text-[11px] text-gray-400 font-mont uppercase tracking-widest">
+              © JAIPUR KURTI GHARANA. All rights reserved.
             </p>
             <Link
               href="/admin/login"
-              className="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-wider transition-colors shadow-sm"
+              className="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-wider transition-colors shadow-sm font-mont"
             >
               Admin Login
             </Link>
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-[#1e1b3a] text-white flex items-center gap-3 px-6 py-2.5 rounded-full text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-md">
+            <button className="bg-[#E12B5E] text-white flex items-center gap-3 px-6 py-2.5 rounded-full text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-md font-mont">
               <Phone size={14} /> Call Now →
             </button>
 
             <Link
               href="https://wa.me/919784562130"
               target="_blank"
-              className="bg-[#00c853] text-white flex items-center gap-3 px-6 py-2.5 rounded-full text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-md"
+              className="bg-[#00c853] text-white flex items-center gap-3 px-6 py-2.5 rounded-full text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-md font-mont"
             >
               <Image
                 src="/images/icon/whatsapp.svg"
@@ -226,7 +220,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="text-left mt-16 select-none pointer-events-none">
+         <div className="text-left mt-16 select-none pointer-events-none">
           <h1 className="text-3xl md:text-4xl lg:text-4xl font-cinzel font-bold text-[#CECCE0] tracking-tight uppercase">
             Designed with Tradition. Crafted for today.
           </h1>

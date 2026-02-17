@@ -28,6 +28,11 @@ const VideoSlider = () => {
       src: "/images/videos/video3.mp4",
       thumbnail: "/images/videos/thumb3.png",
     },
+    {
+      id: 4,
+      src: "/images/videos/video4.mp4",
+      thumbnail: "/images/videos/thumb4.png",
+    },
   ];
 
   const stopAllVideos = () => {
@@ -56,14 +61,14 @@ const VideoSlider = () => {
       <div className="max-w-7xl mx-auto px-4 text-center mb-10">
         <h3 className="text-[10px] md:text-3xl py-4 font-playfair font-bold  text-[#E13C6C] ">
           Jaipur Kurti Gharana
-          </h3>
+        </h3>
 
-        <h2 className="text-3xl md:text-4xl text-[#1F1951] font-playfair font-bold mb-6">
+        <h2 className="text-2xl md:text-5xl font-bold font-playfair text-[#1F1951] mb-6 ">
           We’re Manufacturing What Matters
         </h2>
 
         <p className="max-w-4xl mx-auto font-semibold text-black text-sm md:text-base">
-         Discover the products we build and the expertise behind them. This gallery of videos and photos highlights Avanta’s diverse manufacturing output, showcasing quality, scale, and performance across industries.
+          Discover the products we build and the expertise behind them. This gallery of videos and photos highlights Avanta’s diverse manufacturing output, showcasing quality, scale, and performance across industries.
         </p>
       </div>
 
@@ -76,6 +81,7 @@ const VideoSlider = () => {
         speed={600}
         spaceBetween={24}
         slidesPerView={1.2}
+        initialSlide={3}
         navigation={{
           nextEl: ".next-btn",
           prevEl: ".prev-btn",
@@ -104,9 +110,8 @@ const VideoSlider = () => {
               <video
                 ref={(el) => (videoRefs.current[index] = el)}
                 src={video.src}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-                  playingIndex === index ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${playingIndex === index ? "opacity-100" : "opacity-0"
+                  }`}
                 muted
                 playsInline
                 controls={playingIndex === index}
