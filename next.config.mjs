@@ -2,9 +2,6 @@
 const nextConfig = {
   serverExternalPackages: ['mongodb'],
   
-  // Don't use standalone for now - causes middleware issues
-  // output: 'standalone',
-  
   // Image optimization
   images: {
     unoptimized: true,
@@ -18,6 +15,11 @@ const nextConfig = {
   
   // Reduce bundle size
   compress: true,
+  
+  // Disable Turbopack for production builds on Vercel
+  ...(process.env.VERCEL && {
+    turbo: false,
+  }),
   
   // Experimental features
   experimental: {
