@@ -33,7 +33,7 @@ export default function HeroCarousel() {
   }, [emblaApi]);
 
   return (
-    <section className="relative overflow-hidden max-w-[1590px] mx-auto h-[600px] md:h-[700px] lg:h-[800px] xl:h-[900px] group" ref={emblaRef}>
+    <section className="relative overflow-hidden w-full mx-auto h-[600px] md:h-[700px] lg:h-[800px] xl:h-[900px] group" ref={emblaRef}>
       <div className="flex h-full">
         {slides.map((slide, index) => (
           <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full">
@@ -45,24 +45,24 @@ export default function HeroCarousel() {
 
             {/* Central Content Card */}
             <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
-              <div className="bg-[#801830] text-white p-8 md:p-14 rounded-[40px] md:rounded-[60px] w-full max-w-[90%] sm:max-w-md md:max-w-[480px] text-center shadow-2xl pointer-events-auto relative z-10 border border-white/5">
+              <div className="mt-24 bg-[#801830]/90 text-white p-8 rounded-[40px] md:rounded-[60px] w-full max-w-[90%] sm:max-w-md md:max-w-[430px] text-center shadow-2xl pointer-events-auto relative z-10 border border-white/5">
                 
                 {/* Victor Top Decoration */}
                 <div className="mb-6 flex justify-center">
                   <img
                     src='/images/icon/VictorTop.png'
                     alt="decoration top"
-                    className="w-48 md:w-64 h-auto opacity-90"
+                    className="w-32 md:w-44 h-auto opacity-90"
                   />
                 </div>
 
                 {/* Title */}
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-playfair font-bold leading-tight mb-4 tracking-tight">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-playfair font-bold leading-tight mb-4 tracking-tight">
                   {slide.title}
                 </h2>
 
                 {/* Elephant Icon */}
-                <div className="my-6 flex justify-center">
+                <div className="my-2 flex justify-center">
                   <img
                     src='/images/icon/Elephent.png'
                     alt="Elephant Icon"
@@ -71,7 +71,7 @@ export default function HeroCarousel() {
                 </div>
 
                 {/* Subtitle */}
-                <p className="text-sm sm:text-base md:text-xl font-mont font-bold mb-8 tracking-wide max-w-[280px] mx-auto">
+                <p className="text-sm sm:text-base md:text-xl font-mont font-bold mb-4 tracking-wide max-w-[280px] mx-auto">
                   {slide.subtitle}
                 </p>
 
@@ -85,7 +85,7 @@ export default function HeroCarousel() {
                   <img
                     src='/images/icon/VictorBottom.png'
                     alt="decoration bottom"
-                    className="w-48 md:w-64 h-auto opacity-90"
+                    className="w-32 md:w-44 h-auto opacity-90"
                   />
                 </div>
               </div>

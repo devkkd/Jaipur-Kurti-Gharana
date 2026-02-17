@@ -4,27 +4,27 @@ import Image from "next/image";
 
 const items = [
   {
-    img: "/images/slider/1.png",
+    img: "/images/slider/1.jpg",
     text: "Crafted in Tradition"
   },
   {
-    img: "/images/slider/2.png",
+    img: "/images/slider/2.jpg",
     text: "Heritage, Refined"
   },
   {
-    img: "/images/slider/3.png",
+    img: "/images/slider/3.jpg",
     text: "Timeless Indian Craft"
   },
   {
-    img: "/images/slider/4.png",
+    img: "/images/slider/4.jpg",
     text: "Rooted in Heritage"
   },
   {
-    img: "/images/slider/5.png",
+    img: "/images/slider/5.jpg",
     text: "Where Craft Endures"
   },
   {
-    img: "/images/slider/3.png",
+    img: "/images/slider/6.jpg",
     text: "Elegant Traditions"
   },
 ];

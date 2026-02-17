@@ -218,8 +218,8 @@ const Header = () => {
           <div className="flex items-center justify-between gap-4">
 
             {/* --- 3-Part Logo Integration --- */}
-            <Link href="/" className="flex items-center gap-2 lg:gap-3 shrink-0 group">
-              <img src="/images/mainlogo.png" alt="Avanta" className="h-6 md:h-8 lg:h-10 w-auto object-contain" />
+            <Link href="/" className="flex items-center gap-2 lg:gap-3 flex-shrink-0 group">
+              <img src="/images/avantalogo.png" alt="Avanta" className="h-6 md:h-8 lg:h-10 w-auto object-contain" />
               <img src="/images/line.png" alt="separator" className="h-5 md:h-7 lg:h-9 w-auto object-contain" />
               <img src="/images/jkg.png" alt="Jaipur Kurti Gharana" className="h-6 md:h-8 lg:h-6 w-auto object-contain" />
             </Link>
@@ -447,7 +447,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation Bar with Full Dropdown Functionality */}
-          <nav className="hidden lg:flex items-center justify-center mt-6 gap-10 pb-2">
+          <nav className="hidden lg:flex items-center justify-center mt-3 gap-10 pb-2">
             {staticLinks.map(item => (
               <NavLink key={item.name} item={item} pathname={pathname} />
             ))}

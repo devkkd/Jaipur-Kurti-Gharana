@@ -51,25 +51,25 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-gradient-to-br from-[#FFF5F8] via-white to-[#FFE5ED] flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         {/* Logo & Brand Section */}
-        <div className="text-center mb-10">
+        <div className="text-center">
           <div className="inline-flex items-center justify-center mb-6">
-            <img 
-              src="/images/mainlogo.png" 
-              alt="Jaipur Kurti Gharana" 
-              className="h-16 md:h-20 w-auto object-contain"
-            />
+            <div className="flex items-center gap-2 lg:gap-3 flex-shrink-0 group">
+              <img src="/images/avantalogo.png" alt="Avanta" className="h-6 md:h-8 lg:h-10 w-auto object-contain" />
+              <img src="/images/line.png" alt="separator" className="h-5 md:h-7 lg:h-9 w-auto object-contain" />
+              <img src="/images/jkg.png" alt="Jaipur Kurti Gharana" className="h-6 md:h-8 lg:h-6 w-auto object-contain" />
+            </div>
           </div>
-          <div className="w-32 h-px bg-[#E13C6C]/30 mx-auto mb-3"></div>
-          <p className="text-xs uppercase tracking-[0.3em] text-gray-500 font-semibold">
+          {/* <div className="w-32 h-px bg-[#E13C6C]/30 mx-auto "></div> */}
+          {/* <p className="text-xs uppercase tracking-[0.3em] text-gray-500 font-semibold">
             Admin Portal
-          </p>
+          </p> */}
         </div>
 
         {/* Login Card */}
         <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl shadow-pink-100 border border-pink-100">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-playfair font-bold text-gray-900 mb-2">
-              Welcome Back
+              Admin Portal
             </h2>
             <p className="text-sm text-gray-500">
               Sign in to access your dashboard
