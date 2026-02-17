@@ -46,21 +46,5 @@
     "description": "Matching co-ord sets for modern fashion",
     "isActive": true,
     "sortOrder": 6
-  },
-  {
-    "_id": "65b8f1a9e9c1a2a007777777",
-    "name": "AA",
-    "slug": "aa",
-    "description": "Dummy category AA",
-    "isActive": true,
-    "sortOrder": 7
-  },
-  {
-    "_id": "65b8f1a9e9c1a2a008888888",
-    "name": "BB",
-    "slug": "bb",
-    "description": "Dummy category BB",
-    "isActive": true,
-    "sortOrder": 8
   }
 ]

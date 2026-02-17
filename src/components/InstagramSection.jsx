@@ -2,10 +2,10 @@ import React from 'react';
 
 const InstagramSection = () => {
   const cards = [
-    { id: 1, image: 'images/collection/collection1.jpg', title: "NEW YEAR'S COLLECTION", type: 'video' },
-    { id: 2, image: 'images/collection/collection2.jpg', title: "NEW YEAR'S COLLECTION", type: 'video' },
-    { id: 3, image: 'images/collection/collection3.jpg', title: "COLLECTION", type: 'video' },
-    { id: 4, image: 'images/collection/collection4.jpg', title: "NEW COLLECTION", type: 'post' },
+    { id: 1, image: 'images/collection/collection1.jpg', type: 'video' },
+    { id: 2, image: 'images/collection/collection2.jpg', type: 'video' },
+    { id: 3, image: 'images/collection/collection3.jpg', type: 'video' },
+    { id: 4, image: 'images/collection/collection4.jpg', type: 'post' },
   ];
 
   return (
@@ -31,50 +31,33 @@ Follow us on Instagram for exclusive previews, new launches, and elevated style 
         </div>
       </div>
 
-      {/* Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4">
+      {/* Grid rendering - Responsive 4-column grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px] mx-auto px-4">
         {cards.map((card) => (
-          <div key={card.id} className="relative group overflow-hidden bg-gray-50 rounded-sm shadow-sm transition-all duration-300 hover:shadow-lg">
-            {/* Top Icon */}
-            <div className="absolute top-4 right-4 z-10 text-white drop-shadow-md">
+          <div key={card.id} className="relative group overflow-hidden rounded-sm transition-all duration-300">
+            {/* Top Right Media Icon - Matches image overlay */}
+            <div className="absolute top-4 right-4 z-20 text-white drop-shadow-md opacity-90">
               {card.type === 'video' ? (
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-              ) : (
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-              )}
-            </div>
-
-            {/* Image Container */}
-            <div className="aspect-[3/4] overflow-hidden relative">
-              <img 
-                src={card.image} 
-                alt={card.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 "></div>
-            </div>
-
-            {/* Card Content */}
-            {/* <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-              <p className="text-[10px] tracking-widest text-gray-500 mb-1">NEW YEAR'S</p>
-              <h3 className="text-xl font-bold tracking-tight text-black mb-2">{card.title}</h3>
-              
-              {card.id === 4 ? (
-                <div className="space-y-4">
-                   <p className="text-[10px] leading-tight text-gray-500 px-4">
-                    Starting the year with comfort, confidence and Avanta craftsmanship
-                  </p>
-                  <button className="bg-black text-white w-full py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
-                    Shop Now
-                  </button>
-                  <p className="text-[10px] text-gray-400">www.avantaindia.com</p>
+                // Play Icon for Reels
+                <div className="bg-black/20 p-1.5 rounded-md backdrop-blur-sm">
+                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
                 </div>
               ) : (
-                <p className="text-[9px] leading-tight text-gray-400 px-2 line-clamp-2 italic">
-                  Inspired by Jaipur's rich traditions, Avanta creates garments that reflect skilled craftsmanship...
-                </p>
+                // Layers Icon for Carousel Posts
+                <div className="bg-black/20 p-1.5 rounded-md backdrop-blur-sm">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M21 5h-7V2H1v16h7v3h13V5zM3 16V4h9v12H3zm16 3H10v-1h9V7h2v12h-2z"/></svg>
+                </div>
               )}
-            </div> */}
+            </div>
+
+            {/* Image Container - Aspect ratio to match Instagram posts */}
+            <div className="aspect-[4/5] overflow-hidden">
+              <img 
+                src={card.image} 
+                alt="Instagram Content"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
           </div>
         ))}
       </div>

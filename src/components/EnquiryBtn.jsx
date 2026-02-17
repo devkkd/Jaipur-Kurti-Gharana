@@ -31,10 +31,10 @@ export default function EnquiryBtn({ product }) {
         ${
           isAdded
             ? "bg-red-600 border-red-600 text-white"
-            : "bg-[#231f40] border-[#231f40] text-white hover:bg-[#2d2852]"
+            : "bg-[#DE3163] border-[#DE3163] text-white hover:bg-[#DE3133]"
         }`}
     >
-      {isAdded ? "Remove from Cart" : "+ Add to Cart"}
+      {isAdded ? "Remove from Enquiry" : "+ Add to Enquiry"}
     </button>
   );
 }

@@ -1,8 +1,7 @@
 "use client";
 
-
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Search, Menu, X, ShoppingCart } from 'lucide-react';
+import { ChevronDown, Search, Menu, X, ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEnquiry } from "@/context/CartContext";
@@ -11,36 +10,25 @@ const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredImage, setHoveredImage] = useState(null);
   const { Enquiries } = useEnquiry();
 
-  // Fetch categories from API
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await fetch('/api/categories');
         const result = await response.json();
-        if (result.success) {
-          setCategories(result.data);
-        }
+        if (result.success) setCategories(result.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
-      } finally {
-        setLoading(false);
       }
     };
-
     fetchCategories();
   }, []);
 
-  // Scroll listener
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -61,150 +49,124 @@ const Header = () => {
     { name: "DOWNLOAD CATALOG ↓", href: "/catalog" }
   ];
 
-  const navigation = [
-    ...staticLinks,
-    ...categoryLinks,
-    ...footerLinks
-  ];
-
   const MAX_VISIBLE_CATEGORIES = 6;
   const visibleCategories = categoryLinks.slice(0, MAX_VISIBLE_CATEGORIES);
   const overflowCategories = categoryLinks.slice(MAX_VISIBLE_CATEGORIES);
 
   return (
-    <header className="sticky top-0 w-full z-50 font-sans">
-      {/* Top Announcement Bar - Dynamic transition */}
+    <header
+      className={`w-full z-50 font-sans ${pathname === "/"
+          ? "absolute top-0 left-0"
+          : "relative"
+        }`}
+    >
+      {/* Top Announcement Bar */}
       <div
-        className={`bg-[#1F1951] text-white flex items-center justify-center relative transition-all duration-500 ease-in-out overflow-hidden ${isScrolled ? "max-h-0 py-0 opacity-0" : "max-h-20 py-2 opacity-100"
+        className={`bg-[#E12B5E] text-white flex items-center justify-center relative transition-all duration-500 overflow-hidden ${isScrolled ? "max-h-0 opacity-0" : "max-h-12 py-1.5 opacity-100"
           }`}
       >
-        <button className="absolute left-4 lg:left-10 text-white/70 hover:text-white">
-          <ChevronDown className="rotate-90 w-5 h-5" />
-        </button>
-        <p className="text-[10px] md:text-xs tracking-wide text-center px-8 font-light italic">
-          Welcome To Avanta India By Jaipur Kurti Gharana Thoughtfully Crafted To Celebrate Heritage, Purpose-built For Discerning Resellers.
+        <ChevronLeft className="absolute left-4 lg:left-10 w-4 h-4 cursor-pointer opacity-70 hover:opacity-100" />
+        <p className="text-[9px] md:text-[11px] tracking-tight text-center px-12 font-light">
+          Welcome To Jaipur Kurti Gharana Thoughtfully Crafted To Celebrate Heritage, Purpose-built For Discerning Resellers.
         </p>
-        <button className="absolute right-4 lg:right-10 text-white/70 hover:text-white">
-          <ChevronDown className="-rotate-90 w-5 h-5" />
-        </button>
+        <ChevronRight className="absolute right-4 lg:right-10 w-4 h-4 cursor-pointer opacity-70 hover:opacity-100" />
       </div>
 
-      {/* Glassmorphism Header Content - Stays Exactly the Same */}
-      <div className="bg-white/70 backdrop-blur-md border-b border-white/20 shadow-sm transition-all duration-300">
-        <div className="max-w-[1440px] mx-auto px-4 py-4 lg:py-6">
+      {/* Main Header Content */}
+      <div className={`transition-all duration-300 ${isScrolled ? "bg-[#FFFAFB]/90 shadow-md py-2" : "bg-white/10 backdrop-blur-md py-3"
+        }`}>
+        <div className="max-w-[1440px] mx-auto px-4 lg:px-6">
           <div className="flex items-center justify-between gap-4">
 
-            {/* Left: Logo */}
-            <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-              <img src='/images/logo.svg' className='w-sm'/>
+            {/* --- 3-Part Logo Integration --- */}
+            <Link href="/" className="flex items-center gap-2 lg:gap-3 flex-shrink-0 group">
+              <img src="/images/mainlogo.png" alt="Avanta" className="h-6 md:h-8 lg:h-10 w-auto object-contain" />
+              <img src="/images/line.png" alt="separator" className="h-5 md:h-7 lg:h-9 w-auto object-contain" />
+              <img src="/images/jkg.png" alt="Jaipur Kurti Gharana" className="h-6 md:h-8 lg:h-6 w-auto object-contain" />
             </Link>
 
-            {/* Right: All Buttons */}
+            {/* Right Side Tools */}
             <div className="flex items-center gap-2 md:gap-3">
-              
-              {/* Search Bar */}
-              <div className="relative w-40 sm:w-48 md:w-56 lg:w-64">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <div className="relative hidden sm:block w-40 md:w-48 lg:w-64">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <input
                   type="text"
-                  placeholder="Search product or categories & more..."
-                  className="w-full bg-gray-50 border border-gray-200 rounded-full py-2 md:py-2.5 pl-10 pr-4 text-xs md:text-sm focus:outline-none focus:bg-white focus:border-gray-300 transition-all"
+                  placeholder="Search products..."
+                  className="w-full bg-white/80 border border-white/30 rounded-full py-2 pl-10 pr-4 text-xs focus:outline-none focus:bg-white transition-all"
                 />
               </div>
 
-              {/* Call Now Button */}
-              <button className="bg-[#E12B5E] text-white flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs font-semibold hover:bg-[#C91F4E] transition-all whitespace-nowrap">
-                <img src="/images/icon/call-calling.svg" alt="Call" className="w-4 h-4" />
-                <span className="hidden md:inline">Call Now →</span>
+              <button className="bg-[#E12B5E] text-white flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold hover:bg-[#C91F4E] transition-all">
+                <img src="/images/icon/call-calling.svg" alt="Call" className="w-3.5 h-3.5" />
+                <span className="hidden lg:inline">Call Now →</span>
               </button>
 
-              {/* Ship To Button */}
-              <div className="hidden lg:flex items-center gap-2 border border-gray-200 rounded-full px-4 py-2 bg-white flex-shrink-0">
-                <span className="text-[10px] font-semibold text-gray-600 uppercase">Ship To</span>
-                <img src="https://flagcdn.com/w20/in.png" alt="India" className="w-5 h-4 object-cover rounded-sm" />
+              <div className="hidden xl:flex items-center gap-2 border border-white/40 rounded-full px-4 py-2 bg-white/70">
+                <span className="text-[9px] font-bold text-gray-600 uppercase">Ship To</span>
+                <img src="https://flagcdn.com/w20/in.png" alt="India" className="w-4 h-3 object-cover" />
                 <span className="text-xs font-bold text-gray-800 uppercase">India</span>
                 <ChevronDown className="w-3 h-3 text-gray-400" />
               </div>
 
-              {/* Instagram Button */}
-              <button className="hidden md:flex bg-black text-white items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs font-semibold hover:bg-gray-800 transition-all whitespace-nowrap">
-                <img src="/images/icon/instagram.svg" alt="Instagram" className="w-4 h-4" />
+              <button className="hidden md:flex bg-[#E12B5E] text-white items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold hover:bg-gray-800 transition-all whitespace-nowrap">
+                <img src="/images/icon/instagram.svg" alt="Instagram" className="w-3.5 h-3.5" />
                 <span>Instagram</span>
               </button>
 
-              {/* Cart Icon */}
-              <Link href="/cart" className="relative group flex-shrink-0 hidden md:block">
-                <ShoppingCart className="w-6 h-6 text-[#1F1951] group-hover:scale-110 transition-transform" />
+              <Link href="/cart" className="relative group p-1.5 hidden md:block">
+                <ShoppingCart className="w-5 h-5 text-[#1F1951]" />
                 {Enquiries.length > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-[#E12B5E] text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
+                  <span className="absolute -top-1 -right-1 bg-[#E12B5E] text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full border-2 border-white">
                     {Enquiries.length}
                   </span>
                 )}
               </Link>
 
-              {/* Mobile: Cart + Menu */}
               <div className="flex md:hidden items-center gap-2">
-                <Link href="/cart" className="relative group">
-                  <ShoppingCart className="w-5 h-5 text-[#1F1951]" />
-                  {Enquiries.length > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 bg-[#E12B5E] text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full border-2 border-white">
-                      {Enquiries.length}
-                    </span>
-                  )}
-                </Link>
-                <button className="p-1 text-[#1F1951]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                  {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                <button className="p-1 text-[#1F1951]" onClick={() => setIsMenuOpen(true)}>
+                  <Menu size={24} />
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Desktop Navigation Bar */}
-          <nav className="hidden lg:flex items-center justify-center mt-8 gap-10 pb-2">
+          {/* Desktop Navigation Bar with Full Dropdown Functionality */}
+          <nav className="hidden lg:flex items-center justify-center mt-6 gap-10 pb-2">
             {staticLinks.map(item => (
               <NavLink key={item.name} item={item} pathname={pathname} />
             ))}
 
             {visibleCategories.map(item => {
-              const category = categories.find(cat =>
-                cat.slug === item.href.split("/").pop()
-              );
-
+              const category = categories.find(cat => cat.slug === item.href.split("/").pop());
               const relatedSubCategories = category?.subcategories || [];
-              const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
-              
+              const isActive = pathname.startsWith(item.href);
+
               return (
                 <div key={item.name} className="relative group">
                   <Link
                     href={item.href}
-                    className="text-[11px] font-bold tracking-[0.15em] text-gray-800 hover:text-[#1F1951] transition-colors relative uppercase"
+                    className="text-[11px] font-bold tracking-[0.15em] text-gray-800 hover:text-[#E12B5E] transition-colors relative uppercase"
                   >
                     {item.name}
-                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#1F1951] transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#E12B5E] transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
                   </Link>
 
+                  {/* MEGA MENU DROPDOWN */}
                   {relatedSubCategories.length > 0 && (
                     <div className="absolute top-full left-0 mt-4 w-[550px] bg-white border border-[#E5E2D6]/50 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 flex overflow-hidden">
-
-                      {/* LEFT SIDE - SUBCATEGORY LIST */}
                       <div className="w-[240px] p-8 flex flex-col gap-1 bg-white">
-                        {/* <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-4 font-bold">
-                          Shop by Style
-                        </p> */}
                         {relatedSubCategories.map((sub) => (
                           <Link
                             key={sub._id}
                             href={`/store/${category.slug}?sub=${sub.slug}`}
-                            className="group/link flex items-center justify-between text-[11px] font-bold tracking-widest text-gray-700 hover:text-[#1F1951] py-3 border-b border-gray-50 last:border-0 transition-all uppercase"
+                            className="group/link flex items-center justify-between text-[11px] font-bold tracking-widest text-gray-700 hover:text-[#E12B5E] py-3 border-b border-gray-50 last:border-0 transition-all uppercase"
                             onMouseEnter={() => setHoveredImage(sub.image)}
                           >
                             <span>{sub.name}</span>
-                            <div className="w-0 group-hover/link:w-4 h-[1px] bg-[#1F1951] transition-all duration-300"></div>
+                            <div className="w-0 group-hover/link:w-4 h-[1px] bg-[#E12B5E] transition-all duration-300"></div>
                           </Link>
                         ))}
                       </div>
-
-                      {/* RIGHT SIDE - IMAGE PREVIEW */}
                       <div className="flex-1 relative bg-[#F9F8F3] overflow-hidden">
                         <div className="absolute inset-0 p-4">
                           <div className="relative h-full w-full rounded-lg overflow-hidden">
@@ -216,118 +178,81 @@ const Header = () => {
                                 key={hoveredImage}
                               />
                             )}
-                            {/* Subtle Overlay for the "Fashion Look" */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-
-                            {/* Optional: Text overlay like the image you shared */}
-                            <div className="absolute bottom-6 left-6 text-white">
+                            <div className="absolute bottom-6 left-6 text-white text-left">
                               <p className="text-xs uppercase tracking-[0.3em] font-light mb-1">New Collection</p>
                               <h4 className="text-xl font-serif italic">{category.name}</h4>
                             </div>
                           </div>
                         </div>
                       </div>
-
                     </div>
                   )}
-
                 </div>
               );
             })}
 
-
+            {/* ALL CATEGORIES OVERFLOW DROPDOWN */}
             {overflowCategories.length > 0 && (
               <div className="relative group">
-                {/* TRIGGER BUTTON */}
-                <button className="flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] text-gray-800 hover:text-[#1F1951] uppercase transition-all duration-300 ease-in-out">
+                <button className="flex items-center gap-2 text-[11px] font-bold tracking-[0.15em] text-gray-800 hover:text-[#E12B5E] uppercase transition-all">
                   <span>All Categories</span>
-                  <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                  <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180" />
                 </button>
-
-                {/* FIRST LEVEL DROPDOWN (Positioned relative to button) */}
                 <div className="absolute top-full left-0 mt-3 w-[280px] bg-white/95 backdrop-blur-sm border border-gray-100 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50 py-2">
-
                   {overflowCategories.map((item) => {
                     const category = categories.find((cat) => cat.slug === item.href.split("/").pop());
                     const relatedSubCategories = category?.subcategories || [];
-                    console.log("sub",relatedSubCategories);
                     const hasSubs = relatedSubCategories.length > 0;
 
                     return (
                       <div key={item.name} className="relative group/item px-2">
-                        {/* MAIN CATEGORY ITEM */}
                         <Link
                           href={item.href}
-                          className="flex items-center justify-between px-4 py-3 text-[11px] font-bold tracking-widest text-gray-600 hover:bg-[#1F1951] hover:text-white rounded-lg transition-all duration-200 uppercase"
+                          className="flex items-center justify-between px-4 py-3 text-[11px] font-bold tracking-widest text-gray-600 hover:bg-[#E12B5E] hover:text-white rounded-lg transition-all duration-200 uppercase"
                         >
                           <div className="flex items-center gap-2">
                             {hasSubs && <ChevronDown className="w-3 h-3 rotate-90 opacity-50 group-hover/item:opacity-100" />}
                             {item.name}
                           </div>
                         </Link>
-
-                        {/* SECOND LEVEL MEGA-DROPDOWN (Flyout to the LEFT) */}
                         {hasSubs && (
                           <div className="absolute right-full top-0 mr-4 w-[550px] opacity-0 invisible group-hover/item:opacity-100 group-hover/item:visible transition-all duration-300 z-50">
-
                             <div className="bg-white border border-[#E5E2D6]/50 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden flex">
-
-                              {/* LEFT SIDE - SUBCATEGORY LIST */}
                               <div className="w-[240px] p-8 flex flex-col gap-1 bg-white">
-                                <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-4 font-bold">
-                                  Shop by Style
-                                </p>
-
                                 {relatedSubCategories.map((sub) => (
                                   <Link
                                     key={sub._id}
                                     href={`/store/${category.slug}?sub=${sub.slug}`}
-                                    className="group/link flex items-center justify-between text-[11px] font-bold tracking-widest text-gray-700 hover:text-[#1F1951] py-3 border-b border-gray-50 last:border-0 transition-all uppercase"
+                                    className="group/link flex items-center justify-between text-[11px] font-bold tracking-widest text-gray-700 hover:text-[#E12B5E] py-3 border-b border-gray-50 last:border-0 transition-all uppercase"
                                     onMouseEnter={() => setHoveredImage(sub.image)}
                                   >
                                     <span>{sub.name}</span>
-                                    <div className="w-0 group-hover/link:w-4 h-[1px] bg-[#1F1951] transition-all duration-300"></div>
+                                    <div className="w-0 group-hover/link:w-4 h-[1px] bg-[#E12B5E] transition-all duration-300"></div>
                                   </Link>
                                 ))}
                               </div>
-
-                              {/* RIGHT SIDE - IMAGE PREVIEW */}
                               <div className="flex-1 relative bg-[#F9F8F3] overflow-hidden">
                                 <div className="absolute inset-0 p-4">
                                   <div className="relative h-full w-full rounded-lg overflow-hidden">
-                                    {(hoveredImage || relatedSubCategories[0]?.image) && (
-                                      <img
-                                        src={hoveredImage || relatedSubCategories[0]?.image}
-                                        alt="Category Preview"
-                                        className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
-                                        key={hoveredImage}
-                                      />
-                                    )}
-
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-
-                                    <div className="absolute bottom-6 left-6 text-white">
-                                      <p className="text-xs uppercase tracking-[0.3em] font-light mb-1">
-                                        New Collection
-                                      </p>
-                                      <h4 className="text-xl font-serif italic">
-                                        {category.name}
-                                      </h4>
-                                    </div>
+                                    <img
+                                      src={hoveredImage || relatedSubCategories[0]?.image}
+                                      alt="Preview"
+                                      className="w-full h-full object-cover group-hover:scale-105 transition-all"
+                                    />
                                   </div>
                                 </div>
                               </div>
-
                             </div>
                           </div>
                         )}
-
                       </div>
                     );
                   })}
                 </div>
               </div>
             )}
+
             {footerLinks.map(item => (
               <NavLink key={item.name} item={item} pathname={pathname} />
             ))}
@@ -339,17 +264,22 @@ const Header = () => {
       <div className={`lg:hidden fixed inset-0 z-50 bg-[#1F1951]/20 backdrop-blur-sm transition-opacity ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         <div className={`absolute left-0 top-0 h-full w-[85%] bg-white p-8 transition-transform duration-500 ease-out shadow-2xl ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <div className="flex justify-between items-center mb-10">
-            <img src='/images/Avanta-Logo.svg' alt="Avanta India" className="w-28 md:w-32 h-auto" />
+             <Link href="/" className="flex items-center gap-1 group">
+              <img src="/images/mainlogo.png" alt="Avanta" className="h-6 w-auto object-contain" />
+              <img src="/images/line.png" alt="separator" className="h-5 w-auto object-contain" />
+              <img src="/images/jkg.png" alt="Jaipur Kurti Gharana" className="h-5 w-auto object-contain" />
+            </Link>
             <X className="text-gray-400 cursor-pointer" onClick={() => setIsMenuOpen(false)} />
           </div>
           <div className="flex flex-col gap-6">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-xs font-bold tracking-[0.2em] border-b border-gray-50 pb-4 text-gray-700 uppercase"
-              >
+            {staticLinks.map((item) => (
+              <Link key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)} className="text-xs font-bold tracking-[0.2em] border-b border-gray-50 pb-4 text-gray-700 uppercase">
+                {item.name}
+              </Link>
+            ))}
+            {/* Simple Mobile Categories */}
+            {categoryLinks.slice(0, 10).map((item) => (
+              <Link key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)} className="text-xs font-bold tracking-[0.2em] border-b border-gray-50 pb-4 text-gray-700 uppercase">
                 {item.name}
               </Link>
             ))}
@@ -361,17 +291,17 @@ const Header = () => {
 };
 
 const NavLink = ({ item, pathname }) => {
-  const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
-  
+  const isActive = pathname === item.href;
   return (
     <Link
       href={item.href}
-      className="text-[11px] font-bold tracking-[0.15em] text-gray-800 hover:text-[#1F1951] transition-colors relative group uppercase"
+      className={`text-[11px] font-bold tracking-[0.15em] transition-colors relative group uppercase ${isActive ? 'text-[#E12B5E]' : 'text-gray-800'
+        }`}
     >
       {item.name}
-      <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#1F1951] transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+      <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#E12B5E] transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
     </Link>
   );
 };
 
-export default Header;
+export default Header; 
