@@ -1,5 +1,0 @@
-{
-  "buildCommand": "cross-env TURBOPACK=false NEXT_PRIVATE_DISABLE_TURBOPACK=1 next build",
-  "framework": "nextjs",
-  "installCommand": "npm install"
-}

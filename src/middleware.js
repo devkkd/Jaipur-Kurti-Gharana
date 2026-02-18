@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 
+// Force Node.js runtime for middleware (generates proper trace files)
+export const runtime = 'nodejs';
+
 // Public admin routes (no auth needed)
 const publicAdminRoutes = [
   '/admin/login',
