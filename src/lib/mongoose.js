@@ -23,7 +23,10 @@ async function connectDB() {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
       family: 4, // Use IPv4, skip trying IPv6
-      maxPoolSize: 10,
+      maxPoolSize: 2, // Reduced for low memory environments (Render free tier)
+      minPoolSize: 1,
+      maxIdleTimeMS: 10000, // Close idle connections after 10s
+      compressors: 'zlib', // Compress data to reduce memory
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {

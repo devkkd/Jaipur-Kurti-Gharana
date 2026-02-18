@@ -10,7 +10,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: NODE_OPTIONS
-        value: --max-old-space-size=460
+        value: --max-old-space-size=400 --optimize-for-size
       - key: MONGODB_URI
         sync: false
       - key: JWT_SECRET
