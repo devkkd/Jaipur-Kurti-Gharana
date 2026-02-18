@@ -16,11 +16,6 @@ const nextConfig = {
   // Reduce bundle size
   compress: true,
   
-  // Disable Turbopack for production builds (causes middleware issues on Vercel/Netlify)
-  ...(process.env.NODE_ENV === 'production' && {
-    turbo: false,
-  }),
-  
   // Experimental features
   experimental: {
     optimizePackageImports: ['lucide-react'],
