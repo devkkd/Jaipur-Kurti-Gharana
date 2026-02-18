@@ -14,3 +14,6 @@ coverage
 .turbo
 dist
 build
+
+# Large video files - host externally
+public/images/videos/*.mp4

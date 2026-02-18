@@ -35,8 +35,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Avanta India - Jaipur Kurti Creations",
-  description: "Welcome to Avanta India by Jaipur Kurti Creations. Thoughtfully crafted to celebrate heritage.",
+  title: "Jaipur Kurti Gharana - Premium Ethnic Wear Manufacturer",
+  description: "Jaipur Kurti Gharana - Leading manufacturer of premium ethnic wear including kurtis, suits, and traditional Indian clothing. Wholesale and bulk orders available.",
 };
 
 export default function RootLayout({ children }) {

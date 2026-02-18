@@ -16,13 +16,9 @@ const nextConfig = {
   // Reduce bundle size
   compress: true,
   
-  // Memory optimization for low-memory environments
-  swcMinify: true,
-  
   // Experimental features
   experimental: {
     optimizePackageImports: ['lucide-react', 'swiper'],
-    // Reduce memory usage during builds
     memoryBasedWorkersCount: true,
   },
 };
