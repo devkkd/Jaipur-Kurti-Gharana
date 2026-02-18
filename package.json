@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "cross-env TURBOPACK=false NEXT_PRIVATE_DISABLE_TURBOPACK=1 next build",
+    "build:turbo": "next build",
     "start": "next start -p ${PORT:-3000}",
     "seed": "node scripts/seed.js",
     "create-admin": "node scripts/create-admin.js",
@@ -36,5 +37,7 @@
     "tailwindcss": "^4",
     "xlsx": "^0.18.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "cross-env": "^10.1.0"
+  }
 }
