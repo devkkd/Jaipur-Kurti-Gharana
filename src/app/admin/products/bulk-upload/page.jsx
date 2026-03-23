@@ -68,16 +68,16 @@ export default function BulkUploadPage() {
   };
 
   const downloadTemplate = () => {
-    const csvContent = `name,description,categorySlug,subcategorySlug,priceMin,priceMax,mainImage,galleryImages,sizes,material,productCare,additionalInfo,colorName,colorCode,styleCode,sku,slug,isActive,isFeatured,isNewArrival,tags,sortOrder
-"Elegant Anarkali Suit","Beautiful embroidered anarkali suit perfect for weddings","anarkali-suit","embroidered-anarkali",2500,3500,"C:\\Users\\Admin\\Pictures\\images\\anarkali-red-main.jpg","C:\\Users\\Admin\\Pictures\\images\\anarkali-red-1.jpg,C:\\Users\\Admin\\Pictures\\images\\anarkali-red-2.jpg","S:10,M:15,L:20,XL:10","Georgette with embroidery","Dry clean only","Model height: 5'8"", wearing size M","Red","#FF0000","AVT001","AVT001-RED","elegant-anarkali-suit-red",TRUE,TRUE,TRUE,"wedding,festive,ethnic",1
-"Designer Kurti Set","Stylish designer kurti for casual wear","suits-set","designer-kurti",800,1200,"./images/kurti-blue-main.jpg","./images/kurti-blue-1.jpg","M:20,L:25,XL:15","Cotton blend","Machine wash cold","Length: 42 inches","Blue","#0000FF","AVT002","AVT002-BLU","designer-kurti-set-blue",TRUE,FALSE,TRUE,"casual,daily-wear",2
-"Pink Party Gown","Elegant floor-length gown","gown","party-gown",4500,6500,"./images/gown-pink.jpg","","S:5,M:10,L:8","Net with sequin","Dry clean recommended","Includes dupatta","Pink","#FFC0CB","AVT003","AVT003-PIN","",TRUE,TRUE,FALSE,"party,gown",3`;
+    const csvContent = `name,description,categorySlug,subcategorySlug,mainImage,galleryImages,sizes,material,productCare,additionalInfo,colorName,colorCode,slug,isActive,isFeatured,isNewArrival,tags,sortOrder
+"Elegant Anarkali Suit","Beautiful embroidered anarkali suit perfect for weddings","anarkali-suit","embroidered-anarkali","C:\\Users\\Admin\\Pictures\\images\\anarkali-red-main.jpg","C:\\Users\\Admin\\Pictures\\images\\anarkali-red-1.jpg,C:\\Users\\Admin\\Pictures\\images\\anarkali-red-2.jpg","S:10,M:15,L:20,XL:10","Georgette with embroidery","Dry clean only","Model height: 5'8"", wearing size M","Red","#FF0000","elegant-anarkali-suit-red",TRUE,TRUE,TRUE,"wedding,festive,ethnic",1
+"Designer Kurti Set","Stylish designer kurti for casual wear","suits-set","designer-kurti","./images/kurti-blue-main.jpg","./images/kurti-blue-1.jpg","M:20,L:25,XL:15","Cotton blend","Machine wash cold","Length: 42 inches","Blue","#0000FF","designer-kurti-set-blue",TRUE,FALSE,TRUE,"casual,daily-wear",2
+"Pink Party Gown","Elegant floor-length gown","gown","party-gown","./images/gown-pink.jpg","","S:5,M:10,L:8","Net with sequin","Dry clean recommended","Includes dupatta","Pink","#FFC0CB","",TRUE,TRUE,FALSE,"party,gown",3`;
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'product-bulk-upload-complete-template.csv';
+    a.download = 'product-bulk-upload-template.csv';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

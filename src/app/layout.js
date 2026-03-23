@@ -5,6 +5,7 @@ import { ProductProvider } from '@/context/ProductContext';
 import ConditionalLayout from '@/components/ConditionalLayout';
 import { EnquiryProvider, InquiryProvider } from "@/context/CartContext";
 import { CartProvider } from "@/context/CartContext";
+import { AppDataProvider } from '@/context/AppDataContext';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,11 +47,13 @@ export default function RootLayout({ children }) {
   className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${cinzel.variable} ${playfair.variable} antialiased`}
 >
 
-        <CartProvider>
-          <EnquiryProvider>
-            <ConditionalLayout>{children}</ConditionalLayout>
-          </EnquiryProvider>
-        </CartProvider>
+        <AppDataProvider>
+          <CartProvider>
+            <EnquiryProvider>
+              <ConditionalLayout>{children}</ConditionalLayout>
+            </EnquiryProvider>
+          </CartProvider>
+        </AppDataProvider>
       </body>
     </html>
   );

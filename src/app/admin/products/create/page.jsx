@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Plus, X, Upload, IndianRupee } from 'lucide-react';
+import { ArrowLeft, Plus, X, Upload } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import CloudinaryUpload from '@/components/admin/CloudinaryUpload';
@@ -19,12 +19,6 @@ export default function CreateProductPage() {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    styleCode: '',
-    sku: '',
-    priceRange: {
-      min: '',
-      max: ''
-    },
     images: {
       main: '',
       gallery: []
@@ -106,16 +100,6 @@ export default function CreateProductPage() {
 
       if (!formData.categoryId) {
         alert('Category is required');
-        return;
-      }
-
-      if (!formData.priceRange.min || !formData.priceRange.max) {
-        alert('Price range is required');
-        return;
-      }
-
-      if (parseFloat(formData.priceRange.min) >= parseFloat(formData.priceRange.max)) {
-        alert('Maximum price must be greater than minimum price');
         return;
       }
 
@@ -269,32 +253,6 @@ export default function CreateProductPage() {
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Style Code
-              </label>
-              <input
-                type="text"
-                value={formData.styleCode}
-                onChange={(e) => setFormData({ ...formData, styleCode: e.target.value })}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Auto-generated if empty"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                SKU
-              </label>
-              <input
-                type="text"
-                value={formData.sku}
-                onChange={(e) => setFormData({ ...formData, sku: e.target.value })}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Auto-generated if empty"
-              />
-            </div>
-
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Description *
@@ -311,65 +269,11 @@ export default function CreateProductPage() {
           </div>
         </div>
 
-        {/* Price Range */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-              <span className="text-blue-600 font-semibold text-sm">2</span>
-            </div>
-            <h2 className="text-xl font-semibold text-gray-900">Price Range</h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Minimum Price *
-              </label>
-              <div className="relative">
-                <IndianRupee className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-                <input
-                  type="number"
-                  value={formData.priceRange.min}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    priceRange: { ...formData.priceRange, min: e.target.value }
-                  })}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="0"
-                  min="0"
-                  required
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Maximum Price *
-              </label>
-              <div className="relative">
-                <IndianRupee className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-                <input
-                  type="number"
-                  value={formData.priceRange.max}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    priceRange: { ...formData.priceRange, max: e.target.value }
-                  })}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="0"
-                  min="0"
-                  required
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Images */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-              <span className="text-blue-600 font-semibold text-sm">3</span>
+              <span className="text-blue-600 font-semibold text-sm">2</span>
             </div>
             <h2 className="text-xl font-semibold text-gray-900">Product Images</h2>
           </div>

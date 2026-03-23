@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { getProductById, updateProduct, deleteProduct, getAllCategories, getAllSubcategories } from '@/lib/database-adapter';
-import { generateStyleCode } from '@/models/Product';
 
 // Helper function to validate ID (for mock database compatibility)
 function isValidId(id) {
@@ -84,17 +83,14 @@ export async function PUT(request, { params }) {
   try {
     const { id } = await params;
     const body = await request.json();
-    const { 
-      name, 
-      description, 
-      styleCode, 
-      sku,
-      priceRange, 
-      images, 
-      sizes, 
-      productDetails, 
+    const {
+      name,
+      description,
+      images,
+      sizes,
+      productDetails,
       color,
-      categoryId, 
+      categoryId,
       subcategoryId,
       tags,
       isFeatured,
@@ -135,25 +131,10 @@ export async function PUT(request, { params }) {
       updateData.description = description.trim();
     }
     
-    if (styleCode !== undefined) updateData.styleCode = styleCode.trim().toUpperCase();
-    if (sku !== undefined) updateData.sku = sku.trim().toUpperCase();
     if (sortOrder !== undefined) updateData.sortOrder = parseInt(sortOrder) || 0;
     if (isActive !== undefined) updateData.isActive = Boolean(isActive);
     if (isFeatured !== undefined) updateData.isFeatured = Boolean(isFeatured);
     if (tags !== undefined) updateData.tags = tags;
-    
-    if (priceRange !== undefined) {
-      if (!priceRange.min || !priceRange.max || priceRange.min < 0 || priceRange.max < priceRange.min) {
-        return NextResponse.json(
-          { error: 'Valid price range is required (min and max, with max >= min)' },
-          { status: 400 }
-        );
-      }
-      updateData.priceRange = {
-        min: Number(priceRange.min),
-        max: Number(priceRange.max)
-      };
-    }
     
     if (images !== undefined) {
       if (!images.main) {

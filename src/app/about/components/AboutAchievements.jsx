@@ -29,7 +29,7 @@ const AboutAchievements = () => {
           </h2>
 
         {/* Main Heading */}
-        <h2 className="text-3xl md:text-[40px] font-bold font-playfair text-[#0E0E0E] mb-6 ">
+        <h2 className="text-3xl md:text-4xl font-bold font-playfair text-[#0E0E0E] mb-6 ">
    Our Achievements
         </h2>
         

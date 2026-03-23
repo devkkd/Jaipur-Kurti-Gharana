@@ -35,10 +35,7 @@ export function CartProvider({ children }) {
       productId: product._id,
       name: product.name,
       slug: product.slug,
-      styleCode: product.styleCode,
-      sku: product.sku,
       size: size,
-      price: product.priceRange.min,
       image: product.images.main,
       color: product.color,
       quantity: 1
@@ -87,9 +84,9 @@ export function CartProvider({ children }) {
     setCart([]);
   };
 
-  // Get cart total
+  // Get cart total (price on request - wholesale)
   const getCartTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return 0;
   };
 
   // Get cart count

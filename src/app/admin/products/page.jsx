@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Eye, EyeOff, Search, Filter, Package, IndianRupee, Star, Calendar, Layers } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, EyeOff, Search, Filter, Package, Star, Layers } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ProductsPage() {
@@ -196,7 +196,7 @@ export default function ProductsPage() {
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="text"
-              placeholder="Search products by name, style code, SKU..."
+              placeholder="Search products by name..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -339,15 +339,6 @@ export default function ProductsPage() {
               <div className="p-5">
                 <div className="mb-3">
                   <h3 className="font-semibold text-gray-900 truncate text-lg">{product.name}</h3>
-                  <p className="text-sm text-gray-500 mt-1">{product.styleCode}</p>
-                </div>
-
-                {/* Price Range */}
-                <div className="flex items-center gap-1 mb-3">
-                  <IndianRupee size={16} className="text-gray-600" />
-                  <span className="font-bold text-gray-900 text-lg">
-                    {product.priceRange?.min} - {product.priceRange?.max}
-                  </span>
                 </div>
 
                 {/* Category & Stock */}
@@ -412,9 +403,6 @@ export default function ProductsPage() {
                     Category
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Price Range
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Stock
                   </th>
                   <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -445,7 +433,6 @@ export default function ProductsPage() {
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">{product.name}</div>
-                          <div className="text-sm text-gray-500">{product.styleCode}</div>
                           {product.isFeatured && (
                             <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 mt-1">
                               <Star size={10} />
@@ -460,14 +447,6 @@ export default function ProductsPage() {
                       {product.subcategoryId && (
                         <div className="text-sm text-gray-500">{getSubcategoryName(product.subcategoryId)}</div>
                       )}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-1">
-                        <IndianRupee size={14} className="text-gray-600" />
-                        <span className="text-sm font-medium text-gray-900">
-                          {product.priceRange?.min} - {product.priceRange?.max}
-                        </span>
-                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="text-sm text-gray-900">{getTotalStock(product.sizes)}</span>

@@ -41,14 +41,14 @@ const TheSeasons = () => {
   if (!mounted) return null;
 
   return (
-    <div className="max-w-[1440px] mx-auto bg-white py-16 px-4 md:px-10 font-sans ">
+    <div className="max-w-[1440px] mx-auto bg-white mb-4  px-4 md:px-10 font-sans ">
       {/* --- Header Section Updated to match Image_7c6ea0 --- */}
-      <div className="text-center mb-12">
-        <h3 className="text-[10px] md:text-3xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+      <div className="text-center mb-8">
+        <h3 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
           Jaipur Kurti Gharana
         </h3>
 
-        <h2 className="text-2xl md:text-5xl font-bold font-playfair text-[#1F1951] mb-6 ">
+        <h2 className="text-2xl md:text-4xl font-bold font-playfair text-[#1F1951] mb-6 ">
           This Seasons Most Coveted Jaipur Kurti Gharana Pieces
         </h2>
 

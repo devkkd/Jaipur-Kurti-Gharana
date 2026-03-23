@@ -50,7 +50,7 @@ const PartnershipSection = () => {
         
         {/* Header Section - Updated to match image_05aaa8.png */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-playfair font-bold mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-4xl font-playfair font-bold mb-6 tracking-tight">
             Why Partner With Jaipur Kurti Gharana
           </h2>
           <p className="text-base md:text-lg font-mont font-medium opacity-90 tracking-wide">

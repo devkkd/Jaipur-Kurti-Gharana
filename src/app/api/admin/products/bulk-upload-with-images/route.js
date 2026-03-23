@@ -203,10 +203,7 @@ export async function POST(request) {
           }
         }
 
-        // Generate codes
-        const styleCode = row.styleCode || `AVT${Date.now().toString().slice(-6)}${Math.floor(Math.random() * 1000)}`;
-        const colorCode = row.colorName ? row.colorName.substring(0, 3).toUpperCase() : 'DEF';
-        const sku = row.sku || `${styleCode}-${colorCode}`;
+        // Generate slug
         const productSlug = row.slug || generateSlug(row.name);
 
         // Parse boolean values
@@ -223,13 +220,7 @@ export async function POST(request) {
         const productData = {
           name: row.name.trim(),
           description: row.description.trim(),
-          styleCode: styleCode.toUpperCase(),
-          sku: sku.toUpperCase(),
           slug: productSlug,
-          priceRange: {
-            min: parseFloat(row.priceMin) || 0,
-            max: parseFloat(row.priceMax) || 0
-          },
           images: {
             main: mainImageUrl || '',
             gallery: galleryUrls
@@ -255,7 +246,7 @@ export async function POST(request) {
         };
 
         // Create or update product
-        const existingProduct = await Product.findOne({ sku: productData.sku });
+        const existingProduct = await Product.findOne({ slug: productData.slug });
         
         if (existingProduct) {
           await Product.findByIdAndUpdate(existingProduct._id, productData);

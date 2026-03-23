@@ -51,18 +51,18 @@ const TrustedNetwork = () => {
   );
 
   return (
-    <section className="py-16 px-4 max-w-[1440px] mx-auto font-mont">
+    <section className="py-10 px-4 max-w-[1440px] mx-auto font-mont">
       {/* Header Section */}
-      <div className="text-center max-w-6xl mx-auto mb-12">
+      <div className="text-center max-w-6xl mx-auto mb-8">
         <div className="flex items-center justify-center gap-2 mb-4">
          
-          <h3 className="text-[10px] md:text-3xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          <h3 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
           Jaipur Kurti Gharana
           </h3>
          
         </div>
 
-        <h2 className="text-2xl md:text-5xl font-bold font-playfair text-[#1F1951] mb-6 ">
+        <h2 className="text-2xl md:text-4xl font-bold font-playfair text-[#1F1951] mb-6 ">
        Trusted Across India and the World
         </h2>
 
@@ -73,8 +73,8 @@ const TrustedNetwork = () => {
       </div>
 
       {/* India Top Cities */}
-      <div className="mb-16">
-        <h3 className="text-center text-xl md:text-2xl font-cinzel font-bold text-[#0E0E0E] mb-10 uppercase ">
+      <div className="mb-10">
+        <h3 className="text-center text-xl md:text-2xl font-cinzel font-bold text-[#0E0E0E] mb-6 uppercase ">
           India Top Cities
         </h3>
         <div className="flex md:grid md:grid-cols-5 lg:grid-cols-10 gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x px-2">
@@ -88,7 +88,7 @@ const TrustedNetwork = () => {
 
       {/* Worldwide Top Cities */}
       <div>
-        <h3 className="text-center text-xl md:text-2xl font-cinzel font-bold text-[#0E0E0E] mb-10 uppercase">
+        <h3 className="text-center text-xl md:text-2xl font-cinzel font-bold text-[#0E0E0E] mb-6 uppercase">
           Worldwide Top Cities
         </h3>
         <div className="flex md:grid md:grid-cols-5 lg:grid-cols-10 gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x px-2">

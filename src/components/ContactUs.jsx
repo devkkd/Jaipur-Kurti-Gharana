@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const ContactUs = () => {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-12 md:py-20  font-sans text-[#333]">
+    <section className="max-w-7xl mx-auto px-4 py-8 md:py-14 font-sans text-[#333]">
       <div className="flex flex-col lg:flex-row gap-10 items-start">
 
         {/* Left Section: Contact Details */}

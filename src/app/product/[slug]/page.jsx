@@ -164,17 +164,6 @@ const ProductDetailsPage = () => {
             {product.name}
           </h1>
 
-          {/* Style Code & SKU */}
-          <div className="flex gap-4 text-sm text-gray-600">
-            <span>Style Code: <strong>{product.styleCode}</strong></span>
-            <span>SKU: <strong>{product.sku}</strong></span>
-          </div>
-
-          {/* Price */}
-          <div className="text-2xl font-bold text-gray-900">
-            ₹{product.priceRange.min} – ₹{product.priceRange.max}
-          </div>
-
           {/* Description */}
           <p className="text-gray-600 leading-relaxed">
             {product.description}

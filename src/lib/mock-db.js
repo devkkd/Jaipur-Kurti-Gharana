@@ -440,8 +440,6 @@ export async function searchProducts(query, filters = {}) {
       const matchesText = 
         product.name.toLowerCase().includes(searchText) ||
         product.description.toLowerCase().includes(searchText) ||
-        product.styleCode.toLowerCase().includes(searchText) ||
-        product.sku.toLowerCase().includes(searchText) ||
         (product.tags && product.tags.some(tag => tag.toLowerCase().includes(searchText)));
       
       if (!matchesText) return false;
@@ -449,8 +447,6 @@ export async function searchProducts(query, filters = {}) {
       // Apply filters
       if (filters.categoryId && product.categoryId !== filters.categoryId) return false;
       if (filters.subcategoryId && product.subcategoryId !== filters.subcategoryId) return false;
-      if (filters.minPrice && product.priceRange.min < filters.minPrice) return false;
-      if (filters.maxPrice && product.priceRange.max > filters.maxPrice) return false;
       if (filters.sizes && filters.sizes.length > 0) {
         const hasMatchingSize = product.sizes.some(size => filters.sizes.includes(size.size));
         if (!hasMatchingSize) return false;

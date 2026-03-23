@@ -67,15 +67,11 @@ export default function CategoryPage() {
     });
 
     if (sortBy === "low-high") {
-      products.sort(
-        (a, b) => a.priceRange.min - b.priceRange.min
-      );
+      products.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
     }
 
     if (sortBy === "high-low") {
-      products.sort(
-        (a, b) => b.priceRange.max - a.priceRange.max
-      );
+      products.sort((a, b) => (b.sortOrder || 0) - (a.sortOrder || 0));
     }
 
     return products;
@@ -167,8 +163,8 @@ export default function CategoryPage() {
             className="appearance-none border border-[#E13C6C]/30 rounded-lg px-4 py-2 pr-10 text-xs focus:outline-none focus:border-[#E13C6C] bg-white cursor-pointer w-full sm:w-48 text-gray-700 hover:border-[#E13C6C]/50 transition-colors"
           >
             <option value="default">Sort by: Default</option>
-            <option value="low-high">Price: Low to High</option>
-            <option value="high-low">Price: High to Low</option>
+            <option value="low-high">Sort: A to Z</option>
+            <option value="high-low">Sort: Z to A</option>
           </select>
           <ChevronDown
             className="absolute right-3 top-1/2 -translate-y-1/2 text-[#E13C6C] pointer-events-none"

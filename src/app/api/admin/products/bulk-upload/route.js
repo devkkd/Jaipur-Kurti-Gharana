@@ -277,13 +277,6 @@ export async function POST(request) {
           }
         }
 
-        // Generate style code if not provided
-        const styleCode = row.styleCode || `AVT${Date.now().toString().slice(-6)}${Math.floor(Math.random() * 1000)}`;
-        
-        // Generate SKU if not provided
-        const colorCode = row.colorName ? row.colorName.substring(0, 3).toUpperCase() : 'DEF';
-        const sku = row.sku || `${styleCode}-${colorCode}`;
-
         // Generate slug from product name if not provided
         const productSlug = row.slug || generateSlug(row.name);
 
@@ -302,15 +295,7 @@ export async function POST(request) {
           // Basic Info
           name: row.name.trim(),
           description: row.description.trim(),
-          styleCode: styleCode.toUpperCase(),
-          sku: sku.toUpperCase(),
           slug: productSlug,
-          
-          // Price
-          priceRange: {
-            min: parseFloat(row.priceMin) || 0,
-            max: parseFloat(row.priceMax) || 0
-          },
           
           // Images
           images: {
@@ -354,7 +339,7 @@ export async function POST(request) {
         };
 
         // Create or update product
-        const existingProduct = await Product.findOne({ sku: productData.sku });
+        const existingProduct = await Product.findOne({ slug: productData.slug });
         
         if (existingProduct) {
           await Product.findByIdAndUpdate(existingProduct._id, productData);

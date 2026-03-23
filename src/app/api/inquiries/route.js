@@ -82,7 +82,6 @@ export async function POST(request) {
     const formattedProducts = products.map(product => ({
       productId: product._id,
       name: product.name || product.title,
-      styleCode: product.styleCode || product._id.slice(-6),
       image: product.images?.main || '/placeholder.png',
       material: product.productDetails?.material || 'N/A',
       color: product.color?.name || 'N/A',

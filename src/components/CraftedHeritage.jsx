@@ -5,7 +5,6 @@ const AvantaLanding = () => {
     <div 
       className="relative mx-auto text-gray-800 overflow-hidden"
       style={{
-        // Layering: Pattern on top, then the solid color gradient, then the 180deg gradient
         backgroundImage: `
           url("/images/pattern.png"),
           linear-gradient(0deg, #F9F8FF, #F9F8FF),
@@ -13,26 +12,27 @@ const AvantaLanding = () => {
         `,
         backgroundRepeat: 'repeat, no-repeat, no-repeat',
         backgroundSize: 'auto, cover, cover',
-        backgroundBlendMode: 'multiply' // This helps the pattern blend naturally with the pink/white gradients
+        backgroundBlendMode: 'multiply'
       }}
     >
-      <div className="relative z-10 max-w-[90rem] mx-auto px-6 py-16 md:py-24">
+      <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-6 py-8">
         
-        {/* Top Centered Header Section */}
-        <div className="text-center mb-12 md:mb-16">
-          <h3 className="text-[10px] md:text-3xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+        {/* Header */}
+        <div className="text-center mb-6 md:mb-8">
+          <h3 className="text-sm md:text-2xl font-playfair font-bold text-[#E13C6C] mb-1">
             Jaipur Kurti Gharana
           </h3>
-        <h2 className="text-2xl md:text-5xl font-bold font-playfair text-[#1F1951] mb-6 ">
+          <h2 className="text-2xl md:text-4xl font-bold font-playfair text-[#1F1951]">
             Crafted Heritage Elevated Luxury
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+        {/* Content + Image */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-8 md:mb-10">
           
           {/* Left Content */}
-          <div className="space-y-6 max-w-xl">
-            <div className="space-y-5 text-black text-sm md:text-base leading-relaxed">
+          <div className="space-y-4">
+            <div className="space-y-3 text-black text-sm md:text-base leading-relaxed">
               <p className="font-mont">
                 <span className="font-bold">Jaipur Kurti Gharana</span> is a celebration of refined Indian fashion deeply rooted in heritage and elevated through thoughtful design.
               </p>
@@ -50,7 +50,7 @@ const AvantaLanding = () => {
               </p>
             </div>
 
-            <ul className="space-y-3 text-sm font-bold pt-4">
+            <ul className="space-y-2 text-sm font-bold pt-2">
               <li className="flex items-center gap-2 font-mont">
                 <span className="text-lg">→</span> Clothing that empowers through elegance
               </li>
@@ -63,8 +63,8 @@ const AvantaLanding = () => {
             </ul>
           </div>
 
-          {/* Right Image Card */}
-          <div className="relative h-[400px] md:h-[550px] w-full bg-[#fdf8f1] rounded-[40px] overflow-hidden shadow-xl border-4 border-white/50">
+          {/* Right Image */}
+          <div className="w-full aspect-[4/3] md:aspect-[3/2] lg:aspect-[4/3] bg-[#fdf8f1] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white/50">
             <img 
               src="/images/landing.svg" 
               alt="Jaipur Kurti Gharana Collection" 
@@ -73,52 +73,23 @@ const AvantaLanding = () => {
           </div>
         </div>
 
-        {/* Bottom Features Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 relative border-t border-gray-200/50 pt-12">
+        {/* Bottom Features */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 border-t border-gray-200/50 pt-6">
           
-          {/* Feature 1 */}
-          <div className="text-center flex flex-col items-center px-4">
-            <div className="mb-4">
-               <img src='/images/icon/Custom.png' alt="Custom" className='w-10 h-10'/>
+          {[
+            { img: '/images/icon/Custom.png', alt: 'Custom', title: 'Custom Manufacturing', desc: 'Private label and customization options available for bulk orders.' },
+            { img: '/images/icon/Flexible.png', alt: 'Flexible', title: 'Flexible MOQ', desc: 'Minimum order quantities designed for businesses of all sizes.' },
+            { img: '/images/icon/Retailers.png', alt: 'Retailers', title: '1,000+ Retailers', desc: 'Trusted by boutiques & retailers across India & 15+ countries worldwide.' },
+            { img: '/images/icon/Global.png', alt: 'Global', title: 'Global Shipping', desc: 'Reliable worldwide delivery with comprehensive export support.' },
+          ].map((feature, i) => (
+            <div key={i} className={`text-center flex flex-col items-center px-2 md:px-4 ${i > 0 ? 'lg:border-l border-gray-300/50' : ''}`}>
+              <div className="mb-3">
+                <img src={feature.img} alt={feature.alt} className="w-9 h-9 md:w-10 md:h-10" />
+              </div>
+              <h3 className="font-bold font-mont text-xs md:text-sm mb-1">{feature.title}</h3>
+              <p className="text-[10px] md:text-[11px] font-mont text-gray-700 leading-normal">{feature.desc}</p>
             </div>
-            <h3 className="font-bold font-mont text-sm mb-2">Custom Manufacturing</h3>
-            <p className="text-[11px] font-mont text-gray-700 leading-normal">
-              Private label and customization options available for bulk orders.
-            </p>
-          </div>
-
-          {/* Feature 2 */}
-          <div className="text-center flex flex-col items-center px-4 border-l border-gray-300/50">
-            <div className="mb-4">
-              <img src='/images/icon/Flexible.png' alt="Flexible" className='w-10 h-10'/>
-            </div>
-            <h3 className="font-bold font-mont text-sm mb-2">Flexible MOQ</h3>
-            <p className="text-[11px] font-mont text-gray-700 leading-normal">
-              Minimum order quantities designed for businesses of all sizes.
-            </p>
-          </div>
-
-          {/* Feature 3 */}
-          <div className="text-center flex flex-col items-center px-4 border-l border-gray-300/50">
-            <div className="mb-4">
-              <img src='/images/icon/Retailers.png' alt="Retailers" className='w-10 h-10'/>
-            </div>
-            <h3 className="font-bold font-mont text-sm mb-2">1,000+ Retailers</h3>
-            <p className="text-[11px] font-mont text-gray-700 leading-normal">
-              Trusted by boutiques & retailers across <span className="font-bold">India & 15+ countries</span> worldwide.
-            </p>
-          </div>
-
-          {/* Feature 4 */}
-          <div className="text-center flex flex-col items-center px-4 border-l border-gray-300/50">
-            <div className="mb-4">
-              <img src='/images/icon/Global.png' alt="Global" className='w-10 h-10'/>
-            </div>
-            <h3 className="font-bold font-mont text-sm mb-2">Global Shipping</h3>
-            <p className="text-[11px] font-mont text-gray-700 leading-normal">
-              Reliable worldwide delivery with comprehensive export support.
-            </p>
-          </div>
+          ))}
 
         </div>
       </div>

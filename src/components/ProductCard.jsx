@@ -1,14 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
 import EnquiryBtn from "./EnquiryBtn";
 
 const ProductCard = ({ product }) => {
-  const priceText =
-    product?.priceRange?.min && product?.priceRange?.max
-      ? `₹${product.priceRange.min} – ₹${product.priceRange.max}`
-      : "Price on request";
-
   // Get main image from product.images.main or fallback
   const mainImage = product?.images?.main || product?.image || "/placeholder.jpg";
 
@@ -23,17 +17,15 @@ const ProductCard = ({ product }) => {
 
   // WhatsApp inquiry handler
   const handleWhatsAppInquiry = () => {
-    const styleCode = product?.styleCode || product?._id?.slice(-6) || "N/A";
     const material = product?.material || product?.productDetails?.material || "Premium Fabric";
-    const color = product?.primaryColor || product?.color || "As Shown";
+    const color = product?.primaryColor || product?.color?.name || "As Shown";
 
     const message = `Hello! I'm interested in this product:
 
 *${productName}*
-Style Code: ${styleCode}
+SKU: ${product?.sku || 'N/A'}
 Material: ${material}
 Color: ${color}
-Price: ${priceText}
 
 Please provide wholesale pricing, MOQ, and delivery details.
 
@@ -47,58 +39,48 @@ Thank you!`;
 
   return (
     <div className="flex flex-col justify-between group">
-      {/* Image (Clickable) */}
+      {/* Image */}
       <Link href={`/product/${productSlug}`} className="block">
-        <div className="relative aspect-[3/4] mb-4 overflow-hidden rounded-sm bg-gray-100">
+        <div className="relative aspect-[8/9] max-h-80 mb-2.5 overflow-hidden rounded-md bg-gray-100">
           <img
             src={mainImage}
             alt={productName}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-
-          {/* NEW Badge */}
           {product.isNewArrival && (
-            <span className="absolute top-4 left-4 bg-[#00C349] text-white text-[10px] font-bold px-3 py-1.5 rounded uppercase tracking-wider">
+            <span className="absolute top-3 left-3 bg-[#00C349] text-white text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider">
               New
             </span>
           )}
-
-          {/* Featured Badge */}
           {product.isFeatured && !product.isNewArrival && (
-            <span className="absolute top-4 left-4 bg-[#DE3163] text-white text-[10px] font-bold px-3 py-1.5 rounded uppercase tracking-wider">
+            <span className="absolute top-3 left-3 bg-[#DE3163] text-white text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider">
               Featured
             </span>
           )}
         </div>
       </Link>
 
-      {/* Product Info */}
+      {/* Info */}
       <div className="space-y-1">
-        {/* Title (Clickable) */}
         <Link href={`/product/${productSlug}`}>
-          <h3 className="font-semibold text-[#1a1a1a] text-lg hover:underline cursor-pointer">
+          <h3 className="font-semibold text-[#1a1a1a] text-sm leading-snug hover:underline line-clamp-1">
             {productName}
           </h3>
         </Link>
 
-        <p className="font-semibold text-[#1a1a1a] text-sm">
-          {priceText}
-        </p>
-
-        <p className="text-gray-600 text-[11px] leading-relaxed pt-1 line-clamp-2">
+        <p className="text-gray-500 text-[11px] leading-relaxed line-clamp-2">
           {productDescription}
         </p>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-2 pt-5">
+        {/* Buttons */}
+        <div className="flex items-center gap-3 mr-5 pt-1.5">
           <EnquiryBtn product={product} />
-
           <button
             onClick={handleWhatsAppInquiry}
-            className="w-10 h-10 flex items-center justify-center bg-[#25D366] text-white rounded-full shadow-sm hover:bg-[#20BA5A] transition-colors"
+            className="w-11 h-11 shrink-0 flex items-center justify-center bg-[#25D366] text-white rounded-full shadow-sm hover:bg-[#20BA5A] transition-colors"
             title="WhatsApp Inquiry"
           >
-            <img src="/images/icon/whatsapp.svg" alt="WA" className="w-5 h-5" />
+            <img src="/images/icon/whatsapp.svg" alt="WA" className="w-4 h-4" />
           </button>
         </div>
       </div>

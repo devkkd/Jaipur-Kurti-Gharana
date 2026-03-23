@@ -48,10 +48,6 @@ const InquirySchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    styleCode: {
-      type: String,
-      required: true
-    },
     image: {
       type: String,
       required: true

@@ -27,7 +27,7 @@ export default function EnquiryBtn({ product }) {
   return (
     <button
       onClick={handleClick}
-      className={`flex-[1.5] border  py-4.5 rounded-full text-[8px] md:text-[10px] font-bold uppercase tracking-wide transition-all duration-300 active:scale-95
+      className={`flex-[1.5] border  py-3 rounded-full text-[8px] md:text-[10px] font-bold uppercase tracking-wide transition-all duration-300 active:scale-95
         ${
           isAdded
             ? "bg-red-600 border-red-600 text-white"

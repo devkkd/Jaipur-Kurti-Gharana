@@ -394,7 +394,6 @@ export default function AdminInquiriesPage() {
                       />
                       <div className="flex-1">
                         <h4 className="font-medium text-gray-900">{product.name}</h4>
-                        <p className="text-sm text-gray-600">Style Code: {product.styleCode}</p>
                         <div className="flex gap-4 mt-2 text-xs text-gray-500">
                           <span>Material: {product.material}</span>
                           <span>Color: {product.color}</span>

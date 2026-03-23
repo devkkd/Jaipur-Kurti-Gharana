@@ -10,7 +10,7 @@ export async function GET(request, { params }) {
     const { id } = await params;
 
     const inquiry = await Inquiry.findById(id)
-      .populate('products.productId', 'name slug styleCode')
+      .populate('products.productId', 'name slug')
       .lean();
 
     if (!inquiry) {

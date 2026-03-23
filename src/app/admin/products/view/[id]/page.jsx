@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Edit, Package, IndianRupee, Tag, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Edit, Package, Tag, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ViewProductPage({ params }) {
@@ -113,7 +113,6 @@ console.log('Fetched product data:', data);
           </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{product.name}</h1>
-            <p className="text-gray-600">{product.styleCode}</p>
           </div>
         </div>
         
@@ -188,33 +187,11 @@ console.log('Fetched product data:', data);
                 <span className="text-sm font-medium text-gray-500">Product Name:</span>
                 <p className="text-gray-900">{product.name}</p>
               </div>
-              
-              <div>
-                <span className="text-sm font-medium text-gray-500">Style Code:</span>
-                <p className="text-gray-900">{product.styleCode}</p>
-              </div>
-              
-              <div>
-                <span className="text-sm font-medium text-gray-500">SKU:</span>
-                <p className="text-gray-900">{product.sku}</p>
-              </div>
-              
+
               <div>
                 <span className="text-sm font-medium text-gray-500">Description:</span>
                 <p className="text-gray-900">{product.description}</p>
               </div>
-            </div>
-          </div>
-
-          {/* Price Range */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Price Range</h2>
-            
-            <div className="flex items-center gap-2">
-              <IndianRupee size={20} className="text-gray-600" />
-              <span className="text-2xl font-bold text-gray-900">
-                {product.priceRange?.min} - {product.priceRange?.max}
-              </span>
             </div>
           </div>
 

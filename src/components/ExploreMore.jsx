@@ -40,12 +40,12 @@ const ExploreMore = () => {
       
       {/* --- Header Section Updated to match Image_f9e882 --- */}
       <div className="text-center mb-12">
-            <h3 className="text-[10px] md:text-3xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+            <h3 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
           Jaipur Kurti Gharana
           </h3>
         
         {/* Playfair Display font for main heading as requested */}
-        <h2 className="text-2xl md:text-5xl font-bold font-playfair text-[#1F1951] mb-6 ">
+        <h2 className="text-2xl md:text-4xl font-bold font-playfair text-[#1F1951] mb-6 ">
           Explore More Products
         </h2>
         

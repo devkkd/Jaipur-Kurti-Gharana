@@ -2,18 +2,18 @@ import React from 'react';
 
 const Embrace = () => {
   return (
-    <section className="bg-white py-16 px-6 md:py-24 font-sans">
+    <section className="bg-white py-6 px-6  font-sans">
       <div className="max-w-[90rem] mx-auto">
         
         {/* Header Content Section - Centered per image */}
-        <div className="text-center max-w-5xl mx-auto mb-16">
+        <div className="text-center max-w-5xl mx-auto mb-10">
           {/* Brand Tagline - font-mont */}
-          <h3 className="text-[10px] md:text-3xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+          <h3 className="text-[10px] md:text-2xl py-2 font-playfair font-bold  text-[#E13C6C] ">
             Jaipur Kurti Gharana
           </h3>
 
           {/* Main Heading - font-playfair */}
-        <h2 className="text-2xl md:text-5xl font-bold font-playfair text-[#1F1951] mb-6 ">
+        <h2 className="text-2xl md:text-4xl font-bold font-playfair text-[#1F1951] mb-6 ">
             A Signature of Timeless Style
           </h2>
 

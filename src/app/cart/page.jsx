@@ -84,17 +84,12 @@ const CartPage = () => {
       return;
     }
 
-    // Build detailed product list with all information
     const productList = Enquiries.map((item, index) => {
       const productName = item.name || item.title;
-      const styleCode = item.styleCode || item._id.slice(-6);
-      
-      // Get actual material and color from database
-      const material = item.material || item.productDetails?.material || "Premium Fabric";
-      const color = item.primaryColor || item.color || "As Shown";
-      
+      const material = item.productDetails?.material || "Premium Fabric";
+      const color = item.color?.name || "As Shown";
+
       return `${index + 1}. *${productName}*
-   Style Code: ${styleCode}
    Material: ${material}
    Color: ${color}`;
     }).join("\n\n");
@@ -229,20 +224,10 @@ Thank you!`;
                     <div className="flex-1 flex flex-col py-2">
                       <div className="flex justify-between items-start gap-3 mb-3">
                         <div className="flex-1">
-                          <h3 className="text-[#E13C6C]  font-playfair text-xl  mb-2">
+                          <h3 className="text-[#E13C6C] font-playfair text-xl mb-2">
                             {item.name || item.title}
                           </h3>
-                          
-                          {/* SKU Code */}
-                          <p className="text-xs text-gray-500 mb-2">
-                            SKU: <span className="font-semibold text-gray-700">{item.sku || item.styleCode || "N/A"}</span>
-                          </p>
-                          
-                          {/* Price */}
-                          <p className="text-gray-900 font-semibold text-lg mb-2">
-                            ₹{item.priceRange?.min} – ₹{item.priceRange?.max}
-                          </p>
-                          
+
                           {/* Description - 2 lines max */}
                           <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
                             {item.description || "Premium quality ethnic wear for wholesale."}

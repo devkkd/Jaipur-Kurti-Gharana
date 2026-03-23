@@ -18,7 +18,7 @@ export async function GET(request, { params }) {
     }
 
     const inquiry = await CustomerInquiry.findById(id)
-      .populate('productId', 'title slug images styleCode')
+      .populate('productId', 'title slug images')
       .lean();
 
     if (!inquiry) {
@@ -82,7 +82,7 @@ export async function PUT(request, { params }) {
       id,
       updateData,
       { new: true, runValidators: true }
-    ).populate('productId', 'title slug images styleCode');
+    ).populate('productId', 'title slug images');
 
     console.log('Updated inquiry:', inquiry);
 

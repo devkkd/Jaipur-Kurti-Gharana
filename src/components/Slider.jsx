@@ -31,7 +31,7 @@ const items = [
 
 export default function ContinuousSlider() {
   return (
-    <div className="w-full overflow-hidden bg-white py-6 md:py-8">
+    <div className="w-full overflow-hidden bg-white py-4 md:py-6">
       <div className="relative">
         {/* Continuous Scrolling Container */}
         <div className="flex w-max animate-scroll items-center">

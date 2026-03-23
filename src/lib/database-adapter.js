@@ -521,8 +521,6 @@ export async function searchProducts(query, filters = {}) {
       $or: [
         { name: { $regex: query, $options: 'i' } },
         { description: { $regex: query, $options: 'i' } },
-        { styleCode: { $regex: query, $options: 'i' } },
-        { sku: { $regex: query, $options: 'i' } },
         { tags: { $in: [new RegExp(query, 'i')] } }
       ]
     };
@@ -533,11 +531,6 @@ export async function searchProducts(query, filters = {}) {
     }
     if (filters.subcategoryId) {
       searchQuery.subcategoryId = convertId(filters.subcategoryId);
-    }
-    if (filters.minPrice || filters.maxPrice) {
-      searchQuery['priceRange.min'] = {};
-      if (filters.minPrice) searchQuery['priceRange.min'].$gte = filters.minPrice;
-      if (filters.maxPrice) searchQuery['priceRange.max'] = { $lte: filters.maxPrice };
     }
     if (filters.sizes && filters.sizes.length > 0) {
       searchQuery['sizes.size'] = { $in: filters.sizes };

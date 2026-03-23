@@ -14,16 +14,23 @@ if (!cached) {
 
 async function dbConnect() {
   if (cached.conn) {
-    return cached.conn;
+    // Check if connection is still alive
+    if (cached.conn.connection?.readyState === 1) {
+      return cached.conn;
+    }
+    // Connection dropped, reset cache
+    cached.conn = null;
+    cached.promise = null;
   }
 
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      maxPoolSize: 2, // Reduced for low memory environments
+      maxPoolSize: 2,
       minPoolSize: 1,
       maxIdleTimeMS: 10000,
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 30000,
+      connectTimeoutMS: 30000,
       socketTimeoutMS: 45000,
       compressors: 'zlib',
     };
@@ -38,6 +45,7 @@ async function dbConnect() {
     cached.conn = await cached.promise;
   } catch (e) {
     cached.promise = null;
+    cached.conn = null;
     console.error('❌ MongoDB connection error:', e);
     throw e;
   }

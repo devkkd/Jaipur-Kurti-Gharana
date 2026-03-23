@@ -28,28 +28,33 @@ export default function Home() {
       <>
          <HeroCarousel />
          <Slider />
-         <TrustedCities />
          <Manufacturing />
+        
+         
          <ExclusiveCollections />
-         {/* <PremiumCollections/> */}
+          <CuratedArrivals />
+              <TheSeasons />
+             <Legacy />
+  
          <CraftedHeritage />
-         <CuratedArrivals />
-         <SignatureCraft />
-         <Legacy />
+          
+         {/* <SignatureCraft /> */}
+      
          {/* <ArtisanExcellence /> */}
-         <TheSeasons />
+    
          {/* <AvantaBanner /> */}
          {/* <RefinedSelection /> */}
-         <PartnershipSection />
-         <ExploreMore />
+         {/* <PartnershipSection /> */}
+         {/* <ExploreMore /> */}
          <Signature />
-         <Achievements />
+         {/* <Achievements /> */}
          <InstagramSection />
-         <CommitmentSection />
+         {/* <CommitmentSection /> */}
          <WholesaleForm />
-         <FAQ />
+         {/* <FAQ /> */}
+          <TrustedCities />
          <ContactUs />
-         <CraftsmanshipSection />
+         {/* <CraftsmanshipSection /> */}
       </>
    );
 }

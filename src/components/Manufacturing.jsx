@@ -56,14 +56,14 @@ const VideoSlider = () => {
   };
 
   return (
-    <section className="py-16 bg-white overflow-hidden">
+    <section className="py-10 bg-white overflow-hidden">
       {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 text-center mb-10">
-        <h3 className="text-[10px] md:text-3xl py-4 font-playfair font-bold  text-[#E13C6C] ">
+      <div className="max-w-7xl mx-auto px-4 text-center mb-6">
+        <h3 className="text-[10px] md:text-2xl py-4 font-playfair font-bold  text-[#E13C6C] ">
           Jaipur Kurti Gharana
         </h3>
 
-        <h2 className="text-2xl md:text-5xl font-bold font-playfair text-[#1F1951] mb-6 ">
+        <h2 className="text-2xl md:text-4xl font-bold font-playfair text-[#1F1951] mb-6 ">
           We’re Manufacturing What Matters
         </h2>
 
