@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import CustomerInquiry from '@/models/CustomerInquiry';
+import { sendInquiryEmail } from '@/lib/mailer';
 
 // POST - Create new customer inquiry
 export async function POST(request) {
@@ -9,21 +10,22 @@ export async function POST(request) {
 
     const body = await request.json();
     
-    // Get IP address and user agent for tracking
     const ipAddress = request.headers.get('x-forwarded-for') || 
                      request.headers.get('x-real-ip') || 
                      'unknown';
     const userAgent = request.headers.get('user-agent') || 'unknown';
 
-    // Create inquiry with tracking data
-    const inquiryData = {
+    const inquiry = await CustomerInquiry.create({
       ...body,
       ipAddress,
       userAgent,
       status: 'pending'
-    };
+    });
 
-    const inquiry = await CustomerInquiry.create(inquiryData);
+    // Send email notification (non-blocking — don't fail the request if email fails)
+    sendInquiryEmail(inquiry).catch(err =>
+      console.error('Email notification failed:', err.message)
+    );
 
     return NextResponse.json({
       success: true,
@@ -32,11 +34,8 @@ export async function POST(request) {
     }, { status: 201 });
 
   } catch (error) {
-    console.error('Error creating customer inquiry:', error);
-    console.error('Error details:', error.message);
-    console.error('Error stack:', error.stack);
+    console.error('Error creating customer inquiry:', error.message);
 
-    // Handle validation errors
     if (error.name === 'ValidationError') {
       const errors = Object.values(error.errors).map(err => err.message);
       return NextResponse.json({

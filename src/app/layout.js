@@ -1,11 +1,11 @@
 import { Geist, Geist_Mono, Montserrat, Cinzel, Playfair_Display } from "next/font/google";
 
 import "./globals.css";
-import { ProductProvider } from '@/context/ProductContext';
 import ConditionalLayout from '@/components/ConditionalLayout';
-import { EnquiryProvider, InquiryProvider } from "@/context/CartContext";
+import { EnquiryProvider } from "@/context/CartContext";
 import { CartProvider } from "@/context/CartContext";
 import { AppDataProvider } from '@/context/AppDataContext';
+import InquiryPopup from '@/components/InquiryPopup';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,12 +45,14 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
   className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${cinzel.variable} ${playfair.variable} antialiased`}
+  suppressHydrationWarning
 >
 
         <AppDataProvider>
           <CartProvider>
             <EnquiryProvider>
               <ConditionalLayout>{children}</ConditionalLayout>
+              <InquiryPopup />
             </EnquiryProvider>
           </CartProvider>
         </AppDataProvider>

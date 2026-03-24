@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import CustomerInquiry from '@/models/CustomerInquiry';
 import Inquiry from '@/models/Inquiry';
+import '@/models/Product'; // ensure Product schema is registered for populate
 
 // GET - Fetch pending notifications
 export async function GET(request) {

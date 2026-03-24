@@ -1,5 +1,5 @@
 {
-  "name": "avanta-web",
+  "name": "jaipur-kurti-gharana",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -26,8 +26,9 @@
     "mongodb": "^6.0.0",
     "mongoose": "^9.1.5",
     "multer": "^2.0.2",
-    "next": "15.1.6",
+    "next": "15.2.6",
     "next-auth": "^4.24.13",
+    "nodemailer": "^7.0.13",
     "papaparse": "^5.5.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",

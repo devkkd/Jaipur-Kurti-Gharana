@@ -1,25 +1,26 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { useAppData } from "@/context/AppDataContext";
 
 export default function CuratedArrivals() {
   const { products, loading, error } = useAppData();
+  const [curatedProducts, setCuratedProducts] = useState([]);
 
-  const curatedProducts = useMemo(() => {
-    if (!products || products.length === 0) return [];
+  useEffect(() => {
+    if (!products || products.length === 0) return;
 
     const newArrivals = products.filter(p => p.isNewArrival && p.isActive);
 
-    // Fisher-Yates Shuffle
+    // Fisher-Yates shuffle — runs only on client
     const shuffled = [...newArrivals];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
 
-    return shuffled.slice(0, 8);
+    setCuratedProducts(shuffled.slice(0, 8));
   }, [products]);
 
   /* ================= LOADING/ERROR ================= */  if (loading) return <div className="py-16 text-center text-gray-500 text-sm">Loading new arrivals...</div>;

@@ -75,31 +75,6 @@ const CustomerInquirySchema = new mongoose.Schema({
     ]
   },
   
-  expectedOrderFrequency: {
-    type: String,
-    required: [true, 'Expected order frequency is required'],
-    enum: [
-      'One-time order',
-      'Monthly',
-      'Quarterly',
-      'Bi-annually',
-      'Annually'
-    ]
-  },
-  
-  targetDeliveryTimeline: {
-    type: String,
-    required: [true, 'Target delivery timeline is required'],
-    enum: [
-      'Within 1 week',
-      '1-2 weeks',
-      '2-4 weeks',
-      '1-2 months',
-      '2-3 months',
-      'Flexible'
-    ]
-  },
-  
   // Customization
   customisationRequirement: {
     type: String,

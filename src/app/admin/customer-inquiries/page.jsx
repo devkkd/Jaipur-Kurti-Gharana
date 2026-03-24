@@ -422,14 +422,6 @@ export default function CustomerInquiriesPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Quantity Required</label>
                     <p className="text-sm text-gray-900">{selectedInquiry.quantityRequired}</p>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Order Frequency</label>
-                    <p className="text-sm text-gray-900">{selectedInquiry.expectedOrderFrequency}</p>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Delivery Timeline</label>
-                    <p className="text-sm text-gray-900">{selectedInquiry.targetDeliveryTimeline}</p>
-                  </div>
                   <div className="col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Customisation</label>
                     <p className="text-sm text-gray-900">{selectedInquiry.customisationRequirement}</p>
