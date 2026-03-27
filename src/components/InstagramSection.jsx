@@ -2,10 +2,10 @@ import React from 'react';
 
 const InstagramSection = () => {
   const cards = [
-    { id: 1, image: 'images/collection/collection1.jpg', type: 'video' },
-    { id: 2, image: 'images/collection/collection2.jpg', type: 'video' },
-    { id: 3, image: 'images/collection/collection3.jpg', type: 'video' },
-    { id: 4, image: 'images/collection/collection4.jpg', type: 'post' },
+    { id: 1, image: '/images/collection/collection1.jpg', type: 'video' },
+    { id: 2, image: '/images/collection/collection2.jpg', type: 'video' },
+    { id: 3, image: '/images/collection/collection3.jpg', type: 'video' },
+    { id: 4, image: '/images/collection/collection4.jpg', type: 'post' },
   ];
 
   return (
