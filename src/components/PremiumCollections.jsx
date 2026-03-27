@@ -263,7 +263,6 @@
 
 // export default PremiumCollections;
 import React from 'react';
-import Image from 'next/image';
 
 const collections = [
   {
@@ -352,12 +351,10 @@ const PremiumCollections = () => {
             {/* Image Side */}
             <div className="relative w-full md:w-2/3 h-[300px] md:h-full flex items-center justify-center overflow-hidden z-10">
               <div className="relative w-full h-full">
-                <Image
+                <img
                   src={item.img}
                   alt={item.title}
-                  fill
-                  className="object-contain object-bottom"
-                  priority
+                  className="w-full h-full object-contain object-bottom"
                 />
               </div>
             </div>
