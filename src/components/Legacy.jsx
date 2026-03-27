@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 const CraftedHeritage = () => {
   return (
@@ -7,7 +6,7 @@ const CraftedHeritage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2  gap-12 items-center">
 
         <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
-          <Image src="/images/about/about2.png" alt="aboutus" fill className="object-cover rounded-2xl" sizes="(max-width: 1024px) 100vw, 50vw" />
+          <img src="/images/about/about2.png" alt="aboutus" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
         </div>
 
         {/* Right Side: Content */}

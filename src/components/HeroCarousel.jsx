@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
 
 const slides = [
   {
@@ -38,13 +37,11 @@ export default function HeroCarousel() {
       <div className="flex h-full">
         {slides.map((slide, index) => (
           <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full">
-            <Image
+            <img
               src={slide.image}
               alt="Hero Banner"
-              fill
-              priority={index === 0}
-              className="object-cover object-top"
-              sizes="100vw"
+              className="w-full h-full object-cover object-top"
+              loading={index === 0 ? "eager" : "lazy"}
             />
 
             {/* Central Content Card */}
@@ -69,13 +66,7 @@ export default function HeroCarousel() {
 
                 {/* Elephant Icon */}
                 <div className="my-2 flex justify-center">
-                  <Image
-                    src='/images/icon/Elephent.png'
-                    alt="Elephant Icon"
-                    width={128}
-                    height={80}
-                    className="w-24 md:w-32 h-auto"
-                  />
+                  <img src='/images/icon/Elephent.png' alt="Elephant Icon" className="w-24 md:w-32 h-auto" loading="lazy" />
                 </div>
 
                 {/* Subtitle */}
@@ -90,13 +81,7 @@ export default function HeroCarousel() {
 
                 {/* Victor Bottom Decoration */}
                 <div className="mt-8 flex justify-center">
-                  <Image
-                    src='/images/icon/VictorBottom.png'
-                    alt="decoration bottom"
-                    width={176}
-                    height={60}
-                    className="w-32 md:w-44 h-auto opacity-90"
-                  />
+                  <img src='/images/icon/VictorBottom.png' alt="decoration bottom" className="w-32 md:w-44 h-auto opacity-90" loading="lazy" />
                 </div>
               </div>
             </div>

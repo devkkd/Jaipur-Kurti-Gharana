@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 const AvantaLanding = () => {
   return (
@@ -65,14 +64,8 @@ const AvantaLanding = () => {
           </div>
 
           {/* Right Image */}
-          <div className="w-full aspect-[4/3] md:aspect-[3/2] lg:aspect-[4/3] bg-[#fdf8f1] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white/50 relative">
-            <Image 
-              src="/images/landing.svg" 
-              alt="Jaipur Kurti Gharana Collection" 
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+          <div className="w-full aspect-[4/3] md:aspect-[3/2] lg:aspect-[4/3] bg-[#fdf8f1] rounded-[2rem] overflow-hidden shadow-xl border-4 border-white/50">
+            <img src="/images/landing.svg" alt="Jaipur Kurti Gharana Collection" className="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
 
@@ -87,7 +80,7 @@ const AvantaLanding = () => {
           ].map((feature, i) => (
             <div key={i} className={`text-center flex flex-col items-center px-2 md:px-4 ${i > 0 ? 'lg:border-l border-gray-300/50' : ''}`}>
               <div className="mb-3">
-                <Image src={feature.img} alt={feature.alt} width={40} height={40} className="w-9 h-9 md:w-10 md:h-10" />
+                <img src={feature.img} alt={feature.alt} className="w-9 h-9 md:w-10 md:h-10" loading="lazy" />
               </div>
               <h3 className="font-bold font-mont text-xs md:text-sm mb-1">{feature.title}</h3>
               <p className="text-[10px] md:text-[11px] font-mont text-gray-700 leading-normal">{feature.desc}</p>
