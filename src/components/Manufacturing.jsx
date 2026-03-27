@@ -103,6 +103,8 @@ const VideoSlider = () => {
               <img
                 src={video.thumbnail}
                 alt=""
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"
               />
 

@@ -2,9 +2,21 @@ import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import CustomerInquiry from '@/models/CustomerInquiry';
 import { sendInquiryEmail } from '@/lib/mailer';
+import { rateLimit, getIP } from '@/lib/rate-limit';
+
+const limiter = rateLimit({ limit: 5, windowMs: 60 * 1000 }); // 5 per minute per IP
 
 // POST - Create new customer inquiry
 export async function POST(request) {
+  const ip = getIP(request);
+  const { allowed, retryAfter } = limiter(ip);
+  if (!allowed) {
+    return NextResponse.json({ success: false, error: 'Too many requests. Please try again later.' }, {
+      status: 429,
+      headers: { 'Retry-After': String(retryAfter) }
+    });
+  }
+
   try {
     await dbConnect();
 

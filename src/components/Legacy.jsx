@@ -6,7 +6,9 @@ const CraftedHeritage = () => {
     <section className="max-w-7xl mx-auto px-4 py-6 md:py-8 font-sans">
       <div className="grid grid-cols-1 lg:grid-cols-2  gap-12 items-center">
 
-        <img src="images/about/about2.png" alt="aboutus" className='rounded-2xl' />
+        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
+          <Image src="/images/about/about2.png" alt="aboutus" fill className="object-cover rounded-2xl" sizes="(max-width: 1024px) 100vw, 50vw" />
+        </div>
 
         {/* Right Side: Content */}
         <div className="flex flex-col justify-center text-center lg:text-right space-y-8">
