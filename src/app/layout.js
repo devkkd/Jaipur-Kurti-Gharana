@@ -33,15 +33,18 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Jaipur Kurti Gharana - Premium Ethnic Wear Manufacturer",
   description: "Jaipur Kurti Gharana - Leading manufacturer of premium ethnic wear including kurtis, suits, and traditional Indian clothing. Wholesale and bulk orders available.",
+  icons: {
+    icon: "/images/icon/favIcons.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-  className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${cinzel.variable} antialiased`}
-  suppressHydrationWarning
->
+        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${cinzel.variable} antialiased`}
+        suppressHydrationWarning
+      >
 
         <AppDataProvider>
           <CartProvider>
