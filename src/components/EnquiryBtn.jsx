@@ -27,14 +27,14 @@ export default function EnquiryBtn({ product }) {
   return (
     <button
       onClick={handleClick}
-      className={`flex-[1.5] border  py-3 rounded-full text-[8px] md:text-[10px] font-bold uppercase tracking-wide transition-all duration-300 active:scale-95
+      className={`flex-[1.5] border  py-3 rounded-xl text-[8px] md:text-[10px] font-bold uppercase tracking-wide transition-all duration-300 active:scale-95
         ${
           isAdded
             ? "bg-red-600 border-red-600 text-white"
             : "bg-[#DE3163] border-[#DE3163] text-white hover:bg-[#DE3133]"
         }`}
     >
-      {isAdded ? "Remove from Enquiry" : "+ Add to Enquiry"}
+      {isAdded ? "Remove" : "+ Add to Inquiry"}
     </button>
   );
 }

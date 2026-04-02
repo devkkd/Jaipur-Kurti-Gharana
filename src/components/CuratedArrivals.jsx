@@ -23,7 +23,8 @@ export default function CuratedArrivals() {
     setCuratedProducts(shuffled.slice(0, 8));
   }, [products]);
 
-  /* ================= LOADING/ERROR ================= */  if (loading) return <div className="py-16 text-center text-gray-500 text-sm">Loading new arrivals...</div>;
+  /* ================= LOADING/ERROR ================= */
+  if (loading) return <div className="py-16 text-center text-gray-500 text-sm">Loading new arrivals...</div>;
   if (error) return <div className="py-16 text-center text-red-500 text-sm">{error}</div>;
   if (curatedProducts.length === 0) return null;
 
@@ -47,8 +48,8 @@ export default function CuratedArrivals() {
         </div>
       </div>
 
-      {/* Grid rendering - Responsive 2x4 grid to show max 8 products */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 max-w-[1400px] mx-auto">
+      {/* Grid rendering - Updated to match TheSeasons layout (grid-cols-2 base) */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 max-w-[1400px] mx-auto">
         {curatedProducts.map((item) => (
           <ProductCard key={item._id} product={item} />
         ))}

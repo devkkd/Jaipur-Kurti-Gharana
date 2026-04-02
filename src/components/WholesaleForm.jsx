@@ -1,155 +1,109 @@
-import React from 'react';
-import { Upload } from 'lucide-react';
+"use client";
+import React from "react";
+import { Upload } from "lucide-react";
 
 const WholesaleForm = () => {
   return (
-    <div className="flex flex-col max-w-[90rem]  mx-auto lg:flex-row bg-gradient-to-b from-[#FFECF2] to-[#FFD3E1]">
-      {/* Left Side: Image Section */}
-      <div className="w-full lg:w-3/7 relative  m-6">
-        <img
-          src="/images/about/Wholesale-form.svg"
-          alt="Fashion Model"
-          className="absolute inset-0 w-full rounded-3xl object-cover"
-        />
-      </div>
+    <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-8">
+      <div className="flex flex-col lg:flex-row bg-gradient-to-b from-[#FFECF2] to-[#FFD3E1] rounded-3xl overflow-hidden shadow-sm">
 
-      {/* Right Side: Form Section */}
-      <div className="w-full lg:w-3/5 p-6 md:p-12 flex flex-col justify-center">
-        <h2 className="text-2xl md:text-3xl font-bold font-playfair text-center mb-6">
-        Wholesale Collaborations
-        </h2>
+        {/* LEFT IMAGE */}
+        <div className="w-full lg:w-[40%] h-[250px] md:h-[350px] lg:h-auto">
+          <img
+            src="/images/about/Wholesale-form.svg"
+            alt="Fashion Model"
+            className="w-full h-full object-top object-cover"
+          />
+        </div>
 
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-3 ">
-          {/* Company Name */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Company Name</label>
-            <input
-              type="text"
-              placeholder="Enter Company Name"
-              className="p-2 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-400 bg-white"
-            />
-          </div>
+        {/* RIGHT FORM */}
+        <div className="w-full lg:w-[60%] p-6 md:p-10 bg-transparent">
 
-          {/* Business Type */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Business Type</label>
-            <select className="p-2 border border-gray-200 rounded-md focus:outline-none bg-white">
-              <option>Select Business Type</option>
-              <option>Retailer</option>
-              <option>Distributor</option>
-            </select>
-          </div>
+          <h2 className="text-2xl md:text-3xl font-bold font-playfair text-center mb-8 text-[#1F1951]">
+            Wholesale Collaborations
+          </h2>
 
-          {/* Contact Person Name */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Contact Person Name</label>
-            <input
-              type="text"
-              placeholder="Enter Contact Person Name"
-              className="p-2 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-400 bg-white"
-            />
-          </div>
+          <form className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-          {/* Email Address */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Email Address</label>
-            <input
-              type="email"
-              placeholder="Enter Email Address"
-              className="p-2 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-400 bg-white"
-            />
-          </div>
+            {/* INPUT STYLE */}
+            {[
+              "Company Name",
+              "Contact Person Name",
+              "Email Address",
+              "Phone / WhatsApp Number",
+              "City"
+            ].map((label, i) => (
+              <div key={i} className="flex flex-col gap-1">
+                <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
+                  {label}
+                </label>
+                <input
+                  type="text"
+                  placeholder={`Enter ${label}`}
+                  className="px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#E13C6C]/20 focus:border-[#E13C6C]"
+                />
+              </div>
+            ))}
 
-          {/* Phone/WhatsApp */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Phone / WhatsApp Number</label>
-            <input
-              type="text"
-              placeholder="Enter Phone / WhatsApp Number"
-              className="p-2 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-400 bg-white"
-            />
-          </div>
+            {/* SELECTS */}
+            {[
+              { label: "Business Type", options: ["Retailer", "Distributor"] },
+              { label: "Country", options: ["India", "USA"] },
+              { label: "Approximate Quantity", options: ["10-50", "50-200", "200+"] },
+              { label: "Business Verification Proof", options: ["GST Certificate", "Trade License"] }
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col gap-1">
+                <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
+                  {item.label}
+                </label>
+                <select className="px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#E13C6C]/20">
+                  <option>Select {item.label}</option>
+                  {item.options.map((opt, idx) => (
+                    <option key={idx}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+            ))}
 
-          {/* Country */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Country</label>
-            <select className="p-2 border border-gray-200 rounded-md focus:outline-none bg-white">
-              <option>Select Country</option>
-              <option>India</option>
-              <option>USA</option>
-            </select>
-          </div>
-
-          {/* City */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">City</label>
-            <input
-              type="text"
-              placeholder="Enter City Name"
-              className="p-2 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-400 bg-white"
-            />
-          </div>
-
-          {/* Approximate Quantity */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Approximate Quantity</label>
-            <select className="p-2 border border-gray-200 rounded-md focus:outline-none bg-white">
-              <option>Select Approximate Quantity</option>
-              <option>10-50</option>
-              <option>50-200</option>
-              <option>200+</option>
-            </select>
-          </div>
-
-          {/* Business Verification Proof Dropdown */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Business Verification Proof</label>
-            <select className="p-2 border border-gray-200 rounded-md focus:outline-none bg-white">
-              <option>Select your business verification proof</option>
-              <option>GST Certificate</option>
-              <option>Trade License</option>
-            </select>
-          </div>
-
-          {/* Upload Section */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">Upload Image Business Verification Proof</label>
-            <div className="relative">
-              <input
-                type="file"
-                className="hidden"
-                id="fileUpload"
-              />
+            {/* FILE UPLOAD */}
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
+                Upload Proof
+              </label>
               <label
                 htmlFor="fileUpload"
-                className="flex items-center justify-between p-2 border border-gray-200 rounded-md cursor-pointer bg-white text-gray-400 text-sm"
+                className="flex items-center justify-between px-4 py-3 border border-dashed border-gray-300 rounded-lg cursor-pointer bg-white text-gray-500 text-sm hover:border-[#E13C6C] transition"
               >
-                <span>Upload Image Business Verification Proof</span>
+                <span>Upload file</span>
                 <Upload size={18} />
               </label>
+              <input type="file" id="fileUpload" className="hidden" />
             </div>
-          </div>
 
-          {/* Special Instructions - Full Width */}
-          <div className="flex flex-col gap-2 md:col-span-2">
-            <label className="text-sm font-medium text-gray-700">Special Instructions for Your Requirement</label>
-            <textarea
-              rows={4}
-              placeholder="Write Special Instructions for Your Requirement here..."
-              className="p-2 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-400 bg-white"
-            ></textarea>
-          </div>
+            {/* TEXTAREA */}
+            <div className="md:col-span-2 flex flex-col gap-1">
+              <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
+                Special Instructions
+              </label>
+              <textarea
+                rows={4}
+                placeholder="Write your requirements..."
+                className="px-4 py-3 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#E13C6C]/20"
+              />
+            </div>
 
-          {/* Submit Button */}
-          <div className="md:col-span-2 flex justify-center mt-4">
-            <button
-              type="submit"
-              className="bg-[#E13C6C] text-white px-10 py-3 rounded-full flex items-center gap-2 hover:bg-opacity-90 transition-all font-medium"
-            >
-              Submit Enquiry <span className="text-lg">→</span>
-            </button>
-          </div>
-        </form>
+            {/* BUTTON */}
+            <div className="md:col-span-2 flex justify-center mt-4">
+              <button
+                type="submit"
+                className="bg-[#E13C6C] text-white px-10 py-3 rounded-full text-sm font-semibold hover:bg-[#c92c58] transition shadow-md"
+              >
+                Submit Enquiry →
+              </button>
+            </div>
+
+          </form>
+        </div>
       </div>
     </div>
   );

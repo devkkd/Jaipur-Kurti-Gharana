@@ -12,11 +12,6 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-export const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-playfair",
-});
 
 export const cinzel = Cinzel({
   subsets: ["latin"],
@@ -44,7 +39,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-  className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${cinzel.variable} ${playfair.variable} antialiased`}
+  className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${cinzel.variable} antialiased`}
   suppressHydrationWarning
 >
 

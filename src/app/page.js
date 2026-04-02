@@ -29,19 +29,19 @@ export default function Home() {
          <HeroCarousel />
          <Slider />
          <Manufacturing />
-        
-         
+
+
          <ExclusiveCollections />
-          <CuratedArrivals />
-              <TheSeasons />
-             <Legacy />
-  
+         <CuratedArrivals />
+         <TheSeasons />
+         <Legacy />
+
          <CraftedHeritage />
-          
+
          {/* <SignatureCraft /> */}
-      
+
          {/* <ArtisanExcellence /> */}
-    
+
          {/* <AvantaBanner /> */}
          {/* <RefinedSelection /> */}
          {/* <PartnershipSection /> */}
@@ -52,7 +52,7 @@ export default function Home() {
          {/* <CommitmentSection /> */}
          <WholesaleForm />
          {/* <FAQ /> */}
-          <TrustedCities />
+         <TrustedCities />
          <ContactUs />
          {/* <CraftsmanshipSection /> */}
       </>

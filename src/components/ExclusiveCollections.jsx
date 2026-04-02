@@ -16,7 +16,7 @@ const ExclusiveCollections = () => {
   }
 
   return (
-    <section 
+    <section
       className="relative w-full overflow-hidden py-8 lg:py-12 bg-white lg:bg-cover lg:bg-center lg:bg-no-repeat exclusive-section"
       style={{
         backgroundImage: 'url("/images/banner/ExclusiveBanner.png")',
@@ -25,10 +25,10 @@ const ExclusiveCollections = () => {
       <div className="absolute inset-0 bg-white/10 pointer-events-none hidden lg:block" />
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Header — always visible */}
         <div className="mb-6 lg:hidden">
-          <h3 className="text-[12px] font-bold font-mont text-[#E13C6C] uppercase tracking-[0.2em] mb-2">
+          <h3 className="text-[12px] font-bold font-playfair text-[#E13C6C] tracking-[0.2em] mb-2">
             Jaipur Kurti Gharana
           </h3>
           <h2 className="text-3xl font-bold font-playfair text-[#1F1951] mb-3 leading-tight">
@@ -59,16 +59,16 @@ const ExclusiveCollections = () => {
 
         {/* Desktop: original layout */}
         <div className="hidden lg:flex flex-row items-start">
-          
+
           {/* Left Side: Header and Category Grids */}
           <div className="w-[75%]">
-            
+
             {/* Top Row: Header + 2 Categories */}
             <div className="flex flex-row gap-5 mb-6">
-              
+
               {/* Header Info */}
               <div className="w-2/5">
-                <h3 className="text-sm font-bold font-mont text-[#E13C6C] uppercase tracking-[0.2em] mb-4">
+                <h3 className="text-[10px] md:text-2xl font-bold font-playfair text-[#E13C6C]  mb-4">
                   Jaipur Kurti Gharana
                 </h3>
                 <h2 className="text-5xl font-bold font-playfair text-[#1F1951] mb-6 leading-tight">

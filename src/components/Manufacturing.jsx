@@ -63,11 +63,11 @@ const VideoSlider = () => {
           Jaipur Kurti Gharana
         </h3>
 
-        <h2 className="text-2xl md:text-4xl font-bold font-playfair text-[#1F1951] mb-6 ">
+        <h2 className="text-2xl md:text-4xl font-extrabold font-playfair text-[#1F1951] mb-6 ">
           We’re Manufacturing What Matters
         </h2>
 
-        <p className="max-w-4xl mx-auto font-semibold text-black text-sm md:text-base">
+        <p className="max-w-4xl mx-auto text-black text-sm md:text-sm">
           Discover the products we build and the expertise behind them. This gallery of videos and photos highlights Avanta’s diverse manufacturing output, showcasing quality, scale, and performance across industries.
         </p>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Search, Menu, X, ShoppingCart, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { ChevronDown, Search, Menu, X, ShoppingCart, ChevronLeft, ChevronRight, Loader2, Home, LayoutGrid } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEnquiry } from "@/context/CartContext";
@@ -21,6 +21,7 @@ const Header = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const searchRef = useRef(null);
   const searchTimeoutRef = useRef(null);
 
@@ -70,6 +71,7 @@ const Header = () => {
 
   const handleProductClick = (slug) => {
     setShowSearchDropdown(false);
+    setIsMobileSearchOpen(false);
     setSearchQuery('');
     setSearchResults([]);
     router.push(`/product/${slug}`);
@@ -107,20 +109,20 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className={`transition-all duration-300 ${isScrolled ? "bg-[#FFFAFB]/90 shadow-md py-2" : "bg-white/10 backdrop-blur-md py-3"}`}>
+      <div className={`transition-all duration-300 ${isScrolled ? "bg-[#FFFAFB]/90 shadow-md py-2 backdrop-blur-md" : "bg-white/10 backdrop-blur-md py-3"}`}>
         <div className="max-w-[1440px] mx-auto px-4 lg:px-6">
           <div className="flex items-center justify-between gap-4">
 
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 lg:gap-3 shrink-0">
-              <img src="/images/avantalogo.png" alt="Avanta" className="h-6 md:h-8 lg:h-10 w-auto object-contain" />
-              <img src="/images/line.png" alt="separator" className="h-5 md:h-7 lg:h-9 w-auto object-contain" />
-              <img src="/images/JKG.png" alt="Jaipur Kurti Gharana" className="h-6 md:h-8 lg:h-6 w-auto object-contain" />
+            {/* Logo - Sizes slightly adjusted for better mobile fit */}
+            <Link href="/" className="flex items-center gap-1.5 md:gap-2 lg:gap-3 shrink-0">
+              <img src="/images/avantalogo.png" alt="Avanta" className="h-5 md:h-8 lg:h-10 w-auto object-contain" />
+              <img src="/images/line.png" alt="separator" className="h-4 md:h-7 lg:h-9 w-auto object-contain" />
+              <img src="/images/JKG.png" alt="Jaipur Kurti Gharana" className="h-5 md:h-8 lg:h-6 w-auto object-contain" />
             </Link>
 
             {/* Right Side Tools */}
             <div className="flex items-center gap-2 md:gap-3">
-              {/* Search */}
+              {/* Search (Desktop) */}
               <div ref={searchRef} className="relative hidden sm:block w-40 md:w-56 lg:w-80">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 z-10" />
                 {isSearching && <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#E12B5E] animate-spin z-10" />}
@@ -186,9 +188,10 @@ const Header = () => {
                 )}
               </div>
 
-              <button className="bg-[#E12B5E] text-white flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold hover:bg-[#C91F4E] transition-all">
+              <button className="bg-[#E12B5E] text-white flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold hover:bg-[#C91F4E] transition-all">
                 <img src="/images/icon/call-calling.svg" alt="Call" className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Call Now →</span>
+                <span className="lg:hidden">Call</span>
               </button>
 
               <button className="hidden md:flex bg-[#E12B5E] text-white items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold hover:bg-gray-800 transition-all whitespace-nowrap">
@@ -205,22 +208,8 @@ const Header = () => {
                 )}
               </Link>
 
-              {/* Mobile icons */}
+              {/* Mobile Menu Toggle */}
               <div className="flex md:hidden items-center gap-2">
-                <button className="p-1 text-[#1F1951]" onClick={() => {
-                  const el = document.getElementById('mobile-search');
-                  if (el) { el.classList.toggle('hidden'); el.querySelector('input')?.focus(); }
-                }}>
-                  <Search size={20} />
-                </button>
-                <Link href="/cart" className="relative group p-1">
-                  <ShoppingCart className="w-5 h-5 text-[#1F1951]" />
-                  {Enquiries.length > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-[#E12B5E] text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full border-2 border-white">
-                      {Enquiries.length}
-                    </span>
-                  )}
-                </Link>
                 <button className="p-1 text-[#1F1951]" onClick={() => setIsMenuOpen(true)}>
                   <Menu size={24} />
                 </button>
@@ -230,7 +219,6 @@ const Header = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center justify-center mt-3 gap-5 xl:gap-7 pb-2">
-
             {/* Full nav skeleton while loading */}
             {categoriesLoading ? (
               <>
@@ -247,176 +235,269 @@ const Header = () => {
                 {staticLinks.map(item => <NavLink key={item.name} item={item} pathname={pathname} />)}
 
                 {/* Visible categories */}
-            {visibleCategories.map(item => {
-              const category = categories.find(cat => cat.slug === item.href.split("/").pop());
-              const subs = category?.subcategories || [];
-              const isActive = pathname.startsWith(item.href);
-              return (
-                <div key={item.name} className="relative group">
-                  <Link href={item.href}
-                    className={`text-[11px] font-bold tracking-[0.06em] transition-colors relative uppercase whitespace-nowrap ${isActive ? 'text-[#E12B5E]' : 'text-gray-800 hover:text-[#E12B5E]'}`}>
-                    {item.name}
-                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#E12B5E] transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-                  </Link>
-                  {subs.length > 0 && (
-                    <div className="absolute top-full left-0 mt-4 w-[520px] bg-white border border-gray-100 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 flex overflow-hidden">
-                      <div className="w-[230px] p-6 flex flex-col bg-white">
-                        <p className="text-[9px] font-semibold tracking-[0.25em] text-gray-400 uppercase mb-3">Shop By Style</p>
-                        {subs.map((sub) => (
-                          <Link key={sub._id} href={`/store/${category.slug}?sub=${sub.slug}`}
-                            className="group/link flex items-center justify-between text-[11px] font-bold tracking-wider text-gray-700 hover:text-[#E12B5E] py-2.5 border-b border-gray-50 last:border-0 transition-all uppercase"
-                            onMouseEnter={() => setHoveredImage(sub.image)}>
-                            <span>{sub.name}</span>
-                            <div className="w-0 group-hover/link:w-4 h-px bg-[#E12B5E] transition-all duration-300" />
-                          </Link>
-                        ))}
-                      </div>
-                      <div className="flex-1 relative bg-[#F9F8F3] overflow-hidden">
-                        <div className="absolute inset-0 p-4">
-                          <div className="relative h-full w-full rounded-lg overflow-hidden">
-                            {(hoveredImage || subs[0]?.image) && (
-                              <img src={hoveredImage || subs[0]?.image} alt="Preview"
-                                className="w-full h-full object-cover transition-all duration-700" key={hoveredImage} />
-                            )}
-                            <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
-                            <div className="absolute bottom-5 left-5 text-white">
-                              <p className="text-[9px] uppercase tracking-[0.3em] font-light mb-1">New Collection</p>
-                              <h4 className="text-lg font-serif italic">{category.name}</h4>
+                {visibleCategories.map(item => {
+                  const category = categories.find(cat => cat.slug === item.href.split("/").pop());
+                  const subs = category?.subcategories || [];
+                  const isActive = pathname.startsWith(item.href);
+                  return (
+                    <div key={item.name} className="relative group">
+                      <Link href={item.href}
+                        className={`text-[11px] font-bold tracking-[0.06em] transition-colors relative uppercase whitespace-nowrap ${isActive ? 'text-[#E12B5E]' : 'text-gray-800 hover:text-[#E12B5E]'}`}>
+                        {item.name}
+                        <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#E12B5E] transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                      </Link>
+                      {subs.length > 0 && (
+                        <div className="absolute top-full left-0 mt-4 w-[520px] bg-white border border-gray-100 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 flex overflow-hidden">
+                          <div className="w-[230px] p-6 flex flex-col bg-white">
+                            <p className="text-[9px] font-semibold tracking-[0.25em] text-gray-400 uppercase mb-3">Shop By Style</p>
+                            {subs.map((sub) => (
+                              <Link key={sub._id} href={`/store/${category.slug}?sub=${sub.slug}`}
+                                className="group/link flex items-center justify-between text-[11px] font-bold tracking-wider text-gray-700 hover:text-[#E12B5E] py-2.5 border-b border-gray-50 last:border-0 transition-all uppercase"
+                                onMouseEnter={() => setHoveredImage(sub.image)}>
+                                <span>{sub.name}</span>
+                                <div className="w-0 group-hover/link:w-4 h-px bg-[#E12B5E] transition-all duration-300" />
+                              </Link>
+                            ))}
+                          </div>
+                          <div className="flex-1 relative bg-[#F9F8F3] overflow-hidden">
+                            <div className="absolute inset-0 p-4">
+                              <div className="relative h-full w-full rounded-lg overflow-hidden">
+                                {(hoveredImage || subs[0]?.image) && (
+                                  <img src={hoveredImage || subs[0]?.image} alt="Preview"
+                                    className="w-full h-full object-cover transition-all duration-700" key={hoveredImage} />
+                                )}
+                                <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
+                                <div className="absolute bottom-5 left-5 text-white">
+                                  <p className="text-[9px] uppercase tracking-[0.3em] font-light mb-1">New Collection</p>
+                                  <h4 className="text-lg font-serif italic">{category.name}</h4>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              );
-            })}
+                  );
+                })}
 
-            {/* ALL CATEGORIES — overflow dropdown with right-side submenu */}
-            {overflowCategories.length > 0 && (
-              <div className="relative group">
-                <button className="flex items-center gap-1.5 text-[11px] font-bold tracking-[0.06em] text-gray-800 hover:text-[#E12B5E] uppercase transition-all whitespace-nowrap">
-                  ALL CATEGORIES
-                  <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180" />
-                </button>
+                {/* ALL CATEGORIES — overflow dropdown with right-side submenu */}
+                {overflowCategories.length > 0 && (
+                  <div className="relative group">
+                    <button className="flex items-center gap-1.5 text-[11px] font-bold tracking-[0.06em] text-gray-800 hover:text-[#E12B5E] uppercase transition-all whitespace-nowrap">
+                      ALL CATEGORIES
+                      <ChevronDown className="w-3.5 h-3.5 transition-transform group-hover:rotate-180" />
+                    </button>
 
-                <div className="absolute top-full right-0 mt-3 flex opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
-                  {/* Left: category list */}
-                  <div className="w-[240px] bg-white border border-gray-100 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.12)] py-1.5 overflow-hidden">
-                    {overflowCategories.map((item) => {
-                      const category = categories.find((cat) => cat.slug === item.href.split("/").pop());
-                      const subs = category?.subcategories || [];
-                      const isItemActive = pathname.startsWith(item.href);
-                      return (
-                        <div key={item.name} className="relative group/item">
-                          <Link href={item.href}
-                            className={`flex items-center justify-between px-5 py-3 text-[11px] font-bold tracking-wider uppercase transition-all duration-150 ${isItemActive ? 'bg-[#1F1951] text-white' : 'text-gray-700 hover:bg-gray-50 hover:text-[#E12B5E]'}`}>
-                            <span>{item.name}</span>
-                            {subs.length > 0 && <ChevronRight className="w-3.5 h-3.5 opacity-40" />}
-                          </Link>
+                    <div className="absolute top-full right-0 mt-3 flex opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
+                      {/* Left: category list */}
+                      <div className="w-[240px] bg-white border border-gray-100 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.12)] py-1.5 overflow-hidden">
+                        {overflowCategories.map((item) => {
+                          const category = categories.find((cat) => cat.slug === item.href.split("/").pop());
+                          const subs = category?.subcategories || [];
+                          const isItemActive = pathname.startsWith(item.href);
+                          return (
+                            <div key={item.name} className="relative group/item">
+                              <Link href={item.href}
+                                className={`flex items-center justify-between px-5 py-3 text-[11px] font-bold tracking-wider uppercase transition-all duration-150 ${isItemActive ? 'bg-[#1F1951] text-white' : 'text-gray-700 hover:bg-gray-50 hover:text-[#E12B5E]'}`}>
+                                <span>{item.name}</span>
+                                {subs.length > 0 && <ChevronRight className="w-3.5 h-3.5 opacity-40" />}
+                              </Link>
 
-                          {/* Right: subcategory panel */}
-                          {subs.length > 0 && (
-                            <div className="absolute left-full top-0 ml-1 w-[500px] opacity-0 invisible group-hover/item:opacity-100 group-hover/item:visible transition-all duration-200 z-50">
-                              <div className="bg-white border border-gray-100 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] overflow-hidden flex">
-                                <div className="w-[220px] p-6 flex flex-col bg-white">
-                                  <p className="text-[9px] font-semibold tracking-[0.25em] text-gray-400 uppercase mb-3">Shop By Style</p>
-                                  {subs.map((sub) => (
-                                    <Link key={sub._id} href={`/store/${category.slug}?sub=${sub.slug}`}
-                                      className="group/link flex items-center justify-between text-[11px] font-bold tracking-wider text-gray-700 hover:text-[#E12B5E] py-2.5 border-b border-gray-50 last:border-0 transition-all uppercase"
-                                      onMouseEnter={() => setHoveredImage(sub.image)}>
-                                      <span>{sub.name}</span>
-                                      <div className="w-0 group-hover/link:w-4 h-px bg-[#E12B5E] transition-all duration-300" />
-                                    </Link>
-                                  ))}
-                                </div>
-                                <div className="flex-1 relative bg-[#F9F8F3] overflow-hidden">
-                                  <div className="absolute inset-0 p-4">
-                                    <div className="relative h-full w-full rounded-lg overflow-hidden">
-                                      {(hoveredImage || subs[0]?.image) ? (
-                                        <img src={hoveredImage || subs[0]?.image} alt="Preview"
-                                          className="w-full h-full object-cover transition-all duration-500" />
-                                      ) : (
-                                        <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg">
-                                          <span className="text-gray-300 text-xs">No image</span>
+                              {/* Right: subcategory panel */}
+                              {subs.length > 0 && (
+                                <div className="absolute left-full top-0 ml-1 w-[500px] opacity-0 invisible group-hover/item:opacity-100 group-hover/item:visible transition-all duration-200 z-50">
+                                  <div className="bg-white border border-gray-100 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] overflow-hidden flex">
+                                    <div className="w-[220px] p-6 flex flex-col bg-white">
+                                      <p className="text-[9px] font-semibold tracking-[0.25em] text-gray-400 uppercase mb-3">Shop By Style</p>
+                                      {subs.map((sub) => (
+                                        <Link key={sub._id} href={`/store/${category.slug}?sub=${sub.slug}`}
+                                          className="group/link flex items-center justify-between text-[11px] font-bold tracking-wider text-gray-700 hover:text-[#E12B5E] py-2.5 border-b border-gray-50 last:border-0 transition-all uppercase"
+                                          onMouseEnter={() => setHoveredImage(sub.image)}>
+                                          <span>{sub.name}</span>
+                                          <div className="w-0 group-hover/link:w-4 h-px bg-[#E12B5E] transition-all duration-300" />
+                                        </Link>
+                                      ))}
+                                    </div>
+                                    <div className="flex-1 relative bg-[#F9F8F3] overflow-hidden">
+                                      <div className="absolute inset-0 p-4">
+                                        <div className="relative h-full w-full rounded-lg overflow-hidden">
+                                          {(hoveredImage || subs[0]?.image) ? (
+                                            <img src={hoveredImage || subs[0]?.image} alt="Preview"
+                                              className="w-full h-full object-cover transition-all duration-500" />
+                                          ) : (
+                                            <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg">
+                                              <span className="text-gray-300 text-xs">No image</span>
+                                            </div>
+                                          )}
+                                          <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
+                                          <div className="absolute bottom-5 left-5 text-white">
+                                            <p className="text-[9px] uppercase tracking-[0.3em] font-light mb-1">New Collection</p>
+                                            <h4 className="text-lg font-serif italic">{category?.name}</h4>
+                                          </div>
                                         </div>
-                                      )}
-                                      <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
-                                      <div className="absolute bottom-5 left-5 text-white">
-                                        <p className="text-[9px] uppercase tracking-[0.3em] font-light mb-1">New Collection</p>
-                                        <h4 className="text-lg font-serif italic">{category?.name}</h4>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                      );
-                    })}
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            )}
+                )}
 
-            {footerLinks.map(item => <NavLink key={item.name} item={item} pathname={pathname} />)}
+                {footerLinks.map(item => <NavLink key={item.name} item={item} pathname={pathname} />)}
               </>
             )}
           </nav>
         </div>
-
-        {/* Mobile Search Bar */}
-        <div id="mobile-search" className="hidden md:hidden px-4 pb-3">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={handleSearchInput}
-              onFocus={() => searchQuery.length >= 2 && setShowSearchDropdown(true)}
-              className="w-full bg-white border border-gray-200 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-[#E12B5E] focus:ring-2 focus:ring-[#E12B5E]/20 transition-all"
-            />
-          </div>
-        </div>
       </div>
 
-      {/* Mobile Sidebar */}
-      <div className={`lg:hidden fixed inset-0 z-50 bg-[#1F1951]/20 backdrop-blur-sm transition-opacity ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        <div className={`absolute left-0 top-0 h-full w-[85%] bg-white p-8 transition-transform duration-500 ease-out shadow-2xl ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-          <div className="flex justify-between items-center mb-10">
-            <Link href="/" className="flex items-center gap-1">
-              <img src="/images/mainlogo.png" alt="Avanta" className="h-6 w-auto object-contain" />
-              <img src="/images/line.png" alt="separator" className="h-5 w-auto object-contain" />
-              <img src="/images/jkg.png" alt="Jaipur Kurti Gharana" className="h-5 w-auto object-contain" />
-            </Link>
-            <X className="text-gray-400 cursor-pointer" onClick={() => setIsMenuOpen(false)} />
+      {/* MOBILE BOTTOM NAVIGATION */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 py-3 flex justify-between items-center z-[60] shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
+        <Link href="/" className={`flex flex-col items-center gap-1 transition-colors ${pathname === '/' ? 'text-[#E12B5E]' : 'text-gray-400 hover:text-gray-600'}`}>
+          <Home size={20} />
+          <span className="text-[10px] font-bold">HOME</span>
+        </Link>
+        {/* <Link href="/store" className={`flex flex-col items-center gap-1 transition-colors ${pathname.includes('/store') ? 'text-[#E12B5E]' : 'text-gray-400 hover:text-gray-600'}`}>
+          <LayoutGrid size={20} />
+          <span className="text-[10px] font-bold">SHOP</span>
+        </Link> */}
+        <button onClick={() => setIsMobileSearchOpen(true)} className="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 transition-colors">
+          <Search size={20} />
+          <span className="text-[10px] font-bold">SEARCH</span>
+        </button>
+        <Link href="/cart" className={`flex flex-col items-center gap-1 relative transition-colors ${pathname === '/cart' ? 'text-[#E12B5E]' : 'text-gray-400 hover:text-gray-600'}`}>
+          <ShoppingCart size={20} />
+          {Enquiries.length > 0 && (
+            <span className="absolute -top-1.5 -right-1 bg-[#E12B5E] text-white text-[9px] font-bold w-4 h-4 flex items-center justify-center rounded-full border border-white">
+              {Enquiries.length}
+            </span>
+          )}
+          <span className="text-[10px] font-bold">CART</span>
+        </Link>
+      </div>
+
+      {/* MOBILE FULL-SCREEN SEARCH OVERLAY */}
+      {isMobileSearchOpen && (
+        <div className="fixed inset-0 bg-white z-[100] p-4 flex flex-col lg:hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
+          <div className="flex items-center gap-3 mb-6">
+            <button onClick={() => setIsMobileSearchOpen(false)} className="p-2 -ml-2 text-gray-500">
+              <ChevronLeft size={24} />
+            </button>
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input 
+                autoFocus
+                type="text"
+                placeholder="Search Kurti, Sets..."
+                className="w-full bg-gray-100 rounded-full py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#E12B5E]/20"
+                value={searchQuery}
+                onChange={handleSearchInput}
+              />
+              {isSearching && <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#E12B5E] animate-spin" />}
+            </div>
           </div>
-          <div className="flex flex-col gap-6">
-            {staticLinks.map((item) => (
-              <Link key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)}
-                className="text-xs font-bold tracking-[0.2em] border-b border-gray-100 pb-4 text-gray-700 uppercase">
-                {item.name}
-              </Link>
-            ))}
-            {categoriesLoading
-              ? Array.from({ length: 6 }).map((_, i) => (
-                  <div key={i} className="h-3 rounded-full bg-gray-200 animate-pulse pb-4" style={{ width: `${80 + (i % 3) * 30}px` }} />
-                ))
-              : categoryLinks.map((item) => (
-                  <Link key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)}
-                    className="text-xs font-bold tracking-[0.2em] border-b border-gray-100 pb-4 text-gray-700 uppercase">
-                    {item.name}
-                  </Link>
-                ))
-            }
-            {footerLinks.map((item) => (
-              <Link key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)}
-                className="text-xs font-bold tracking-[0.2em] border-b border-gray-100 pb-4 text-gray-700 uppercase">
-                {item.name}
-              </Link>
-            ))}
+          
+          <div className="flex-1 overflow-y-auto">
+            {isSearching ? (
+              <div className="flex justify-center py-10"><Loader2 className="animate-spin text-[#E12B5E]" /></div>
+            ) : searchResults.length > 0 ? (
+              <div className="flex flex-col gap-1">
+                <p className="text-xs font-semibold text-gray-400 mb-2 px-1 tracking-wider uppercase">Results</p>
+                {searchResults.map(product => (
+                  <button key={product._id} onClick={() => handleProductClick(product.slug)} className="flex items-center gap-4 py-3 border-b border-gray-50 text-left">
+                    <div className="w-14 h-14 rounded-lg bg-gray-100 overflow-hidden shrink-0">
+                       {product.images?.main && <img src={product.images.main} className="w-full h-full object-cover" alt={product.name} />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 truncate">{product.name}</p>
+                      {product.categoryId && <p className="text-xs text-gray-500 mt-0.5">{product.categoryId.name}</p>}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            ) : searchQuery.length >= 2 ? (
+              <div className="flex flex-col items-center justify-center h-40 text-gray-500 text-sm">
+                No products found for "{searchQuery}"
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-40 text-gray-400 text-sm">
+                Type at least 2 characters to search
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* MOBILE SIDEBAR (Grouped & Premium Layout) */}
+      <div className={`lg:hidden fixed inset-0 z-[70] transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        {/* Backdrop */}
+        <div className="absolute inset-0 bg-[#1F1951]/40 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)} />
+        
+        {/* Sidebar Panel */}
+        <div className={`absolute left-0 top-0 h-full w-[85%] max-w-[320px] bg-white transition-transform duration-300 shadow-2xl flex flex-col ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className="p-6 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
+            <Link href="/" className="flex items-center gap-1.5" onClick={() => setIsMenuOpen(false)}>
+              <img src="/images/mainlogo.png" alt="Avanta" className="h-5 w-auto object-contain" />
+              <img src="/images/line.png" alt="separator" className="h-4 w-auto object-contain" />
+              <img src="/images/jkg.png" alt="JKG" className="h-4 w-auto object-contain" />
+            </Link>
+            <button onClick={() => setIsMenuOpen(false)} className="p-1.5 hover:bg-gray-100 rounded-full transition-colors">
+              <X size={20} className="text-gray-500" />
+            </button>
+          </div>
+          
+          <div className="flex-1 overflow-y-auto py-6">
+            <div className="px-6 mb-8">
+               <p className="text-[10px] font-bold text-gray-400 tracking-[0.2em] mb-4">PAGES</p>
+               <div className="flex flex-col gap-5">
+                  {staticLinks.map(link => (
+                    <Link key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-sm font-semibold text-gray-800">
+                      {link.name}
+                    </Link>
+                  ))}
+               </div>
+            </div>
+
+            <div className="px-6 mb-8">
+               <p className="text-[10px] font-bold text-gray-400 tracking-[0.2em] mb-3">SHOP BY CATEGORY</p>
+               <div className="flex flex-col">
+                  {categoriesLoading ? (
+                    <div className="space-y-4 mt-2">
+                       {[1,2,3,4,5].map(i => <div key={i} className="h-3 w-3/4 bg-gray-100 animate-pulse rounded" />)}
+                    </div>
+                  ) : categoryLinks.map(item => (
+                    <Link key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)} 
+                      className="flex items-center justify-between py-3 border-b border-gray-50 text-sm font-medium text-gray-700 last:border-0">
+                      {item.name}
+                      <ChevronRight size={14} className="text-gray-300" />
+                    </Link>
+                  ))}
+               </div>
+            </div>
+
+            <div className="px-6">
+               <p className="text-[10px] font-bold text-gray-400 tracking-[0.2em] mb-4">MORE</p>
+               <div className="flex flex-col gap-5">
+                  {footerLinks.map(link => (
+                    <Link key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-sm font-semibold text-gray-800">
+                      {link.name}
+                    </Link>
+                  ))}
+               </div>
+            </div>
+          </div>
+
+          <div className="p-6 bg-pink-50/50 border-t border-pink-100/50">
+            <p className="text-[10px] font-bold text-[#E12B5E] mb-1.5 uppercase tracking-wider">Need Help?</p>
+            <p className="text-xs text-gray-600 mb-4">Contact our support for reseller enquiries & bulk orders.</p>
+            <button className="w-full flex justify-center items-center gap-2 bg-[#E12B5E] text-white py-3 rounded-xl text-xs font-bold shadow-md shadow-pink-200 hover:bg-[#C91F4E] transition-colors">
+              <img src="/images/icon/call-calling.svg" alt="Call" className="w-3.5 h-3.5 brightness-0 invert" />
+              CONTACT SUPPORT
+            </button>
           </div>
         </div>
       </div>

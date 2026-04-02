@@ -70,7 +70,7 @@ export default function Footer() {
         </div>
 
         {/* --- Main Links Grid --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
 
           {/* Brand Info */}
           <div className="space-y-4">
@@ -220,8 +220,8 @@ export default function Footer() {
           </div>
         </div>
 
-         <div className="text-left mt-16 select-none pointer-events-none">
-          <h1 className="text-3xl md:text-4xl lg:text-4xl font-cinzel font-bold text-[#CECCE0] tracking-tight uppercase">
+         <div className="text-left mt-16 mb-10 select-none pointer-events-none">
+          <h1 className="text-2xl md:text-4xl lg:text-4xl font-cinzel font-bold text-[#CECCE0] tracking-tight uppercase">
             Designed with Tradition. Crafted for today.
           </h1>
         </div>

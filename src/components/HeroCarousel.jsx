@@ -13,7 +13,7 @@ const slides = [
   },
   {
     image: "/images/banner/banner-1.png", 
-    title: "TRADITION REIMAGINED FOR THE MODERN WOMAN",
+    title: "Tradition Redefined for Modern Retail",
     subtitle: "Exquisite Collections for Discerning Resellers"
   }
 ];
@@ -61,7 +61,7 @@ export default function HeroCarousel() {
                 </div>
 
                 {/* Title */}
-                <h2 className="text-lg sm:text-xl md:text-2xl font-playfair font-bold leading-tight mb-4 tracking-tight">
+                <h2 className="text-lg sm:text-xl md:text-3xl font-playfair font-bold leading-tight mb-4 tracking-tight">
                   {slide.title}
                 </h2>
 
