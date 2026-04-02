@@ -61,7 +61,7 @@ export default function Footer() {
           <Link href="/" className="flex items-center justify-center gap-4 mb-2">
             <Image src="/images/mainlogo.png" alt="Avanta" width={120} height={40} className="object-contain" />
             <Image src="/images/line.png" alt="separator" width={2} height={40} className="object-contain h-8" />
-            <Image src="/images/jkg.png" alt="Jaipur Kurti Gharana" width={180} height={40} className="object-contain" />
+            <Image src="/images/JKG.png" alt="Jaipur Kurti Gharana" width={180} height={40} className="object-contain" />
           </Link>
           <div className="w-40 h-[1px] bg-gray-300 mt-4 mb-1"></div>
           <p className="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-mont font-bold">

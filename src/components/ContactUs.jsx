@@ -8,8 +8,8 @@ const ContactUs = () => {
         {/* Left Section: Contact Details */}
         <div className="w-full lg:w-1/3">
           <div className="flex items-center justify-start gap-2 mb-2">
-             <h2 className="text-[10px] md:text-2xl  font-playfair font-bold  text-[#E13C6C] ">   
-           Jaipur Kurti Gharana
+             <h2 className="text-[10px] md:text-2xl font-playfair font-bold text-[#E13C6C]">   
+             Jaipur Kurti Gharana
           </h2>
           </div>
 
@@ -46,7 +46,7 @@ const ContactUs = () => {
           </div>
         </div>
 
-        {/* Right Section: Images */}
+        {/* Right Section: Images & Map */}
         <div className="w-full lg:w-2/3 flex flex-col md:flex-row gap-4 h-[280px] md:h-[380px]">
           <div className="relative flex-1 h-full rounded-xl overflow-hidden shadow-md">
             <img
@@ -55,12 +55,17 @@ const ContactUs = () => {
               className="w-full h-full object-cover"
             />
           </div>
+          
+          {/* Functional Google Map */}
           <div className="relative flex-1 h-full rounded-xl overflow-hidden shadow-md border border-gray-100">
-            <img
-              src="/images/commitment/contact2.png"
-              alt="Location Map"
-              className="w-full h-full object-cover grayscale-[20%]"
-            />
+            <iframe
+              src="https://maps.google.com/maps?q=Plot+No-6,+Aaykar+Nagar-II,+New+Sanganer+Rd,+near+Ricco+Kanta+Choraha,+Mansarovar,+Jaipur,+Rajasthan+302020&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              className="absolute top-0 left-0 w-full h-full border-0 grayscale-[20%]"
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Location Map"
+            ></iframe>
           </div>
         </div>
       </div>
