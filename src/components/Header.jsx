@@ -188,16 +188,25 @@ const Header = () => {
                 )}
               </div>
 
-              <button className="bg-[#E12B5E] text-white flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold hover:bg-[#C91F4E] transition-all">
+              <a href="tel:+919784562130" className="bg-[#E12B5E] text-white flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold hover:bg-[#C91F4E] transition-all">
                 <img src="/images/icon/call-calling.svg" alt="Call" className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Call Now →</span>
                 <span className="lg:hidden">Call</span>
-              </button>
-
-              <button className="hidden md:flex bg-[#E12B5E] text-white items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold hover:bg-gray-800 transition-all whitespace-nowrap">
+              </a>
+    {/* WhatsApp */}
+                <a
+                  href="https://wa.me/919784562130"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#00C349] text-white flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-bold tracking-tight transition-all shadow-md"
+                >
+                  <img src="/images/icon/whatsapp.svg" alt="WA" className="w-3.5 h-3.5" />
+                  Enquiry Now →
+                </a>
+              <a href='https://www.instagram.com/__avanta__?igsh=OGN1enJndDhsMmJv' className="hidden md:flex bg-[#E12B5E] text-white items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold hover:bg-[#941136] transition-all whitespace-nowrap">
                 <img src="/images/icon/instagram.svg" alt="Instagram" className="w-3.5 h-3.5" />
                 <span>Instagram</span>
-              </button>
+              </a>
 
               <Link href="/cart" className="relative group p-1.5 hidden md:block">
                 <ShoppingCart className="w-5 h-5 text-[#1F1951]" />

@@ -6,14 +6,13 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { 
   Bell, 
-  Search, 
   User, 
   LogOut,
   Menu,
   X,
   Package,
   Users,
-  Clock
+  Timer
 } from 'lucide-react';
 
 export default function AdminHeader({ sidebarOpen, setSidebarOpen }) {
@@ -221,7 +220,7 @@ export default function AdminHeader({ sidebarOpen, setSidebarOpen }) {
                               </p>
                             )}
                             <div className="flex items-center gap-1 mt-1 text-xs text-gray-400">
-                              <Clock size={10} />
+                              <Timer size={10} />
                               {new Date(notification.timestamp).toLocaleString('en-IN', {
                                 day: 'numeric',
                                 month: 'short',

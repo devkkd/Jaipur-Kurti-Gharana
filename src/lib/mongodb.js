@@ -41,14 +41,14 @@ async function dbConnect() {
       try {
         const db = mongoose.connection.db;
         const indexes = await db.collection('products').indexes();
-        const stale = indexes.find(idx => idx.name === 'styleCode_1');
-        if (stale) {
-          await db.collection('products').dropIndex('styleCode_1');
-          console.log('✅ Dropped stale styleCode_1 index');
+        for (const staleIndex of ['styleCode_1', 'sku_1']) {
+          if (indexes.find(idx => idx.name === staleIndex)) {
+            await db.collection('products').dropIndex(staleIndex);
+            console.log(`✅ Dropped stale ${staleIndex} index`);
+          }
         }
       } catch (e) {
-        // Non-fatal — log and continue
-        console.warn('⚠️ Could not check/drop styleCode_1 index:', e.message);
+        console.warn('⚠️ Could not check/drop stale indexes:', e.message);
       }
       return mongoose;
     });

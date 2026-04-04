@@ -4,7 +4,7 @@ import EnquiryBtn from "./EnquiryBtn";
 
 const ProductCard = ({ product }) => {
   // Get main image from product.images.main or fallback
-  const mainImage = product?.images?.main || product?.image || "/placeholder.jpg";
+  const mainImage = product?.images?.main || product?.image || "/images/placeholder.svg";
 
   // Get product name
   const productName = product?.name || product?.title || "Untitled Product";

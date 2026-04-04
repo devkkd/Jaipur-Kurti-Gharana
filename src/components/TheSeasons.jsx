@@ -28,7 +28,7 @@ const TheSeasons = () => {
         }
 
         // Updated to 8 products as per requirements
-        setFeaturedProducts(shuffled.slice(0, 8));
+        setFeaturedProducts(shuffled.slice(0, 4));
         setMounted(true);
       } catch (error) {
         console.error("Error fetching products:", error);

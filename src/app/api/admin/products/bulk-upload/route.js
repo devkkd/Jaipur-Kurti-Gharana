@@ -147,6 +147,35 @@ export async function POST(request) {
     const formData = await request.formData();
     const file = formData.get('file');
     const baseDir = formData.get('baseDir') || process.cwd();
+
+    // Get pre-uploaded image map { filename -> r2Url } from frontend
+    let uploadedMap = {};
+    const uploadedMapRaw = formData.get('uploadedMap');
+    if (uploadedMapRaw) {
+      try { uploadedMap = JSON.parse(uploadedMapRaw); } catch {}
+    }
+
+    // Resolve image: filename → R2 URL
+    // Since R2 stores as products/filename.jpg, we can always reconstruct the URL
+    const r2Base = process.env.CLOUDFLARE_R2_PUBLIC_URL;
+    const resolveImage = async (imageField) => {
+      if (!imageField) return '';
+      const trimmed = imageField.trim();
+
+      // Already a full URL
+      if (trimmed.startsWith('http')) return trimmed;
+
+      // Get just the filename (strip any path)
+      const filename = trimmed.split(/[/\\]/).pop();
+
+      // Check session uploadedMap first
+      if (uploadedMap[filename]) return uploadedMap[filename];
+
+      // Reconstruct from R2 base — works for any previously uploaded image
+      if (r2Base && filename) return `${r2Base}/products/${filename}`;
+
+      return '';
+    };
     
     if (!file) {
       return NextResponse.json(
@@ -238,11 +267,12 @@ export async function POST(request) {
         if (row.mainImage) {
           results.imageUploads.total++;
           try {
-            mainImageUrl = await processImageField(row.mainImage, baseDir);
+            mainImageUrl = await resolveImage(row.mainImage.trim());
             if (mainImageUrl) results.imageUploads.success++;
+            else results.imageUploads.failed++;
           } catch (error) {
             results.imageUploads.failed++;
-            console.error(`Main image upload failed for row ${i + 1}:`, error);
+            console.error(`Main image failed for row ${i + 1}:`, error);
           }
         }
 
@@ -251,13 +281,14 @@ export async function POST(request) {
         if (row.galleryImages) {
           const galleryPaths = row.galleryImages.split(',').map(p => p.trim()).filter(Boolean);
           results.imageUploads.total += galleryPaths.length;
-          
-          try {
-            galleryUrls = await processGalleryImages(row.galleryImages, baseDir);
-            results.imageUploads.success += galleryUrls.length;
-            results.imageUploads.failed += (galleryPaths.length - galleryUrls.length);
-          } catch (error) {
-            console.error(`Gallery images upload failed for row ${i + 1}:`, error);
+          for (const imgPath of galleryPaths) {
+            try {
+              const url = await resolveImage(imgPath);
+              if (url) { galleryUrls.push(url); results.imageUploads.success++; }
+              else results.imageUploads.failed++;
+            } catch {
+              results.imageUploads.failed++;
+            }
           }
         }
 
@@ -292,49 +323,30 @@ export async function POST(request) {
 
         // Create product object with ALL Product model fields
         const productData = {
-          // Basic Info
           name: row.name.trim(),
           description: row.description.trim(),
           slug: productSlug,
-          
-          // Images
           images: {
             main: mainImageUrl || row.mainImage || '',
             gallery: galleryUrls.length > 0 ? galleryUrls : []
           },
-          
-          // Sizes
           sizes: sizes,
-          
-          // Product Details
           productDetails: {
-            material: row.material || 'Not specified',
-            productCare: row.productCare || 'Dry clean recommended',
+            material: row.material || '',
+            productCare: row.productCare || '',
             additionalInfo: row.additionalInfo || ''
           },
-          
-          // Color
           color: {
             name: row.colorName || 'Default',
-            code: row.colorCode || '#000000'
+            code: row.colorCode || ''
           },
-          
-          // Category & Subcategory
           categoryId: category._id,
           subcategoryId: subcategory ? subcategory._id : null,
-          
-          // Status Flags
           isActive: parseBoolean(row.isActive !== undefined ? row.isActive : true),
           isFeatured: parseBoolean(row.isFeatured),
           isNewArrival: parseBoolean(row.isNewArrival),
-          
-          // Tags
-          tags: row.tags ? row.tags.split(',').map(tag => tag.trim()) : [],
-          
-          // Sort Order
+          tags: row.tags ? row.tags.split(',').map(tag => tag.trim()).filter(Boolean) : [],
           sortOrder: parseInt(row.sortOrder) || 0,
-          
-          // Total Stock (will be calculated by pre-save hook)
           totalStock: 0
         };
 

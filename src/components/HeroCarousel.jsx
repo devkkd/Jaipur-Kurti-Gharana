@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
 
 const slides = [
   {
@@ -43,6 +42,7 @@ export default function HeroCarousel() {
               alt="Hero Banner"
               className="w-full h-full object-cover object-top"
               loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "low"}
             />
 
             {/* Central Content Card */}
@@ -51,13 +51,7 @@ export default function HeroCarousel() {
                 
                 {/* Victor Top Decoration */}
                 <div className="mb-6 flex justify-center">
-                  <Image
-                    src='/images/icon/VictorTop.png'
-                    alt="decoration top"
-                    width={176}
-                    height={60}
-                    className="w-32 md:w-44 h-auto opacity-90"
-                  />
+                  <img src='/images/icon/VictorTop.png' alt="decoration top" className="w-32 md:w-44 h-auto opacity-90" loading="eager" />
                 </div>
 
                 {/* Title */}

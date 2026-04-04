@@ -46,9 +46,9 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { name: "Instagram", icon: "/images/icon/instagram.svg", href: "#" },
-    { name: "Facebook", icon: "/images/icon/facebook.png", href: "#" },
-    { name: "Youtube", icon: "/images/icon/youtube.png", href: "#" },
+    { name: "Instagram", icon: "/images/icon/instagram.svg", href: "https://www.instagram.com/__avanta__?igsh=OGN1enJndDhsMmJv" },
+    { name: "Facebook", icon: "/images/icon/facebook.png", href: "https://www.facebook.com/share/1HD4QVHzYQ/" },
+    { name: "Youtube", icon: "/images/icon/youtube.png", href: "https://youtube.com/@jaipurkurtigharana?si=7JtceXtTv9FZm3VU" },
     { name: "Linkedin", icon: "/images/icon/linkedIn.png", href: "#" },
   ];
 
@@ -199,9 +199,9 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-[#E12B5E] text-white flex items-center gap-3 px-6 py-2.5 rounded-full text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-md font-mont">
+            <a href="tel:+919784562130" className="bg-[#E12B5E] text-white flex items-center gap-3 px-6 py-2.5 rounded-full text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-md font-mont">
               <Phone size={14} /> Call Now →
-            </button>
+            </a>
 
             <Link
               href="https://wa.me/919784562130"

@@ -20,7 +20,7 @@ export default function CuratedArrivals() {
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
 
-    setCuratedProducts(shuffled.slice(0, 8));
+    setCuratedProducts(shuffled.slice(0, 4));
   }, [products]);
 
   /* ================= LOADING/ERROR ================= */

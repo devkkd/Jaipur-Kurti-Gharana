@@ -101,9 +101,6 @@ export async function POST(request) {
     if (!sizes || !Array.isArray(sizes) || sizes.length === 0) {
       return NextResponse.json({ error: 'At least one size is required' }, { status: 400 });
     }
-    if (!productDetails || !productDetails.material || !productDetails.productCare) {
-      return NextResponse.json({ error: 'Product details (material and product care) are required' }, { status: 400 });
-    }
     if (!color || !color.name) {
       return NextResponse.json({ error: 'Color information is required' }, { status: 400 });
     }
@@ -131,9 +128,9 @@ export async function POST(request) {
         stock: Number(size.stock) || 0
       })),
       productDetails: {
-        material: productDetails.material.trim(),
-        productCare: productDetails.productCare.trim(),
-        additionalInfo: productDetails.additionalInfo ? productDetails.additionalInfo.trim() : ''
+        material: productDetails?.material?.trim() || '',
+        productCare: productDetails?.productCare?.trim() || '',
+        additionalInfo: productDetails?.additionalInfo ? productDetails.additionalInfo.trim() : ''
       },
       color: { name: color.name.trim(), code: color.code ? color.code.trim() : '' },
       categoryId,
