@@ -31,7 +31,7 @@ Please provide wholesale pricing, MOQ, and delivery details.
 
 Thank you!`;
 
-    const whatsappNumber = "919119127346"; // Update with actual number
+    const whatsappNumber = "919784562130"; // Update with actual number
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
 
     window.open(whatsappUrl, '_blank');

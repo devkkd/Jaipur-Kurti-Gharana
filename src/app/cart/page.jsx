@@ -124,7 +124,7 @@ Thank you!`;
 
     // Use api.whatsapp.com instead of wa.me for better compatibility
     // This works even if number is not on WhatsApp
-    const whatsappNumber = "919119127346"; // Update this with actual number
+    const whatsappNumber = "919784562130"; // Update this with actual number
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
     
     window.open(whatsappUrl, '_blank');

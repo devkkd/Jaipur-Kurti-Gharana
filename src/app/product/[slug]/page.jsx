@@ -104,7 +104,7 @@ export default function ProductDetailsPage() {
 
   const handleWhatsApp = () => {
     const msg = `Hello! I'm interested in:\n\n*${product.name}*\nSKU: ${product.sku || "N/A"}\nMaterial: ${product.productDetails?.material || "N/A"}\nColor: ${product.color?.name || "N/A"}\n\nPlease share wholesale pricing and MOQ.`;
-    window.open(`https://api.whatsapp.com/send?phone=919119127346&text=${encodeURIComponent(msg)}`, "_blank");
+    window.open(`https://api.whatsapp.com/send?phone=919784562130&text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   return (
