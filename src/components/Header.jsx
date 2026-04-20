@@ -188,7 +188,7 @@ const Header = () => {
                 )}
               </div>
 
-              <a href="tel:+919784562130" className="bg-[#E12B5E] text-white flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold hover:bg-[#C91F4E] transition-all">
+              <a href="tel:+919784562130" className=" bg-[#E12B5E] text-white flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold hover:bg-[#C91F4E] transition-all">
                 <img src="/images/icon/call-calling.svg" alt="Call" className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Call Now →</span>
                 <span className="lg:hidden">Call</span>
@@ -198,7 +198,7 @@ const Header = () => {
                   href="https://wa.me/919784562130"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#00C349] text-white flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-bold tracking-tight transition-all shadow-md"
+                  className="bg-[#00C349] text-white hidden sm:flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-bold tracking-tight transition-all shadow-md"
                 >
                   <img src="/images/icon/whatsapp.svg" alt="WA" className="w-3.5 h-3.5" />
                   Enquiry Now →

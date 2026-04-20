@@ -1,0 +1,65 @@
+server {
+    server_name jaipurkurtigharana.com www.jaipurkurtigharana.com;
+
+    # STATIC FILES — served directly by nginx (fast)
+    location /images/ {
+        root /var/www/JKG/public;
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+        add_header Vary "Accept-Encoding";
+        gzip_static on;
+    }
+
+    # VIDEO FILES
+    location /videos/ {
+        root /var/www/JKG/public;
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+    }
+
+    # NEXT.JS STATIC ASSETS — long cache
+    location /_next/static/ {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # IMAGE UPLOAD API — larger body size
+    location /api/admin/products/upload-image {
+        client_max_body_size 50M;
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_read_timeout 120s;
+    }
+
+    # ALL OTHER REQUESTS
+    location / {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        # Remove proxy_buffering off — it was preventing caching
+        proxy_buffering on;
+        proxy_buffer_size 128k;
+        proxy_buffers 4 256k;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/jaipurkurtigharana.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/jaipurkurtigharana.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    # Enable gzip compression
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml image/svg+xml;
+    gzip_min_length 1000;
+}
